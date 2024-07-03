@@ -3,7 +3,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'Template LEDS',
+  title: 'Documentação LEDS Tools',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -15,7 +15,7 @@ const config: Config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'LEDSIFES', // Usually your GitHub org/user name.
-  projectName: 'Template-LEDS', // Usually your repo name.
+  projectName: 'Docs-LEDS-Tools', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -40,10 +40,6 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -61,7 +57,7 @@ const config: Config = {
     },
     image: 'img/leds-social-card.jpg',
     navbar: {
-      title: 'Documentação LEDS',
+      title: 'LEDS Tools',
       logo: {
         alt: 'LEDS Logo',
         src: 'img/logo.svg',
@@ -69,9 +65,21 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'r2d2',
           position: 'left',
-          label: 'Tutorial',
+          label: 'R2D2',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'bb8',
+          position: 'left',
+          label: 'BB-8',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'made',
+          position: 'left',
+          label: 'MADE',
         },
         {
           href: 'https://gitlab.com/ledsifes',
