@@ -65,15 +65,15 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'r2d2',
+          sidebarId: 'codeto',
           position: 'left',
-          label: 'R2D2',
+          label: 'CODETO',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'bb8',
+          sidebarId: 'andes',
           position: 'left',
-          label: 'BB-8',
+          label: 'ANDES',
         },
         {
           type: 'docSidebar',
