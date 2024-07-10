@@ -41,17 +41,24 @@ timebox timeboxid {
     description: "descrição timebox"
     startDate: "01/01/2024"
     endDate: "12/12/2024"
-    responsible: TeamID.memberid  //Referência do membro responsável
+    responsible: TeamID.memberid  //Referência do membro responsável pela sprint
 
     planning {
-        item: "item planejado" assigner: "nome do membro"
+        item: BacklogID.itemid assigner: TeamID.memberid Complexity: 0
     } 
 
     performed {
-        item: "item feito" status: DOING
+        item: BacklogID.itemid status: DOING
     }
+
+    comment: "Comentários da sprint"
+    Label: LabelID_1, LabelID_2
 }
 ```
+Label é uma tag que pode ser utilizada para rastreio de atividades de um setor específico, categorizando tarefas.
+Complexity indica a complexidade dos itens, sendo um número inteiro;
+Planning: Cita itens dos backlog, inserindo-os na sprint;
+Performed: Cita itens do planning e atribuiu o seu status `DOING` ou `DONE`. Sendo útil para a sprint review, uma vez que é possível verificar o status das tarefas da timebox.
 
 ### Process:
 Define o processo do projeto e suas atividades.
@@ -63,9 +70,27 @@ process processID {
     activity activityID {
         name: "Nome da atividade"
         description: "Descrição da atividade"
+        DefinitionDone: "Definição para estar concluído"
+        DefinitionReady: "Definição para estar pronto"
+        Learning: "Definição para o que é necessário estudar"
+        Label: LabelID
+        Depends: processID.taskID
     }
+
+    task TaskID {
+        name: "Nome da atividade"
+        description: "Descrição da atividade"
+        DefinitionDone: "Definição para estar concluído"
+        DefinitionReady: "Definição para estar pronto"
+        Learning: "Definição para o que é necessário estudar"
+        Label: LabelID
+        Depends: processID.activityID
+    }
+    Label: LabelID
 }
 ```
+As definitions podem ser usadas para definir quando a atividade ou task estão prontas ou concluídas.
+Depends define as dependências entre o que foi criado.
 
 ### BackLog
 Define o backlog, seus épicos e histórias de usuário.
@@ -80,9 +105,13 @@ backlog BackLogID {
     userstory userstoryId {
         name: "Nome da história de usuário"
         activity: processID.activityID //Referência da atividade
+        epic: BackLogID.EpicID
+        depends: BackLogID.EpicID
+        activity: processID.activityID
     }
 }
 ```
+A dependência pode ocorrer na userstory e na epic, funcionando da mesma forma.
 
 ### RoadMap
 Define o roteiro, suas versões e o planejamento das versões.

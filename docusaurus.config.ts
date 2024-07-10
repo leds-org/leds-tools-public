@@ -49,6 +49,19 @@ const config: Config = {
   ],
 
   themeConfig: {
+
+    footer: {
+
+      style: 'light',      
+    copyright: `
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <img src="/img/leds.png" alt="Powered by LEDS" style="height: 24px; margin-right: 8px;" />
+      <span>Copyright © ${new Date().getFullYear()}. Powered by <a href="https://www.instagram.com/ledsifes/">LEDS</a>, created with Docusaurus.</span>
+    </div>
+  `,
+
+    },
+    
     docs: {
       sidebar: {
         hideable: false,
