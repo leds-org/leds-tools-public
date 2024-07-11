@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # O que é gerado?
 
-Por enquanto, o R2D2 gera apenas o backend do CRUD, gerando:
+Por enquanto, o CODETO gera apenas o backend do CRUD, gerando:
 
 #### Docs:
 

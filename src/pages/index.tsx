@@ -8,8 +8,6 @@ import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
 
-import MySvg from '../../static/img/vamos.svg';
-
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
@@ -22,15 +20,15 @@ function HomepageHeader() {
         <div className={styles.cardsContainer}>
           <div className={styles.card}>
             <Link className={styles.cardLink} to="/docs/r2d2/intro">
-              <img src="/img/r2d2.png" alt="R2D2" className={styles.cardImage} />
-              <h3>R2D2</h3>
+              <img src="/img/codeto.png" alt="CODETO" className={styles.cardImage} />
+              <h3>CODETO</h3>
               <p>Plugin que faz a geração automática de código para diversas partes do projeto, incluindo a criação de interfaces de usuário, lógica de servidor, documentação e diagramas UML.</p>
             </Link>
           </div>
           <div className={styles.card}>
             <Link className={styles.cardLink} to="/docs/bb8/intro">
-              <img src="/img/bb8.png" alt="BB-8" className={styles.cardImage} />
-              <h3>BB-8</h3>
+              <img src="/img/ANDES.png" alt="ANDES" className={styles.cardImage} />
+              <h3>ANDES</h3>
               <p>Plugin que permite descrever requisitos de software, casos de uso, regras de negócio e outras construções essenciais para definir o domínio do problema em projetos de software.</p>
             </Link>
           </div>
@@ -55,9 +53,6 @@ export default function Home(): JSX.Element {
       description="Documentação LEDS Tools">
       <HomepageHeader />
       <main>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <MySvg className="my-svg-class" />
-        </div>
       </main>
     </Layout>
   );

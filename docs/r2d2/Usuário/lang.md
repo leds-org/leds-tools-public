@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Como funciona a linguagem?
 
-A linguagem do langium segue uma sintaxe simples, utilizando pequenas declarações explicitando as entidades, seus tipos e suas relações.
+A linguagem do CODETO segue uma sintaxe simples, utilizando pequenas declarações explicitando as entidades, seus tipos e suas relações.
 
 ## Explicando a sintaxe e seus elementos:
 

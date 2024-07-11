@@ -49,6 +49,19 @@ const config: Config = {
   ],
 
   themeConfig: {
+
+    footer: {
+
+      style: 'light',      
+    copyright: `
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <img src="/img/leds.png" alt="Powered by LEDS" style="height: 24px; margin-right: 8px;" />
+      <span>Copyright © ${new Date().getFullYear()}. Powered by <a href="https://www.instagram.com/ledsifes/">LEDS</a>, created with Docusaurus.</span>
+    </div>
+  `,
+
+    },
+    
     docs: {
       sidebar: {
         hideable: false,
@@ -65,15 +78,15 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'r2d2',
+          sidebarId: 'codeto',
           position: 'left',
-          label: 'R2D2',
+          label: 'CODETO',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'bb8',
+          sidebarId: 'andes',
           position: 'left',
-          label: 'BB-8',
+          label: 'ANDES',
         },
         {
           type: 'docSidebar',
