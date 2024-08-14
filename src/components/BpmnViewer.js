@@ -25,7 +25,7 @@ const BpmnViewer = ({ diagramUrl }) => {
     };
   }, [diagramUrl]);
 
-  return <div ref={viewerRef} style={{ width: '100%', height: '600px' }} />;
+  return <div ref={viewerRef} style={{ width: '100%', height: '800px' }} />;
 };
 
 export default BpmnViewer;
