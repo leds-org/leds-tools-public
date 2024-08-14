@@ -1,0 +1,8 @@
+{
+  "label": "Ferramentas",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Ferramentas criadas ou usadas nos projetos"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "label": "Spark",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Auxilia os desenvolvedores de um projeto criarem um sistema de informação com os artefatos de análise (e.g., Diagrama de classe)"
+  }
+}

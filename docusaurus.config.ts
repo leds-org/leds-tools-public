@@ -3,7 +3,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'Documentação LEDS Tools',
+  title: 'Base de Conhecimento do LEDS',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -70,7 +70,7 @@ const config: Config = {
     },
     image: 'img/leds-social-card.jpg',
     navbar: {
-      title: 'LEDS Tools',
+      title: 'KnowLEDS ',
       logo: {
         alt: 'LEDS Logo',
         src: 'img/logo.svg',
@@ -78,21 +78,21 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'codeto',
+          sidebarId: 'processos',
           position: 'left',
-          label: 'CODETO',
+          label: 'Processos',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'andes',
+          sidebarId: 'ferramentas',
           position: 'left',
-          label: 'ANDES',
+          label: 'Ferramentas',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'made',
+          sidebarId: 'devsecops',
           position: 'left',
-          label: 'MADE',
+          label: 'DevSecOps',
         },
         {
           href: 'https://gitlab.com/ledsifes',

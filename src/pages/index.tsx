@@ -21,22 +21,22 @@ function HomepageHeader() {
           <div className={styles.card}>
             <Link className={styles.cardLink} to="/docs/r2d2/intro">
               <img src="/img/codeto.png" alt="CODETO" className={styles.cardImage} />
-              <h3>CODETO</h3>
-              <p>Plugin que faz a geração automática de código para diversas partes do projeto, incluindo a criação de interfaces de usuário, lógica de servidor, documentação e diagramas UML.</p>
+              <h3>Processos</h3>
+              <p>Processos</p>
             </Link>
           </div>
           <div className={styles.card}>
             <Link className={styles.cardLink} to="/docs/bb8/intro">
               <img src="/img/ANDES.png" alt="ANDES" className={styles.cardImage} />
-              <h3>ANDES</h3>
-              <p>Plugin que permite descrever requisitos de software, casos de uso, regras de negócio e outras construções essenciais para definir o domínio do problema em projetos de software.</p>
+              <h3>Ferramentas</h3>
+              <p>Ferraentas</p>
             </Link>
           </div>
           <div className={styles.card}>
             <Link className={styles.cardLink} to="/docs/made/intro">
               <img src="/img/made.png" alt="MADE" className={styles.cardImage} />
-              <h3>MADE</h3>
-              <p>Plugin que capacita o Scrum Master e a equipe de desenvolvimento a criar o backlog e sprints com base em processos que podem ser reutilizados e padronizados ao longo do projeto e/ou entre diferentes projetos.</p>
+              <h3>Tutorias</h3>
+              <p>Tutorias</p>
             </Link>
           </div>
         </div>
