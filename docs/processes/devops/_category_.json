@@ -1,8 +1,8 @@
 {
   "label": "DevOps",
-  "position": 4,
+  "position": 2,
   "link": {
     "type": "generated-index",
-    "description": "Processos relacionados ao processo de DevOps"
+    "description": "DevOps processes"
   }
 }
