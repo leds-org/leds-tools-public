@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 7
 title: MVP and Releases
 ---
 # MVP and Releases

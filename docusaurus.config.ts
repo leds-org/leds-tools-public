@@ -3,7 +3,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'LED`s Knowledge Base ',
+  title: 'KnowLeds: The Source of LED Knowledge',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -76,6 +76,12 @@ const config: Config = {
         src: 'img/logo.svg',
       },
       items: [
+        {
+          type: 'docSidebar',
+          sidebarId: 'inspirations',
+          position: 'left',
+          label: 'Inspirations',
+        },        
         {
           type: 'docSidebar',
           sidebarId: 'processos',
