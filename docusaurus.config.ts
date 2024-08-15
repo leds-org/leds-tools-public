@@ -80,19 +80,19 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'processos',
           position: 'left',
-          label: 'Processos',
+          label: 'Processs',
         },
         {
           type: 'docSidebar',
           sidebarId: 'ferramentas',
           position: 'left',
-          label: 'Ferramentas',
+          label: 'Tools',
         },
         {
           type: 'docSidebar',
           sidebarId: 'devsecops',
           position: 'left',
-          label: 'DevSecOps',
+          label: 'Tutoriais',
         },
         {
           href: 'https://gitlab.com/ledsifes',
