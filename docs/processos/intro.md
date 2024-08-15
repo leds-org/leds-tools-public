@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: Visão Geral
+title: Overview
 ---
 
-Essa seção apresenta um conjunto de processos utilizados pelo Leds ao longo do processo de desenvolvimento, gestão e suporte de software.
+This section outlines the processes used by Leds throughout the stages of software development, management, and support.

@@ -84,7 +84,7 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'ferramentas',
+          sidebarId: 'tools',
           position: 'left',
           label: 'Tools',
         },

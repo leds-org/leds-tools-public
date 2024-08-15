@@ -16,13 +16,18 @@ But why is it centered on the human being?
 
 HCD is guided by three lenses: Desirability, Feasibility, and Viability. These lenses are present throughout the entire process of understanding the problem and creating the solution.
 
+![alt text](hcd_lenses.webp)
+
+
 We use HCD because it is a process/toolkit that allows the development team to understand the client, develop empathy for the problem, and create solutions that are viable both economically and technically. The feeling of empathy for the problem makes the team want to complete the project not just because it was requested but because they have taken on the problem as their own. Additionally, focusing on the technical and financial feasibility of the project encourages the team to create solutions that truly meet the client's needs.
 
 This shift in mindset and behavior is crucial for the execution and success of the project. When the team takes ownership of the problem as something "personal," because they empathize with and understand it, they will solve the problem in the best way possible. Because now, the problem is also theirs. Repeating, this feeling makes a big difference in project management and execution. Believe it! It's true! So, here’s a tip: MAKE YOUR TEAM EMPATHIZE WITH THE PROBLEM!
 
 The following figures present the three stages of HCD from different perspectives: Inspiration (listening), Ideation (creating), and Implementation (delivering).
 
-**Inspiration** is dedicated to learning directly from the people you are designing the solution for. This requires immersing yourself in their lives and deeply understanding their needs. **Ideation** is for organizing what you learned in the previous phase, identifying design opportunities, and prototyping possible solutions. **Implementation** is the stage where the solution (prototypes and final solutions) is built and brought to market.
+![alt text](hcd_flow.webp)
+
+**Inspiration** is dedicated to learning directly from the people you are designing the solution for. This requires immersing yourself in their lives and deeply understanding their needs;  While **Ideation** is for organizing what you learned in the previous phase, identifying design opportunities, and prototyping possible solutions. Finally, **Implementation** is the stage where the solution (prototypes and final solutions) is built and brought to market.
 
 Note that the image above presents stages of the solution creation process, moving from abstract concepts to concrete solutions. For more details about HCD, visit the material at [www.designkit.org/human-centered-design](http://www.designkit.org/human-centered-design).
 

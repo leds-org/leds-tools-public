@@ -7,11 +7,7 @@ A **complex adaptive system** is a special case of a "complex system." It is com
 
 When we view an organization as a system composed of elements (e.g., teams, artifacts, and policies) and interconnections (e.g., the relationship between the development team, the software artifacts they produce, and the policies that influenced their production) coherently organized into a structure that produces a set of characteristic behaviors, often classified as its functions or the system's purpose (e.g., the development team produces a software product aimed at fulfilling one or more functions within the organization).
 
-On the other hand, small actions by a team member or an unmet rule can positively or negatively affect a software project. See the example below:
-
-Notice how important it is to meet deadlines and avoid fatigue for the well-being of the project and the people involved.
-
-A project is a system of elements that interact with each other. Complexity is a characteristic of a project or its environment that is difficult to manage due to human behavior, system behavior, and ambiguity. The nature and number of interactions determine the degree of complexity in a project. Complexity arises from the project's elements, the interactions between the project's elements, and the interactions with other systems and the project's environment. Although complexity cannot be controlled, project teams can modify their activities to manage the impacts that occur as a result of complexity.
+On the other hand, small actions by a team member or an unmet rule can positively or negatively affect a software project. A project is a system of elements that interact with each other. Complexity is a characteristic of a project or its environment that is difficult to manage due to human behavior, system behavior, and ambiguity. The nature and number of interactions determine the degree of complexity in a project. Complexity arises from the project's elements, the interactions between the project's elements, and the interactions with other systems and the project's environment. Although complexity cannot be controlled, project teams can modify their activities to manage the impacts that occur as a result of complexity.
 
 Project teams often fail to anticipate the emergence of complexity because it results from many interactions, such as risks, dependencies, events, or relationships. Alternatively, some causes may converge to produce a single complex effect, making it difficult to isolate a specific cause of complexity.
 
