@@ -90,7 +90,7 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'devsecops',
+          sidebarId: 'tutoriais',
           position: 'left',
           label: 'Tutoriais',
         },
