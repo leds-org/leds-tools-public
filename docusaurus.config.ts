@@ -80,7 +80,7 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'processos',
           position: 'left',
-          label: 'Processs',
+          label: 'Processes',
         },
         {
           type: 'docSidebar',
