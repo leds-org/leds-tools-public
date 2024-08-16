@@ -81,7 +81,13 @@ const config: Config = {
           sidebarId: 'inspirations',
           position: 'left',
           label: 'Inspirations',
-        },        
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'concepts',
+          position: 'left',
+          label: 'Concepts',
+        },          
         {
           type: 'docSidebar',
           sidebarId: 'processos',
