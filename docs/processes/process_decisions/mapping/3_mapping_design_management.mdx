@@ -4,4 +4,12 @@ title: Project and Managemnt Processes
 ---
 import BpmnViewer from '@site/src/components/BpmnViewer';
 
-## Mapping **Project Class Diagram** to **Task**  
+## Mapping Project Class Diagram to Task  
+
+<BpmnViewer diagramUrl="/diagrams/project_decision/mapping_project_to_management_project_model.bpmn"  height="100px"/>
+
+| **Task**                   | **Decision**                      | **Example**                        | 
+|--------------------------------|-------------------------------|------------------------------------|
+|Create Task to implement Model and Infraesrtuture|When a class is created or updated, code class and Infraesrtuture needs to be created or updated, based on project`s design patterns|Create a new class on model package and map it to database, using a ORM|
+|Create Task to implement CRUD Events to each class|It is created or updated a CRUD components to each class in model, or updated, based on project`s design patterns|Create the controller, database and view class to implement CRUD operation|
+|Create Task to implement CRUD Test|It is created or updated a CRUD components Scenario Test to each class in model, or updated, based on project`s design patterns|Create and implement Teting Scenario to insert method |

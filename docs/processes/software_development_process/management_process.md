@@ -3,7 +3,6 @@ sidebar_position: 2
 title: Management Process
 ---
 
-## Objective
 Define the milestones for each stage of the process, the responsible parties, and the deliverables.
 
 ## Process Requirement

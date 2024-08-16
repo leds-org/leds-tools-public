@@ -3,7 +3,6 @@ sidebar_position: 4
 title: Development Process
 ---
 
-## Objective
 Deliver the solution defined during the inception process.
 
 ## Process Requirement

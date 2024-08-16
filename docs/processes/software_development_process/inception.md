@@ -3,7 +3,6 @@ sidebar_position: 3
 title: Inception
 ---
 
-## Objective
 Identify the problem and the solution for the project.
 
 ## Process Requirement
