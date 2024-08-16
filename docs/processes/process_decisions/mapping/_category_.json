@@ -1,0 +1,8 @@
+{
+  "label": "Mapping",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Presents decision making mapping between artifacts among processes."
+  }
+}

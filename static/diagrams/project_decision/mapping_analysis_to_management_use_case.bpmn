@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:startEvent id="StartEvent_1" name="Use Case Created or updated">
+      <bpmn:outgoing>Flow_0xxc3ji</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Activity_0haz463" name="Create a Epic on Software Management Tools from Use Case">
+      <bpmn:incoming>Flow_0xxc3ji</bpmn:incoming>
+      <bpmn:outgoing>Flow_16xphxy</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0xxc3ji" sourceRef="StartEvent_1" targetRef="Activity_0haz463" />
+    <bpmn:task id="Activity_1o16tgc" name="Create User Story for each Use Case`s Event">
+      <bpmn:incoming>Flow_16xphxy</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hvdkmo</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_16xphxy" sourceRef="Activity_0haz463" targetRef="Activity_1o16tgc" />
+    <bpmn:task id="Activity_06o1dys" name="Create Task  to  each Use Case`s Event">
+      <bpmn:incoming>Flow_0hvdkmo</bpmn:incoming>
+      <bpmn:outgoing>Flow_1i0zr9m</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0hvdkmo" sourceRef="Activity_1o16tgc" targetRef="Activity_06o1dys" />
+    <bpmn:endEvent id="Event_0z9ow94" name="Mapping done">
+      <bpmn:incoming>Flow_1i0zr9m</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1i0zr9m" sourceRef="Activity_06o1dys" targetRef="Event_0z9ow94" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="192" y="22" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="184" y="65" width="54" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0haz463_di" bpmnElement="Activity_0haz463">
+        <dc:Bounds x="280" y="0" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1o16tgc_di" bpmnElement="Activity_1o16tgc">
+        <dc:Bounds x="440" y="0" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06o1dys_di" bpmnElement="Activity_06o1dys">
+        <dc:Bounds x="600" y="0" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0z9ow94_di" bpmnElement="Event_0z9ow94">
+        <dc:Bounds x="762" y="22" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="745" y="65" width="70" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0xxc3ji_di" bpmnElement="Flow_0xxc3ji">
+        <di:waypoint x="228" y="40" />
+        <di:waypoint x="280" y="40" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16xphxy_di" bpmnElement="Flow_16xphxy">
+        <di:waypoint x="380" y="40" />
+        <di:waypoint x="440" y="40" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hvdkmo_di" bpmnElement="Flow_0hvdkmo">
+        <di:waypoint x="540" y="40" />
+        <di:waypoint x="600" y="40" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1i0zr9m_di" bpmnElement="Flow_1i0zr9m">
+        <di:waypoint x="700" y="40" />
+        <di:waypoint x="762" y="40" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

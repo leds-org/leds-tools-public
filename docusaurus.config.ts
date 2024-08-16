@@ -96,9 +96,9 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'tutoriais',
+          sidebarId: 'bestpractices',
           position: 'left',
-          label: 'Tutoriais',
+          label: 'Best Practices',
         },
         {
           href: 'https://gitlab.com/ledsifes',
