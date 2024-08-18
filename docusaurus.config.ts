@@ -96,6 +96,12 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
+          sidebarId: 'projectdecisions',
+          position: 'left',
+          label: 'Project Decisions',
+        },
+        {
+          type: 'docSidebar',
           sidebarId: 'tools',
           position: 'left',
           label: 'Tools',
