@@ -6,7 +6,7 @@ import BpmnViewer from '@site/src/components/BpmnViewer';
 
 Presents examples of process that implements Inception.
 
-## Exempla 1: When Soluction was defined before
+## Example 1: When Soluction was defined before
 
 This process describes an example of a inception process when a soluction (e.g. Web Application or Mobile apps) was defined before.  
 
@@ -16,56 +16,24 @@ This process describes an example of a inception process when a soluction (e.g. 
 
 Requirement Enginner, or Business Process Modeler, models, and validates with stakeholders, one or more business Pprocess models to understand how the organization works. 
 
-**Inputs**:
-    1. Organization`s documents
-    2. Project`s Scope
-
-**Results**: 
-    1.  Business Process Models validades
-
 ### Define Software Requirements
 
 Requirement Enginner defines, and validades, functionals and non-funcionals software requirements based on information in business process models and other artifacts (e.g., interviews). 
 
-**Inputs**:
-    1. Organization`s documents
-    2. Project`s Scope
-    3. Business Processes
+### Create Prototype
 
-**Results**: 
-    1.  Software Requirement: define and describes the software requirements
-    2.  Graph with relation among software requirements: presents the relationship among the software requirements
+Designer creates a non-functional prototypes and validade with statkeholders.
 
-**Example**:
+### Mapping Among Artifacts
 
-**Software Requirements**
-
-|ID|Requirement|Type|Relation|
-|--|-----------|----|--------|
-|RQ01| Description from RQ01|Non-Functional|-|
-|RQ02| Description from RQ02|Functional|RQ01|
-|RQ03| Description from RQ03|Functional|RQ01,RQ02|
+This figure above presents relations among artifacts created in this processes. 
 
 ```mermaid
-graph TD
-    RQ01["RQ01: Description from RQ01"]:::highlight
-    RQ02["RQ02: Description from RQ02"]
-    RQ03["RQ03: Description from RQ03"]
-
-    RQ01 --> RQ02
-    RQ01 --> RQ03
-    RQ02 --> RQ03
-    classDef highlight fill:#f9f,stroke:#333,stroke-width:2px;
-```
-### Define Use Cases
-
-Requirement Enginner creates and describes a use case to support the sotware requirements.
-
-**Inputs**:
-    1. Requirements
-
-**Results**: 
-    1.  Use Case     
+ graph LR
+    A[Business Process] --> B[Requirements] --> C[Functional Requirement 1] --> D[Use Case 1] --> E[Screen Prototype 1]
+    B --> F[Functional Requirement 2] --> G[Use Case 2] --> H[Screen Prototype 2]
+    D --> H
 
 
-### Create Prototype
+
+``` 
