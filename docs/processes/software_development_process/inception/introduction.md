@@ -1,6 +1,6 @@
 ---
-sidebar_position: 3
-title: Inception
+sidebar_position: 1
+title: Introduction
 ---
 
 Identify the problem and the solution for the project.
