@@ -38,3 +38,7 @@ The process must include activities that meet the listed objectives:
 | Domain Specification (Use Cases, Process Models, User Stories, and other models for understanding the problem) | Development Team and Management Team |
 | Non-functional Prototypes | Development Team and Management Team |
 | Solution Specification (Architecture, features, etc.) | Development Team and Management Team |
+
+## Relation with other processes
+
+
