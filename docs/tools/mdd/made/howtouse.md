@@ -1,17 +1,7 @@
 ---
-sidebar_position: 1
+sidebar_position: 4
+title: How to Use
 ---
-
-# Como Usar?
-
-## Instalação:
-
-1. Abra o Visual Studio Code
-2. Clique em extensões
-3. Pesquise Origami-Leds
-4. Clique para instalar a extensão Origami do LEDS IFES
-![Imagem da loja do VSCode com a extensão aberta](./img/extension.png)
-
 ## Geração:
 
 1. Crie um arquivo de nome qualquer com a extensão `.origami`

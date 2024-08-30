@@ -3,6 +3,9 @@
   "position": 3,
   "link": {
     "type": "generated-index",
-    "description": "Auxilia a equipe de Gestão a criar tarefas, roadmaps e outros elementos de gestão tomando com base processos de desenvolvimento (e.g., processo de criação de webservice) e artefatos de análise (e.g., diagrama de caso de uso)."
+    "description": "Supports the management team in creating tasks, roadmaps, and other planning elements on management software."
   }
 }
+
+
+
