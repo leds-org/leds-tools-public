@@ -12,7 +12,7 @@ Spark`s language is compose of following parts:
 
 This constructor allows to define: Software Name, description about the software, language that desires to develope the information system, and database name.
 
-```
+```js
    Configuration {
        software_name: "SlaveOne" // software`s name
        about: "Slave One project example" // description about the software
@@ -26,7 +26,7 @@ For the `language`, we have the options: `python, java, csharp-minimal-api, csha
 
 Spark allows us to create organize a class diagram on Modules.  The declaration of a module is simple, following this pattern:
 
-```
+```js
    module Main {
        // Aqui ficam os componentes dos módulos
    }
@@ -34,7 +34,7 @@ Spark allows us to create organize a class diagram on Modules.  The declaration 
 
 Inside in each module it is possible define Entities, relations between entities, and Enuns.
 
-```uml
+```js
    entity Project {
        name: string
        start_date: date
