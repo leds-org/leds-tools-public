@@ -3,14 +3,7 @@ sidebar_position: 3
 title: Understanding the Language
 ---
 
-MADE`s language is compose of following parts:
-
-1. Project
-2. Team
-3. Backlog
-4. TimeBox
-5. Roadmap
-6. Process
+MADE`s language is compose of following parts: Project,Team, Backlog, TimeBox, Roadmap, and Process.
 
 ## Project
 
@@ -41,7 +34,6 @@ It allows us create teams that will be responsible for one or more tasks. MADE a
 
 It is important to comment that each member needs to be registered on JIRA. 
 
-
 ```js
 team DevelopmentTeam {
     name: "Development Team "
@@ -67,7 +59,6 @@ A backlog is composed of: EPIC, User Story, and Task. Link about [EPIC, USer Sto
 
 
 A Epic is composed of User Stories and User Stories is composed of tasks. MADE allows to define this relation. Beside allow us define a relation of dependecies, i.e., It is possible to define that a task will be performed only when other task or user story was performed. 
-
 
 ```js
 backlog DevelopmentBacklog {
@@ -104,77 +95,80 @@ timebox TimeBox01 {
     description: "descrição timebox"
     startDate: "01/01/2024"
     endDate: "12/12/2024"
-    responsible: TeamID.memberid  //Referência do membro responsável pela sprint
+    responsible: DevelopmentTeam.John  
 
     planning {
-        item: BacklogID.itemid assigner: TeamID.memberid Complexity: 0
+        item: DevelopmentBacklog.US01 assigner: DevelopmentTeam.Myke Complexity: 0 Label: developement
     } 
 
     performed {
-        item: BacklogID.itemid status: DOING
+        item: DevelopmentBacklog.US01 status: DOING 
     }
 
     comment: "Comentários da sprint"
-    Label: LabelID_1, LabelID_2
+   
 }
 ```
-Label é uma tag que pode ser utilizada para rastreio de atividades de um setor específico, categorizando tarefas.
-Complexity indica a complexidade dos itens, sendo um número inteiro;
-Planning: Cita itens dos backlog, inserindo-os na sprint;
-Performed: Cita itens do planning e atribuiu o seu status `DOING` ou `DONE`. Sendo útil para a sprint review, uma vez que é possível verificar o status das tarefas da timebox.
+Definition: 
 
-### Process:
-Define o processo do projeto e suas atividades.
+* **Label**: A label is a tag that can be used to track activities of a specific department, categorizing tasks.
+
+* **Complexity**: Indicates the complexity of items, represented by an integer.
+
+* **Planning**: References items from the backlog, inserting them into the sprint and creating the Sprint Backlog.
+
+* **Performed**: References items from the planning and assigns their status as `DOING` or `DONE`. This is useful for sprint reviews, as it allows the status of tasks within the timebox to be checked.
+
+
+## Process
+
+In projects, it's common for some activities to be repeated throughout their duration. To handle this, we've introduced the concept of a **process**, which can be used to instantiate repetitive activities in the project.
+
 ```js
-process processID {
-    name: "Nome do processo"
-    description: "Descrição do processo"
+process DevelopmentProcess {
+    name: "Development Process"
+    description: "Description of a process"
 
-    activity activityID {
-        name: "Nome da atividade"
-        description: "Descrição da atividade"
-        DefinitionDone: "Definição para estar concluído"
-        DefinitionReady: "Definição para estar pronto"
-        Learning: "Definição para o que é necessário estudar"
-        Label: LabelID
-        Depends: processID.taskID
+    activity UseCaseModelling {
+        name: "Use Case Modelling"
+        description: "Use Case Modelling"
+        DefinitionDone: "The criteria that define when the activity is considered complete."
+        DefinitionReady: "The criteria that define when the activity is ready to be worked on."
+        Learning: "Specifies what needs to be studied or learned for the activity."
+        Label: UseCaseModelling
+       
     }
 
-    task TaskID {
-        name: "Nome da atividade"
-        description: "Descrição da atividade"
-        DefinitionDone: "Definição para estar concluído"
-        DefinitionReady: "Definição para estar pronto"
-        Learning: "Definição para o que é necessário estudar"
-        Label: LabelID
-        Depends: processID.activityID
-    }
-    Label: LabelID
+    task UseCaseDescription {
+        name: "Use Case Description"
+        description: "Use Case Description "
+        DefinitionDone: "The criteria that define when the activity is considered complete."
+        DefinitionReady: "The criteria that define when the activity is ready to be worked on."
+        Learning: "Specifies what needs to be studied or learned for the activity."
+        Label: UseCaseDescription
+        Depends: DevelopmentProcess.UseCaseModelling
+    }    
 }
 ```
-As definitions podem ser usadas para definir quando a atividade ou task estão prontas ou concluídas.
-Depends define as dependências entre o que foi criado.
+The dependency can occur in both the **user story** and the **epic**, functioning in the same way.
 
+## RoadMap
 
-```
-A dependência pode ocorrer na userstory e na epic, funcionando da mesma forma.
-
-### RoadMap
 Define o roteiro, suas versões e o planejamento das versões.
 ```js
-roadmap RoadMapID {
-    name: "Nome do roadmap"
-    description: "Descrição do roadmap"
+roadmap RoadMapx {
+    name: "Roadmap`s project X"
+    description: "Description from a project"
 
-    version RoadMapVersionID {
-        name: "Nome da versão do roadmap"
-        description: "Descrição da versão do roadmap"
+    version Version1 {
+        name: "Version1"
+        description: "Version with CRUD elements"
         startDate: "01/01/2024"
         endDate: "12/12/2024"
 
         planning {
-            item: BackLogID.userstoryId //Referência da história de usuário
-            item: "Item da planning"
+            item:DevelopmentBacklog.US01 
+            item: DevelopmentBacklog.US02
         }
     }
 }

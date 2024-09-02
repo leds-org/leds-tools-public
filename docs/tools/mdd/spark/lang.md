@@ -3,10 +3,7 @@ sidebar_position: 3
 title: Understanding the Language
 ---
 
-Spark`s language is compose of following parts:
-
-1. Configuration
-2. Class Diagram 
+Spark`s language is compose of following parts: Configuration and Class Diagram. 
 
 ## Configuration:
 
