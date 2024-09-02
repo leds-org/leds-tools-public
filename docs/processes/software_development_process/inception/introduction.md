@@ -39,6 +39,7 @@ The process must include activities that meet the listed objectives:
 | Non-functional Prototypes | Development Team and Management Team |
 | Solution Specification (Architecture, features, etc.) | Development Team and Management Team |
 
-## Relation with other processes
+## Relationship With Other Processes
 
+TODO
 
