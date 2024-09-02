@@ -17,11 +17,3 @@ Finally, Spark also creates:
 
 * Documentation: Class Diagram Model, using Plant UML, and descroption of models and entities on Markdown.
 * CI/CD: allow create the files that enable a CI/CD on GitLab. 
-
-## Instalation
-To install Spark, follow these steps:
-
-1. Open Visual Studio Code
-2. Click on Extensions
-3. Search for Spark
-4. Click to install the Spark extension by LEDS IFES
