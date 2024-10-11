@@ -32,14 +32,20 @@ _Feature Branch BPMN Diagram_
 
 3. Run the tests and get the code coverage.
 
-#### if the branch is _feature branch_:
+> #### if the branch is _feature branch_:
 
 4. Generate a candidate image for Deployment.
 
-#### if the branch is _special branch_:
+> #### if the branch is _special branch_:
 
-5. Generate a image for deployment with the branch tag and publish the image to the GitHub Container Registry.
+4. Generate a image for deployment with the branch tag and publish the image to the GitHub Container Registry.
 
-6. Deploy the image to the respective environment.
+5. Deploy the image to the respective environment.
 
-#### On any push, an alert will be sent to the team if the pipeline fails.
+6. Alert sucessful deployment to the team. 
+
+![Sucessful Special Branch](image-2.png)  
+_Example of a sucessful deployment to a special branch_
+
+
+> ### On any push, an alert will be sent to the team if the pipeline fails.

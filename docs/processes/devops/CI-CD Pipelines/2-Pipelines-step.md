@@ -60,7 +60,7 @@ This step depends directly on the previous step. If the image is not published, 
 This stage only occors in the "special" branches, only on pushing.
 
 ### 6. Alerting
-This stage is responsible for sending alerts to the team in case of any failure in the pipeline. This is important to ensure that the team is aware of any issues and can take immediate action to resolve them. It happens on all branches and actions on Git, only on failure. In our case, the alerts are sent via Discord.
+This stage is responsible for sending alerts to the team in case of any failure or image deployment in the pipeline. This is important to ensure that the team is aware of any issues and can take immediate action to resolve them. It happens on all branches and actions on Git, only on failure. In our case, the alerts are sent via Discord.
 
 
 Next, we'll dive deeper in the pipeline BPMN diagram, and where and when the stages are executed.
