@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 title: Project Management
+description: Presents the project`s developing planning.
 ---
 ## Backlog
 
