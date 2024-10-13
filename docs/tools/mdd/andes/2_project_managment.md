@@ -13,16 +13,21 @@ title: Project Management
 | 5  | Create Development Artifacts | Create a Spark-type document, using the data from the analysis. | 70 |
 
 
+## General planning
+
+* Release 1.0 - (14/10/2024 - 01/11/2024): create a documentation using Software Requirement information.
+* Release 2.0 - (04/11/2024 - 31/11/2024): create a Made and Spark documents
+
 ## Release 1.0 - 01/11/2024
 
 * **Goal**: Create an analysis document in Markdown with the following information: Requirements, Use Cases, Class Diagram, and State Diagram, to be published on Docusaurus and Update the analysis document with a section for dependencies between use cases and events. . 
 
-* **Implements**: ID 1 and ID 2
+  * **Features**: ID 1 and ID 2
 
-* **Deadline I**  - 25/10/2024 
-    * ID 1: Create an analysis document in Markdown with the following information: Requirements, Use Cases, Class Diagram, and State Diagram, to be published on Docusaurus  
-* **Deadline II** - 01/11/2024 
-    * ID 2: Update the analysis document with a section for dependencies between use cases and events.
+  * **Deadline I**  - 25/10/2024 
+      * ID 1: Create an analysis document in Markdown with the following information: Requirements, Use Cases, Class Diagram, and State Diagram, to be published on Docusaurus  
+  * **Deadline II** - 01/11/2024 
+      * ID 2: Update the analysis document with a section for dependencies between use cases and events.
 
 ```mermaid
 %%{

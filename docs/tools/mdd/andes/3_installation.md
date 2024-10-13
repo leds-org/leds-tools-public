@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: Understanding the Language
+title: Instalation
 ---
 
 to do !
