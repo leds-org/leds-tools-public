@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: Micro Front-Eend Architecture
+title: Micro Front-End Architecture
 ---
 
 On Building!
