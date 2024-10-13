@@ -4,6 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'KnowLeds: The Source of LEDS Knowledge',
+  tagline: "Knowledge is power. — Francis Bacon",
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here

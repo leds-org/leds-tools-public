@@ -12,7 +12,7 @@ function HomepageHeader() {
         <Heading as="h1" className="hero__title" style={{ display: 'flex', justifyContent: 'center', padding: "5% 0 0 0", color: "#446BFF "}}>
           {siteConfig.title}
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle" style={{ display: 'flex', justifyContent: 'center', padding: "5% 0 0 0", color: "#446BFF", fontWeight: 'bold', fontStyle: 'italic' }}>{siteConfig.tagline}</p>
         <div className={styles.cardsContainer}>
         </div>
       </div>
