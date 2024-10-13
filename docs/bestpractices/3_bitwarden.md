@@ -4,11 +4,6 @@
 
 Regular use of Bitwarden or any password manager is not only recommended but virtually MANDATORY in an environment with sensitive information. The use of **send** for sensitive information is **INDISPENSABLE**.
 
-Table of contents:
-- [Installation](#installation)
-- [How to use](#tips)
-- [Sending information securely](#sends)
-
 # Installation
 
 I recommend using the web version of Bitwarden, both the common web app and the browser extension. In this tutorial, I'll use the Mozilla Firefox extension, but the procedure is similar in other versions.
