@@ -1,9 +1,9 @@
 ---
 sidebar_position: 1
-title: Back-End Pattern
+title: Clean Architecture on Back-End
 ---
 
-Back-End Pattern that implements Clean Architecture Concepts.
+Clean Archictecture with CRQS Pattern implemented on Back-End
 
 ![alt text](Overview.png)
 
