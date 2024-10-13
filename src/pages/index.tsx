@@ -9,10 +9,10 @@ function HomepageHeader() {
   return (
     <header>
       <div className="container">
-        <Heading as="h1" className="hero__title" style={{ display: 'flex', justifyContent: 'center', padding: "5% 0 0 0", color: "#446BFF "}}>
+        <Heading as="h1" className="hero__title" style={{ display: 'flex', justifyContent: 'center', padding: "5% 0 0 0", color: "#000000"}}>
           {siteConfig.title}
         </Heading>
-        <p className="hero__subtitle" style={{ display: 'flex', justifyContent: 'center', padding: "5% 0 0 0", color: "#446BFF", fontWeight: 'bold', fontStyle: 'italic' }}>{siteConfig.tagline}</p>
+        <p className="hero__subtitle" style={{ display: 'flex', justifyContent: 'center', padding: "5% 0 0 0", color: "#000000", fontWeight: 'bold', fontStyle: 'italic' }}>{siteConfig.tagline}</p>
         <div className={styles.cardsContainer}>
         </div>
       </div>
