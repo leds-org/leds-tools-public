@@ -19,6 +19,6 @@ Presents the project`s developing planning.
 
 ## General planning
 
-* Release 1.0 - (Undefined Dates): Create basic elements and documenation on jira (ID1, ID2 and, ID3)
-* Release 2.0 - (Undefined Dates): Create analysis and roadmap about project (ID4 and ID5)
-* Release 3.0 - (Undefined Dates): Define task templates in a repository (ID6)
+* Release 1.0 - (Undefined): Create basic elements and documenation on jira (ID1, ID2 and, ID3)
+* Release 2.0 - (Undefined): Create analysis and roadmap about project (ID4 and ID5)
+* Release 3.0 - (Undefined): Define task templates in a repository (ID6)
