@@ -41,14 +41,14 @@ timeline
                                                       : Improve the Version of Andes
 
 
-    Improve documentation with  Class and State Diagrams <br> 25/10/2024 : Define Grammar for Class Diagram
+    Documentation with Class and State Diagrams <br> 25/10/2024 : Define Grammar for Class Diagram
                                                     : Define Grammar for State Diagram
                                                     : Implement the Grammars 
                                                     : Publish new beta version of Andes
                                                     : Validate with users
                                                     : Publish final version
 
-    Improve documentation with USe Case dependency Analysis <br> 1/11/2024 : Implement DSM in the use cases
+    Documentation with dependency Analysis <br> 1/11/2024 : Implement DSM in the use cases
                                             : Publish the DSM as a section of the documentation
                                             : Create a beta version 
                                             : Validate with the user
