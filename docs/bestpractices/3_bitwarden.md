@@ -1,5 +1,3 @@
-Here's the translation of the provided text into English:
-
 # Bitwarden
 
 #### Bitwarden is a free and open-source password manager that has never had its security compromised (unlike LastPass).

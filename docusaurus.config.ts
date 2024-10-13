@@ -3,7 +3,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'KnowLeds: The Source of LED Knowledge',
+  title: 'KnowLeds: The Source of LEDS Knowledge',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
