@@ -2,9 +2,10 @@
 sidebar_position: 2
 title: Architecture
 ---
-
-An overview of *The Band* architecture is presented in below. *The Band* contains five main components:
+An overview of *The Band* architecture is presented in below. 
   ![alt text](theband_architecture.png)
+
+## Five components:
 
 1. **Application Software Artifacts (ASAs):** ASAs are software items (e.g., a code library) that enable communication between applications and the federation. Each ASA is application-specific and is developed to communicate with an application based on its data model, allowing it to retrieve and send data.
 
