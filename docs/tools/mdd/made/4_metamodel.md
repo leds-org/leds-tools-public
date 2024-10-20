@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-title: Meta Model
+title: Metamodel
 ---
 
 This metamodel defines the structure of a "Made" system, which consists of several key components used in project management, such as projects, teams, processes, backlogs, and timeboxes. Below is a breakdown of the elements and their relationships:
