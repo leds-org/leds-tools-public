@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-title: Meta Model
+title: Metamodel
 ---
 
 
