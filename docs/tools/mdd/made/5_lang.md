@@ -1,9 +1,61 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 title: Understanding the Language
 ---
 
 MADE`s language is compose of following parts: Project,Team, Backlog, TimeBox, Roadmap, and Process.
+
+## Meta Model
+
+```mermaid
+
+classDiagram
+    class Model {
+        +Project project
+        +Team components*
+        +Process components*
+        +Backlog components*
+        +TimeBox components*
+    }
+    
+    class Project {
+        <<import>>
+    }
+
+    class Team {
+        <<import>>
+    }
+
+    class Process {
+        <<import>>
+    }
+
+    class Backlog {
+        <<import>>
+    }
+
+    class TimeBox {
+        <<import>>
+    }
+
+    class Helpers {
+        <<import>>
+    }
+
+    class Terminals {
+        <<import>>
+    }
+
+    Model --> Project
+    Model --> Team
+    Model --> Process
+    Model --> Backlog
+    Model --> TimeBox
+    Model --> Helpers
+    Model --> Terminals
+
+
+```
 
 ## Project
 
