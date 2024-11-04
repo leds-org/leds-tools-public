@@ -126,6 +126,12 @@ const config: Config = {
           label: 'Best Practices',
         },
         {
+          type: 'docSidebar',
+          sidebarId: 'tutorials',
+          position: 'left',
+          label: 'Tutorials',
+        },
+        {
           href: 'https://github.com/leds-org',
           label: 'GitHub',
           position: 'right',
