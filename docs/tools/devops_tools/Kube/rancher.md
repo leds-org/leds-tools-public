@@ -54,13 +54,13 @@ systemctl enable --now rke2-server.service
 ```
 
 Se tudo deu certo, a saída deve ser a seguinte:
-![alt text](image.png)
+![alt text](./image.png)
 Podemos validar o procedimento rodando o comando:
 ```
 systemctl status rke2-server
 ```
 Cheque se o status está como ACTIVE.
-![alt text](image-1.png)
+![alt text](./image-1.png)
 
 Se tudo deu certo (se Deus quiser deu), precisamos criar um link simbólico para o `kubectl` no `kube-mario` com os comandos:
 ```
@@ -81,7 +81,7 @@ Também precisamos gerar e salvar o token (em um bloco de notas ou similar) para
 # SALVE ISSO PARA O KUBE-LUIGI!!!!
 cat /var/lib/rancher/rke2/server/node-token
 ```
-![alt text](image-2.png)
+![alt text](./image-2.png)
 
 Se a saída se parece com isso, parabéns! 
 O arquivo de configuração é o que o kubectl usa para se autenticar no serviço da API. Ah, e tem mais uma coisa: precisamos de outro arquivo do kube-mario, também conhecido como o servidor. Esse arquivo é o “agent join token” e fica em `/var/lib/rancher/rke2/server/node-token`, que teoricamente já copiamos. Vamos precisar dele para instalar o agente.
@@ -116,7 +116,7 @@ Para checar se tudo deu certo, na máquina do ```kube-mario``` (control) rode o 
 `kubectl get node -o wide`
 
 A saída deve ser similar a essa:
-![alt text](image-3.png)
+![alt text](./image-3.png)
 Boa! A instalação do RKE2 está completa :D
 Agora só rodaremos comandos dentro do control node, portanto, pode fechar a conexão SSH no kube-luigi.
 
@@ -218,19 +218,19 @@ Podemos executar o comando `kubectl get pod -A` para verificar se tudo está fun
 
 Assumindo que o DNS está apontado para o domínio do server (kube-mario), podemos digitar ele no navegador e acessar a interface gráfica web. Note que se algum erro 500 for exibido, isso significa que os serviços ainda não foram inicializados. Portanto, espere um pouco.
 
-![alt text](image-4.png)
+![alt text](./image-4.png)
 
 Esse aviso pode ser exibido, ignore-o.
 
-![alt text](image-5.png)
+![alt text](./image-5.png)
 
 Lembra da senha que foi colocada na instalação do Rancher (bootstrapPassword)? insira no GUI.
 
-![alt text](image-6.png)
+![alt text](./image-6.png)
 
 Confirme o domínio.
 
-![alt text](image-7.png)
+![alt text](./image-7.png)
 
 ## PRONTO!
 Parabéns, o cluster foi instalado com sucesso.
