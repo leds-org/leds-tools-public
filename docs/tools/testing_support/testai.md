@@ -48,4 +48,3 @@ The API will return a JSON response containing the Feature file:
 FastAPI automatically generates interactive API documentation. You can access this by going to:
 
     Swagger UI: http://testai.leds.dev.br:3000/docs
-
