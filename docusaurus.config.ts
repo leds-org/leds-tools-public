@@ -45,6 +45,14 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          breadcrumbs: true,          
+          showLastUpdateTime: true, 
+          includeCurrentVersion:true,   
+          docsRootComponent: '@theme/DocsRoot',
+          docVersionRootComponent: '@theme/DocVersionRoot',
+          docRootComponent: '@theme/DocRoot',
+          docItemComponent: '@theme/DocItem',  
+          routeBasePath: '/',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -69,7 +77,7 @@ const config: Config = {
     
     docs: {
       sidebar: {
-        hideable: false,
+        hideable: true,
         autoCollapseCategories: true,
       }
     },
@@ -118,8 +126,14 @@ const config: Config = {
           label: 'Best Practices',
         },
         {
-          href: 'https://gitlab.com/ledsifes',
-          label: 'GitLab',
+          type: 'docSidebar',
+          sidebarId: 'tutorials',
+          position: 'left',
+          label: 'Tutorials',
+        },
+        {
+          href: 'https://github.com/leds-org',
+          label: 'GitHub',
           position: 'right',
         },
       ],

@@ -1,0 +1,111 @@
+---
+title: "Máquinas e Aplicações"
+sidebar_position: 2
+---
+
+## Máquinas no Proxmox VE
+
+| Nome da Máquina    | IP              | URL             | Serviços                                 |
+|--------------------|-----------------|-----------------|---------------------------------------------|
+| Service Desk       | 192.168.211.169 | atendimento.leds.dev.br | [Sistema de Tickets](#servicedesk)              |
+| Rancher Master     | 192.168.211.170 |  | [Kubernetes](#ranchermaster)              |
+| Drone              | 192.168.211.171 | drone.leds.dev.br | [Drone CI](#drone)                |
+| PfSense            | 192.168.211.172 | fw.intranet.leds.dev.br | [PfSense](#pfsense)                   |
+| Rancher Worker     | 192.168.211.173 |  | [Kubernetes](#rancherworker)              |
+| Services           | 192.168.211.174 | services.leds.dev.br | [Portainer](#services)                 |
+| ConectaFapes Test  | 192.168.211.175 | testing.conectafapes.leds.dev.br | [Testing](#test)                 |
+| ConectaFapes Develop | 10.128.128.9  | developing.conectafapes.leds.dev.br | [Developing](#develop)              | 
+| Banco de Dados     | 10.128.128.10   |  | [Banco de Dados](#bancodedados)          |
+| PeD                | 10.128.128.11   |  | [Jobs Paulo](#ped)              |
+| ELK Stack                | 10.128.128.20   |  |          |
+
+---
+## Detalhes dos Serviços
+
+<a id="servicedesk"></a>
+
+### Service Desk 
+| Serviço         | Descrição                           | Porta     |
+|-----------------|-------------------------------------|-----------|
+| Request Tracker | Sistema de Gerenciamento de Tickets | 80, 443   |
+
+
+<a id="ranchermaster"></a>
+
+### Rancher Master 
+| Serviço        | Descrição                     | Porta     |
+|----------------|-------------------------------|-----------|
+<!-- | Drone CI       | Plataforma de Integração Contínua | 8000  | -->
+<!-- | PostgreSQL     | Banco de dados relacional     | 5432      | -->
+
+
+<a id="drone"></a>
+
+### Drone 
+| Serviço        | Descrição                     | Porta     |
+|----------------|-------------------------------|-----------|
+| Drone CI       | WebUi         | 80, 443   |
+| Runner       | Docker Runner         | 3000   |
+
+
+<a id="pfsense"></a>
+
+### PfSense 
+| Serviço        | Descrição                     | Porta     |
+|----------------|-------------------------------|-----------|
+| PfSense        | WebUi       | 80, 443   |
+
+<a id="rancherworker"></a>
+
+### Rancher Worker 
+| Serviço        | Descrição                     | Porta     |
+|----------------|-------------------------------|-----------|
+<!-- | pfSense        | Firewall e roteamento         | 80, 443   | -->
+<!-- | OpenVPN        | VPN para rede interna         | 1194      | -->
+
+
+<a id="services"></a>
+
+### Services 
+| Serviço        | Descrição                     | Porta     |
+|----------------|-------------------------------|-----------|
+| Portainer |  | 9443 |
+| Prometheus |  | 9090 |
+| Grafana |  | 3000 |
+
+
+<a id="test"></a>
+
+### ConectaFapes Test
+| Serviço        | Descrição                     | Porta     |
+|----------------|-------------------------------|-----------|
+<!-- | pfSense        | Firewall e roteamento         | 80, 443   | -->
+<!-- | OpenVPN        | VPN para rede interna         | 1194      | -->
+
+
+<a id="develop"></a>
+
+### ConectaFapes Develop 
+| Serviço        | Descrição                     | Porta     |
+|----------------|-------------------------------|-----------|
+<!-- | pfSense        | Firewall e roteamento         | 80, 443   | -->
+<!-- | OpenVPN        | VPN para rede interna         | 1194      | -->
+
+
+<a id="bancodedados"></a>
+
+### Banco de Dados
+| Serviço        | Descrição                     | Porta     |
+|----------------|-------------------------------|-----------|
+<!-- | pfSense        | Firewall e roteamento         | 80, 443   | -->
+<!-- | OpenVPN        | VPN para rede interna         | 1194      | -->
+
+
+<a id="ped"></a>
+
+### PeD 
+| Serviço        | Descrição                     | Porta     |
+|----------------|-------------------------------|-----------|
+<!-- | pfSense        | Firewall e roteamento         | 80, 443   | -->
+<!-- | OpenVPN        | VPN para rede interna         | 1194      | -->
+
