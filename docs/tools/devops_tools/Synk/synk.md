@@ -14,10 +14,12 @@ __Threats categorization__: Synk categorizes threats into four categories: criti
 
 __Automatic fixes__: Synk can automatically fix some vulnerabilities for you, saving you time and effort.
 
+![alt text](image-1.png)
 
 __Automatic PRs__: Synk can automatically create a PR for you with the fixes for the vulnerabilities it found.
 
+![alt text](image-2.png)
+
 __Built-in Github Integration__: Synk has a built-in GitHub integration that allows you to easily integrate it into your CI/CD pipeline.
 
-
-
+![alt text](image-3.png)
