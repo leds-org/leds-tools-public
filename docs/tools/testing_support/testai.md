@@ -18,6 +18,12 @@ The create of E2E tests is an API built with FastAPI that accepts the User Case 
 
 The API provides endpoints to submit the description of user case and access the Swagger documentation.
 
+### How it works
+
+The CrewAI workflow works as follows: 
+
+![Fluxograma Crewai](./img/fluxograma_gherkin.png)
+
 ### Usage
 
 1.  Submitting a User Case Description
