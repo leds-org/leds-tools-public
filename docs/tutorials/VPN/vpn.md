@@ -86,4 +86,3 @@ route 192.168.128.0 255.255.192.0 10.255.248.1
 
 Salve e dê permissão de admin para o VSCode. Reinicie sua máquina, os erros devem sumir.
 
-Siga o resto dos passos do [Tutorial](vpn.md)
