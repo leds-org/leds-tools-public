@@ -1,9 +1,9 @@
 ---
-title: "Como instalar? [EN-US]"
-sidebar_position: 3
+title: "How Install"
+sidebar_position: 1
 ---
 
-**Fonte:** [How To Install Elasticsearch, Logstash, and Kibana (Elastic Stack) on Ubuntu 22.04](https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elastic-stack-on-ubuntu-22-04#step-5-exploring-kibana-dashboards)
+**Source:** [How To Install Elasticsearch, Logstash, and Kibana (Elastic Stack) on Ubuntu 22.04](https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elastic-stack-on-ubuntu-22-04#step-5-exploring-kibana-dashboards)
 
 ---
 

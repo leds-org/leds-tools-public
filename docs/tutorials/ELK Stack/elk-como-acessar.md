@@ -1,9 +1,34 @@
 ---
-title: "Como acessar?"
+title: "How to Access the ELK Stack"
 sidebar_position: 2
 ---
 
-# Como Acessar o ELK Stack
+For security reasons, access to the ELK platform is restricted to our **VPN (Virtual Private Network)**.
+
+## Prerequisites
+
+Before accessing the ELK Stack, ensure that the following prerequisites are met:
+
+1. **VPN Access**: You must have credentials to connect to the VPN that provides access to the network where the ELK Stack is hosted.
+2. **VPN Client**: VPN client software installed and configured on your computer to establish a connection with the internal network.
+
+See the [Open-VPN Installation Tutorial for Windows](../VPN/vpn.md).
+
+## Steps to Access the ELK Stack via VPN
+
+1. **Connect to the VPN** as instructed in the Open-VPN installation tutorial.
+2. **Open your preferred browser** and enter the URL `http://10.128.128.20` in the address bar.
+
+You will then be prompted for the site access credentials. Obtain the login details from the DevOps team and log into the platform.  
+![alt text](img/login-elk.png)
+
+#### 🤩 Yay, you accessed the ELK Stack!
+![alt-text](img/home-elk.png)  
+Once you enter your credentials, you will be redirected to the ELK homepage. Now, enjoy the tool :)
+
+# Em Português
+
+## Como Acessar o ELK Stack
 
 Por motivos de segurança, o acesso à plataforma ELK está restrito a nossa **VPN (Virtual Private Network)**. 
 
