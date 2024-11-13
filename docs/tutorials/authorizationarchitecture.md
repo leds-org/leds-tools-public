@@ -1,9 +1,9 @@
 ---
-title: "Authentication, Authorization, and Accounting Architecture"
+title: "AAA Architecture"
 sidebar_position: 4
 ---
 
-Tutoriais that supports an Authentication, Authorization, and Accounting Architecture: 
+Tutoriais that supports an Authentication, Authorization, and Accounting (AAA) Architecture: 
 
 ## Service Mesh
 
