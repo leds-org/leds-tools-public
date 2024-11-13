@@ -1,5 +1,5 @@
 ---
-title: "How to Access the ELK Stack"
+title: "How to Access"
 sidebar_position: 2
 ---
 

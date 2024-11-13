@@ -1,5 +1,5 @@
 ---
-title: "How Install"
+title: "How to Install"
 sidebar_position: 1
 ---
 
