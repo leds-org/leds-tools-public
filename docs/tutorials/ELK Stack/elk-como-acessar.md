@@ -26,13 +26,13 @@ You will then be prompted for the site access credentials. Obtain the login deta
 ![alt-text](img/home-elk.png)  
 Once you enter your credentials, you will be redirected to the ELK homepage. Now, enjoy the tool :)
 
-# Em Português
+## Em Português
 
-## Como Acessar o ELK Stack
+### Como Acessar o ELK Stack
 
 Por motivos de segurança, o acesso à plataforma ELK está restrito a nossa **VPN (Virtual Private Network)**. 
 
-## Pré-requisitos
+### Pré-requisitos
 
 Antes de acessar o ELK Stack, você deve garantir que os seguintes pré-requisitos estejam atendidos:
 
@@ -41,7 +41,7 @@ Antes de acessar o ELK Stack, você deve garantir que os seguintes pré-requisit
 
 Veja o [Tutorial de instalação da Open-VPN no Windows](../VPN/vpn.md).
 
-## Passos para Acessar o ELK Stack via VPN
+### Passos para Acessar o ELK Stack via VPN
 
 1. **Conectar à VPN**, como instruído no tutorial de instalação da Open-VPN.
 2. **Acessar seu navegador de preferência** e insirar na barra de endereços a URL ``http://10.128.128.20``
