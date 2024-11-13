@@ -22,15 +22,11 @@ sidebar_position: 2
 ---
 ## Detalhes dos Serviços
 
-<a id="servicedesk"></a>
-
 ### Service Desk 
 | Serviço         | Descrição                           | Porta     |
 |-----------------|-------------------------------------|-----------|
 | Request Tracker | Sistema de Gerenciamento de Tickets | 80, 443   |
 
-
-<a id="ranchermaster"></a>
 
 ### Rancher Master 
 | Serviço        | Descrição                     | Porta     |
@@ -39,8 +35,6 @@ sidebar_position: 2
 <!-- | PostgreSQL     | Banco de dados relacional     | 5432      | -->
 
 
-<a id="drone"></a>
-
 ### Drone 
 | Serviço        | Descrição                     | Porta     |
 |----------------|-------------------------------|-----------|
@@ -48,14 +42,12 @@ sidebar_position: 2
 | Runner       | Docker Runner         | 3000   |
 
 
-<a id="pfsense"></a>
 
 ### PfSense 
 | Serviço        | Descrição                     | Porta     |
 |----------------|-------------------------------|-----------|
 | PfSense        | WebUi       | 80, 443   |
 
-<a id="rancherworker"></a>
 
 ### Rancher Worker 
 | Serviço        | Descrição                     | Porta     |
@@ -64,7 +56,6 @@ sidebar_position: 2
 <!-- | OpenVPN        | VPN para rede interna         | 1194      | -->
 
 
-<a id="services"></a>
 
 ### Services 
 | Serviço        | Descrição                     | Porta     |
@@ -74,7 +65,6 @@ sidebar_position: 2
 | Grafana |  | 3000 |
 
 
-<a id="test"></a>
 
 ### ConectaFapes Test
 | Serviço        | Descrição                     | Porta     |
@@ -83,7 +73,6 @@ sidebar_position: 2
 <!-- | OpenVPN        | VPN para rede interna         | 1194      | -->
 
 
-<a id="develop"></a>
 
 ### ConectaFapes Develop 
 | Serviço        | Descrição                     | Porta     |
@@ -92,7 +81,6 @@ sidebar_position: 2
 <!-- | OpenVPN        | VPN para rede interna         | 1194      | -->
 
 
-<a id="bancodedados"></a>
 
 ### Banco de Dados
 | Serviço        | Descrição                     | Porta     |
@@ -101,7 +89,6 @@ sidebar_position: 2
 <!-- | OpenVPN        | VPN para rede interna         | 1194      | -->
 
 
-<a id="ped"></a>
 
 ### PeD 
 | Serviço        | Descrição                     | Porta     |
