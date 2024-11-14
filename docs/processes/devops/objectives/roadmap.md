@@ -9,12 +9,12 @@ title: Roadmaps e Epics
 | [R4](#r4-desenvolvimento-de-pipeline-de-cicd-automatizado) | Desenvolvimento de Pipeline de CI/CD Automatizado |
 | [R5](#r5-criação-de-um-processo-de-revisão-de-código-automatizado) | Criação de um Processo de Revisão de Código Automatizado |
 | [R6](#r6-criação-de-um-processo-contínuo-de-gestão-de-segredos-tokens-e-certificados) | Criação de um processo contínuo de gestão de segredos, tokens e certificados |
-| [R7](#r7-definir-e-implantar-um-sistema-de-aaa-para-acesso-aos-recursos-e-sistemas) | Definir e implantar um sistema de AAA para acesso aos recursos e sistemas |
+| [R7](#r7-definir-e-implantar-um-sistema-de-aaa-autenticação-autorização-e-auditoria-para-acesso-aos-recursos-e-sistemas) | Definir e implantar um sistema de AAA para acesso aos recursos e sistemas |
 | [R10](#r10-treinamento-em-aplicações-escaláveis-com-microserviços) | Treinamento em Aplicações Escaláveis com Microserviços |
 | [R11](#r11-implantação-de-ambiente-seguro-em-nuvem-local-ou-pública-para-build-e-deploy-de-aplicações-escaláveis) | Implantação de ambiente seguro em nuvem local ou pública para build e deploy de aplicações escaláveis |
-| [R12](#r12-criação-de-um-processo-de-gestão-de-infraestrutura-em-iac) | Criação de um processo de gestão de infraestrutura em IaC |
-| [R13](#r13-implantação-de-um-sistema-de-monitoramento-de-ativos-e-aplicações) | Implantação de um sistema de monitoramento de ativos e aplicações |
-| [R14](#r14-implantação-de-um-sistema-inteligente-de-coleta-e-análise-de-logs) | Implantação de um sistema inteligente de coleta e análise de logs |
+| [R12](#r12-criação-de-um-processo-de-gestão-de-infraestrutura-em-iac-infrastructure-as-code-executado-em-pipeline) | Criação de um processo de gestão de infraestrutura em IaC |
+| [R13](#r13-implantação-de-um-sistema-de-monitoramento-de-ativos-e-aplicações-para-acompanhamento-de-kpi-de-sla) | Implantação de um sistema de monitoramento de ativos e aplicações |
+| [R14](#r14-implantação-de-um-sistema-inteligente-de-coleta-e-análise-de-logs-com-suporte-a-trace-de-aplicações) | Implantação de um sistema inteligente de coleta e análise de logs |
 | [R15](#r15-conectafapes) | ConectaFapes |
 
 

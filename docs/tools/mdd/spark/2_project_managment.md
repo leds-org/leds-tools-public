@@ -16,6 +16,8 @@ Presents the project`s developing planning.
 
 ## General planning
 
+**Stopped development on creating OPA based on actor and use case events, without a link to C#.**
+
 * Release 1.0 (14/10/2024 - 01/11/2024): Create authorization service rules based on Actor and User Case's Events on C# application and Create authorization data rules based on Actor and User Case`s Events  (Owner Patterns) on C#
 
 ## Release 1.0 - 01/11/2024
