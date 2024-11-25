@@ -70,13 +70,13 @@ This constructor enables the configuration of the MADE and JIRA integration. A P
 Example:
 
 ```js
-project "Nome do projeto" {
-  id: projectid //Id do projeto(O Id que vem do gerenciador de projetos)
-  description: "Descrição do projeto"
-  email: "editor@mail.com" //Email do editor do projeto
-  host: "host.projeto.net" //Link do projeto
-  token: "A12ADK53218FA" //Token da api do projeto
+project  {
+    name: "Modulo de Autentication, Autorization e Accounting"
+    description: "Modulo responsável pela autenticação, autorização e rastreio do usuário no sistema"
+    startDate: 22/11/2022
+    dueDate: 30/11/2022
 }
+
 ```
 
 
@@ -87,19 +87,14 @@ It allows us create teams that will be responsible for one or more tasks. MADE a
 It is important to comment that each member needs to be registered on JIRA. 
 
 ```js
-team DevelopmentTeam {
-    name: "Development Team "
-    description: "Team responsible for create a system application"
-    
-    teammember John {
-      name: "John xxxx" 
-      email: "John@mail.com"
-    }
-
-    teammember Myke {
-      name: "Myke xxxx" 
-      email: "Myke@mail.com"
-    }
+team blackops {
+    name: "Team Black Ops"
+    description: "Equipe responsável por produzir artefatos de segurança"
+    teammember rafaelemerick {name: "Rafael Emerick" email: "rafael.emerick@blackops.com.br"}
+    teammember joaomarcos {name: "João Marcos " email: "joao.marcos@blackops.com.br"}
+    teammember Arthur {name: "Arthur Cremasco" email: "arthur.cremasco@blackops.com.br"}
+  
+  
 }
 ```
 
@@ -113,52 +108,56 @@ A backlog is composed of: EPIC, User Story, and Task. Link about [EPIC, USer Sto
 A Epic is composed of User Stories and User Stories is composed of tasks. MADE allows to define this relation. Beside allow us define a relation of dependecies, i.e., It is possible to define that a task will be performed only when other task or user story was performed. 
 
 ```js
-backlog DevelopmentBacklog {
-    name: "Backlog de Desenvolvolimento"
-    description: "Backlog description"
-    epic EPIC01 {
-        name: "I want to manager User "
-        description: "Create USER"
-    }
-    userstory US01 {
-        name: "I want to create a form to USER"
-        description: "Create a web form to create a new user"
-        epic: DevelopmentBacklog.EPIC01    
-    
-    }
-
-    userstory US02 {
-        name: "I want to update a USER"
-        description: "Create a web form to update a new user"
-        epic: DevelopmentBacklog.EPIC01 
-        depends:  DevelopmentBacklog.US01 
-    
-    }
+backlog Spike {
+   name: "Backlog de Estudo"
+   description: "Backlog dedicado a estudo da equipe"
+   
+   epic epic1 {
+    name: "Estudar sobre Autorização"
+    description: "Estudo sobre autorização de usuários a recursos de redes"
+    story story1 {
+        name: "Estudar a arquitetura proposta pelo OPA"
+        task estudar {
+            name: "Estudar sobre OPA"
+            }
+        task apresentar {
+            name: "Apresentar o estudo OPA"  
+            depends: Spike.epic1.story1.estudar, Spike.epic1.story2.estudar                       
+            }
+        }
+        story story2 {
+        name: "Estudar a arquitetura proposta pelo OpenFGA"
+        task estudar {
+            name: "Estudar sobre OpenFGA"            
+            }
+        task apresentar {
+            name: "Apresentar o estudo OpenFGA"
+            depends: Spike.epic1.story1.estudar, Spike.epic1.story2.estudar                       
+            }
+        }
+    }    
 }
 ```
 
-## Timebox
+## Sprint
 
 Define a work period for the project team (e.g., sprint) with work tasks, responsible by time box  and other data to manager a timebox. 
 
 ```js
-timebox TimeBox01 {
-    name: "Nome da timebox"
-    description: "descrição timebox"
-    startDate: "01/01/2024"
-    endDate: "12/12/2024"
-    responsible: DevelopmentTeam.John  
 
-    planning {
-        item: DevelopmentBacklog.US01 assigner: DevelopmentTeam.Myke Complexity: 0 Label: developement
-    } 
-
-    performed {
-        item: DevelopmentBacklog.US01 status: DOING 
+sprint estudo {
+    name: "Estudar Autorizacao"
+    description: "Realizar estudos sobre autorizacao"
+    startDate: 20/11/2024
+    endDate: 30/11/2024
+    status: IN_PROGRESS
+    
+    sprintbacklog estudo {
+        item Spike.epic1.story1.estudar {assignee: blackops.joaomarcos  dueDate: 30/11/2024 status: TODO}
+        item Spike.epic1.story1.apresentar {assignee: blackops.joaomarcos startDate: 20/11/2024 completedDate:26/11/2024 dueDate: 30/11/2024 status: DONE}         
+        item Spike.epic1.story2.apresentar {assignee: blackops.joaomarcos startDate: 20/11/2024 dueDate: 30/11/2024 status: DOING}         
     }
-
-    comment: "Comentários da sprint"
-   
+    
 }
 ```
 Definition: 
@@ -208,19 +207,21 @@ The dependency can occur in both the **user story** and the **epic**, functionin
 
 Define o roteiro, suas versões e o planejamento das versões.
 ```js
-roadmap RoadMapx {
-    name: "Roadmap`s project X"
-    description: "Description from a project"
-
-    version Version1 {
-        name: "Version1"
-        description: "Version with CRUD elements"
-        startDate: "01/01/2024"
-        endDate: "12/12/2024"
-
-        planning {
-            item:DevelopmentBacklog.US01 
-            item: DevelopmentBacklog.US02
+roadmap projeto {
+    name: "Rodmap do projeto"
+    description: "Roadmap de todo do projeto"
+    milestone beta {
+        name: "Primeira versão"
+        description: "Contem apenas estudo das tecnologias do projeto"
+        startDate: 20/11/2024        
+        dueDate: 30/11/2024
+        status: IN_PROGRESS
+        release beta {
+            description: "Estudo para entender as tecnologias"
+            item : Spike.epic1
+            status: IN_DEVELOPMENT
+            dueDate: 30/11/2024
+            version: "1.0"
         }
     }
 }
