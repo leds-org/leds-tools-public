@@ -24,8 +24,8 @@ O cluster terá um nó de controle e outro de trabalho.
 Primeiro, precisamos delegar as funções de cada máquina (lembre-se de trocar para IPs e nomes reais): 
 | NOME | IP |Funcão |
 |--|--|--|
-| kube-mario | 10.0.0.1 | controle (control)
-| kube-luigi | 10.0.0.2 | trabalho (work)
+| kube_master | 10.0.0.1 | controle (control)
+| kube_worker | 10.0.0.2 | trabalho (work)
 
 Dê SSH em ***`TODOS`*** os nodes e execute o seguinte comando para desativar o firewall e evitar conflitos. Note que isso assume que você tenha um outro serviço de firewall externo já rodando.
 
@@ -43,10 +43,10 @@ apt autoremove -y
 ```
 ## Instalação do RKE2:
 
-No `kube-mario` (control node), execute o seguinte comando para baixar a versão mais recente do RKE2. O comando de start pode demorar um pouco, principalmente em hardware mais antigo, portanto, *tenha paciência* :D
+No `kube_master` (control node), execute o seguinte comando para baixar a versão mais recente do RKE2. O comando de start pode demorar um pouco, principalmente em hardware mais antigo, portanto, *tenha paciência* :D
 
 ```
-# No kube-mario
+# No kube_master
 curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE=server sh - 
 
 # Inicie o serviço - 
@@ -62,7 +62,7 @@ systemctl status rke2-server
 Cheque se o status está como ACTIVE.
 ![alt text](./image-1.png)
 
-Se tudo deu certo (se Deus quiser deu), precisamos criar um link simbólico para o `kubectl` no `kube-mario` com os comandos:
+Se tudo deu certo (se Deus quiser deu), precisamos criar um link simbólico para o `kubectl` no `kube_master` com os comandos:
 ```
 # Criação de um link simbólico para o kubectl
 ln -s $(find /var/lib/rancher/rke2/data/ -name kubectl) /usr/local/bin/kubectl
@@ -78,22 +78,22 @@ kubectl get node
 Também precisamos gerar e salvar o token (em um bloco de notas ou similar) para os outros nós com a saída do seguinte comando:
 
 ```
-# SALVE ISSO PARA O KUBE-LUIGI!!!!
+# SALVE ISSO PARA O KUBE_WORKER!!!!
 cat /var/lib/rancher/rke2/server/node-token
 ```
 ![alt text](./image-2.png)
 
 Se a saída se parece com isso, parabéns! 
-O arquivo de configuração é o que o kubectl usa para se autenticar no serviço da API. Ah, e tem mais uma coisa: precisamos de outro arquivo do kube-mario, também conhecido como o servidor. Esse arquivo é o “agent join token” e fica em `/var/lib/rancher/rke2/server/node-token`, que teoricamente já copiamos. Vamos precisar dele para instalar o agente.
+O arquivo de configuração é o que o kubectl usa para se autenticar no serviço da API. Ah, e tem mais uma coisa: precisamos de outro arquivo do kube_master, também conhecido como o servidor. Esse arquivo é o “agent join token” e fica em `/var/lib/rancher/rke2/server/node-token`, que teoricamente já copiamos. Vamos precisar dele para instalar o agente.
 
-## Instalação do agente (kube-luigi)
+## Instalação do agente (kube_worker)
 
-Na máquina do `kube-luigi`, insira os seguintes comandos:
+Na máquina do `kube_worker`, insira os seguintes comandos:
 ```
-# Exporte o IP do kube-mario da seguinte forma (lembre-se de mudar).
-export KUBEMARIO_IP=192.168.1.1  # MUDE ISSO (nao pode ter hifen)!
+# Exporte o IP do kube_master da seguinte forma (lembre-se de mudar).
+export kubemaster_IP=10.0.0.1  # MUDE ISSO!
 
-# E exporte o token de kube-mario.
+# E exporte o token de kube_master.
 export TOKEN=seu_token # MUDE ISSO tambem.
 
 # Instale o RKE2 agente INSTALL_RKE2_TYPE=agent
@@ -102,30 +102,30 @@ curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE=agent sh -
 # Crie arquivo de config
 mkdir -p /etc/rancher/rke2/ 
 
-# Mude o IP para refletir o ip de kube-mario.
-echo "server: https://$KUBE-MARIO_IP:9345" > /etc/rancher/rke2/config.yaml
+# Mude o IP para refletir o ip de kube_master.
+echo "server: https://$KUBE_MASTER_IP:9345" > /etc/rancher/rke2/config.yaml
 
-# Mude o Token para o do kube-mario /var/lib/rancher/rke2/server/node-token 
+# Mude o Token para o do kube_master /var/lib/rancher/rke2/server/node-token 
 echo "token: $TOKEN" >> /etc/rancher/rke2/config.yaml
 
 # Ative e inicie
 systemctl enable --now rke2-agent.service
 ```
 
-Para checar se tudo deu certo, na máquina do ```kube-mario``` (control) rode o comando:
+Para checar se tudo deu certo, na máquina do ```kube_master``` (control) rode o comando:
 `kubectl get node -o wide`
 
 A saída deve ser similar a essa:
 ![alt text](./image-3.png)
 Boa! A instalação do RKE2 está completa :D
-Agora só rodaremos comandos dentro do control node, portanto, pode fechar a conexão SSH no kube-luigi.
+Agora só rodaremos comandos dentro do control node, portanto, pode fechar a conexão SSH no kube_worker.
 
 ## Instalação do Rancher
 Para o rancher, precisaremos do `HELM`, o helm é como um APT do Kubernetes.
 
 Rode os seguintes comandos:
 ```
-# No kube-mario
+# No kube_master
 # add helm
 curl -#L https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
@@ -137,7 +137,7 @@ helm repo add jetstack https://charts.jetstack.io
 O Rancher precisa do jetstack/cert-manager pra criar certificados TLS autossinados. A gente precisa instalar ele com o Custom Resource Definition (CRD). Fique de olho na instalação do helm pro Rancher. O URL mario.super.com vai precisar ser alterado pro seu domínio. E repare que estamos configurando o bootstrapPassword e as réplicas. Isso ajuda a pular uma etapa depois. 
 
 ```
-# Ainda no kube-mario.
+# Ainda no kube_master.
 
 # helm install jetstack
 helm upgrade -i cert-manager jetstack/cert-manager -n cert-manager --create-namespace --set installCRDs=true
@@ -216,7 +216,7 @@ Podemos executar o comando `kubectl get pod -A` para verificar se tudo está fun
 
 ## Rancher GUI
 
-Assumindo que o DNS está apontado para o domínio do server (kube-mario), podemos digitar ele no navegador e acessar a interface gráfica web. Note que se algum erro 500 for exibido, isso significa que os serviços ainda não foram inicializados. Portanto, espere um pouco.
+Assumindo que o DNS está apontado para o domínio do server (kube_master), podemos digitar ele no navegador e acessar a interface gráfica web. Note que se algum erro 500 for exibido, isso significa que os serviços ainda não foram inicializados. Portanto, espere um pouco.
 
 ![alt text](./image-4.png)
 
