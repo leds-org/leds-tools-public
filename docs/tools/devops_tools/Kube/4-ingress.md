@@ -1,11 +1,56 @@
-O ingress é um recurso do Kubernetes que permite a exposição de serviços HTTP e HTTPS para fora do cluster. Ele é um recurso que permite a configuração de regras de roteamento baseadas em host e caminho. O ingress é um recurso de nível de aplicação e pode ser configurado para fornecer balanceamento de carga, SSL e hospedagem virtual.
+Ingress is a Kubernetes resource that allows the exposure of HTTP and HTTPS services outside the cluster. It is a resource that enables the configuration of routing rules based on host and path. Ingress is an application-level resource and can be configured to provide load balancing, SSL, and virtual hosting.
 
-## Instalação do Ingress Controller
+## Installing the Ingress Controller
 
-Ele já vem instalado junto com o Rancher. Para instalar o Rancher, siga o [tutorial](./1-rancher.md).
+It comes pre-installed with Rancher. To install Rancher, follow the [tutorial](./1-rancher.md).
 
-## Configuração do Ingress:
+## Configuring Ingress:
 
-Para subir o deployment da nossa aplicação, use esse arquivo:
+To deploy our application, use this file:
 
 ```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: flask-deployment
+    labels:
+        app: flask
+spec:
+    replicas: 2
+    selector:
+        matchLabels:
+            app: flask
+    template:
+        metadata:
+            labels:
+                app: flask
+        spec:
+            containers:
+            - name: flask
+                image: heilima/kubernetes-flask
+                ports:
+                - containerPort: 5000
+```
+
+An example of an Ingress service:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: flask-ingress
+    annotations:
+        kubernetes.io/ingress.class: "nginx"
+spec:
+    rules:
+    - host: testepaulo.leds.dev.br  # Replace with your domain
+        http:
+            paths:
+            - path: /
+                pathType: Prefix
+                backend:
+                    service:
+                        name: flask-service  # Name of your Flask service
+                        port:
+                            number: 5000  # The port exposed by your Flask service
+```
