@@ -28,3 +28,7 @@ From this central “brain,” several arrows point to key ideas and fundamental
 10. **Customer Centricity**: At the core of LeSS is delivering value to the customer, ensuring that all decisions and efforts are aligned with the needs and expectations of the end users.
 
 In summary, the image shows that LeSS is supported by a set of principles derived from various disciplines—ranging from queueing theory to lean thinking, from whole product focus to transparency—all converging to create a scalable, efficient, and customer-centered development environment.
+
+# Remember:
+
+![alt text](team.png)
