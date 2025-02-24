@@ -1,41 +1,38 @@
-# Website
+# Documentação KnowLEDS
+*Este repositório contém todos os recursos de documentação relativos a iniciativa KnowLEDS.*
+**Acesse em https://docs.leds.dev.br/**
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+## Contribuindo com a documentação
+Para contribuir com a documentação do projeto, você deve:
 
-### Installation
+1. **Crie um Fork do Repositório**:
+   - Primeiro, faça um fork deste repositório para a sua própria conta no GitHub. Para isso, clique no botão "Fork" no canto superior direito da página do repositório.
 
-```
-$ yarn
-```
+2. **Clone o Fork**:
+   - Depois de criar o fork, clone o repositório para o seu ambiente local:
+     ```bash
+     git clone https://github.com/seu-usuario/leds-documentation.git
+     ```
+   - Substitua `seu-usuario` pelo seu nome de usuário.
 
-### Local Development
+3. **Crie uma Branch**:
+   - Crie uma nova branch para suas alterações:
+     ```bash
+     git checkout -b minha-branch-de-documentacao
+     ```
+   - Dê um nome descritivo à sua branch, relacionado à documentação que você está contribuindo.
 
-```
-$ yarn start
-```
+4. **Faça as Alterações**:
+   - Baixe as dependências do projeto com o comando `npm i` e rode o comando `npm start` ou `npm serve` para visualizar suas modificações.
+   - Edite os arquivos de documentação e certifique-se de seguir as diretrizes de estilo e formatação do projeto.
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+5. **Commit e Push**:
+   - Após fazer as alterações, faça o commit das mudanças e envie as alterações para o seu fork no GitHub.
 
-### Build
+6. **Abra um Pull Request (PR)**:
+   - Vá até a página do seu fork no GitHub e clique em "Compare & pull request".
+   - Descreva as alterações que você fez e por que elas são necessárias.
+   - Clique em "Create pull request" para enviar sua contribuição para revisão.
 
-```
-$ yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-### Deployment
-
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+7. **Revisão e Merge**:
+   - Aguarde enquanto a equipe do projeto revisa suas alterações. Podem ser solicitadas algumas alterações antes que o PR seja mesclado (merge) ao repositório principal.
