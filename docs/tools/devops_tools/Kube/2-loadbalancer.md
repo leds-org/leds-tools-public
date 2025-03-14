@@ -99,4 +99,4 @@ To apply the `ServiceGroup` configuration, run the following command:
 kubectl apply -f servicegroup.yaml
 ```
 
-To learn how to up an applicatio with PureLB, refer to the [servicelb.yaml](serviceLB.yaml).
+To learn how to up an applicatio with PureLB, refer to the `servicelb.yaml`

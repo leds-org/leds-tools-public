@@ -21,7 +21,7 @@ Os requisitos para a instalação são:
 - Nginx Ingress
 
 Ter um Ingress te salva de uma enorme dor de cabeça setando outras coisas depois, portanto, usaremos ele nessa instalação.
-Todos os requisitos são cumpridos, supondo que você tenha instalado o Rancher pelo nosso [tutorial](/docs/tools/devops_tools/Kube/rancher.md).
+Todos os requisitos são cumpridos, supondo que você tenha instalado o Rancher pelo nosso [tutorial](/docs/tools/devops_tools/Kube/1-rancher.md).
 
 ## Começando a instalação:
 
