@@ -3,20 +3,17 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'KnowLeds: The Source of LEDS Knowledge',
-  tagline: "Knowledge is power. — Francis Bacon",
+  title: 'LEDS Tools',
+  tagline: "Documentação das ferramentas do LEDS de interesse aos alunos das disciplinas de DOO, PROJS e GPS ministradas por @paulossjunior durante o período 2025/1.",
   favicon: 'img/favicon.ico',
 
-  // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
+  url: `https://leds-org.github.io`,
   baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'LEDSIFES', // Usually your GitHub org/user name.
-  projectName: 'Docs-LEDS-Tools', // Usually your repo name.
+  organizationName: 'leds-org', // Usually your GitHub org/user name.
+  projectName: 'leds-tools', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
