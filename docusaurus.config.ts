@@ -100,18 +100,6 @@ const config: Config = {
         },          
         {
           type: 'docSidebar',
-          sidebarId: 'processos',
-          position: 'left',
-          label: 'Processes',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'projectdecisions',
-          position: 'left',
-          label: 'Project Decisions',
-        },
-        {
-          type: 'docSidebar',
           sidebarId: 'tools',
           position: 'left',
           label: 'Tools',
