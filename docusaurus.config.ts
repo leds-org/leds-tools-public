@@ -3,7 +3,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'LEDS Tools',
+  title: 'TOOLS',
   tagline: "Documentação das ferramentas do LEDS de interesse aos alunos das disciplinas de DOO, PROJS e GPS ministradas por @paulossjunior durante o período 2025/1.",
   favicon: 'img/favicon.ico',
 
@@ -80,7 +80,7 @@ const config: Config = {
     },
     image: 'img/leds-social-card.jpg',
     navbar: {
-      title: 'KnowLEDS ',
+      title: 'TOOLS ',
       logo: {
         alt: 'LEDS Logo',
         src: 'img/logo.svg',
@@ -103,12 +103,6 @@ const config: Config = {
           sidebarId: 'tools',
           position: 'left',
           label: 'Tools',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'bestpractices',
-          position: 'left',
-          label: 'Best Practices',
         },
         {
           type: 'docSidebar',
