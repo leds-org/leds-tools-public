@@ -3,10 +3,8 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'TOOLS',
-  tagline: "Documentação das ferramentas do LEDS de interesse aos alunos das disciplinas de DOO, PROJS e GPS ministradas por @paulossjunior durante o período 2025/1.",
+  title: 'LEDS DevTools',
   favicon: 'img/favicon.ico',
-
   url: `https://leds-org.github.io`,
   baseUrl: '/',
 
@@ -88,27 +86,39 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'inspirations',
+          sidebarId: 'andes',
           position: 'left',
-          label: 'Inspirations',
+          label: 'Andes',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'concepts',
+          sidebarId: 'code_wise',
           position: 'left',
-          label: 'Concepts',
-        },          
-        {
-          type: 'docSidebar',
-          sidebarId: 'tools',
-          position: 'left',
-          label: 'Tools',
+          label: 'Code Wise',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'tutorials',
+          sidebarId: 'made',
           position: 'left',
-          label: 'Tutorials',
+          label: 'Made',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'spark',
+          position: 'left',
+          label: 'Spark',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'test_ai',
+          position: 'left',
+          label: 'Test.AI',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'oraculo',
+          position: 'left',
+          label: 'Oraculo',
         },
         {
           href: 'https://github.com/leds-org',
