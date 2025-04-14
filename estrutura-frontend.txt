@@ -1,8 +1,33 @@
-.
-└── my-project/
-    ├── src/
-    │   ├── index.html
-    │   └── my-project.scss
-    └── build/
-        ├── index.html
-        └── my-project.css
+frontend\vue-vite
+├───cypress
+│   ├───e2e
+│   │   └───step_definitions
+│   └───pageObjects
+├───public
+└───src
+    ├───components
+    ├───composition
+    ├───layouts
+    │   └───full
+    │       ├───customizer
+    │       ├───horizontal-header
+    │       ├───horizontal-sidebar
+    │       ├───logo
+    │       ├───vertical-header
+    │       └───vertical-sidebar
+    ├───plugins
+    ├───router
+    ├───scss
+    │   ├───components
+    │   ├───layout
+    │   └───pages
+    ├───services
+    │   └───requires
+    ├───stores
+    │   └───apps
+    │       └───userprofile
+    ├───theme
+    ├───utils
+    └───views
+        ├───authentication
+        └───model
