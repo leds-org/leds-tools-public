@@ -1,33 +1,76 @@
-frontend\vue-vite
-├───cypress
-│   ├───e2e
-│   │   └───step_definitions
-│   └───pageObjects
-├───public
-└───src
-    ├───components
-    ├───composition
-    ├───layouts
-    │   └───full
-    │       ├───customizer
-    │       ├───horizontal-header
-    │       ├───horizontal-sidebar
-    │       ├───logo
-    │       ├───vertical-header
-    │       └───vertical-sidebar
-    ├───plugins
-    ├───router
-    ├───scss
-    │   ├───components
-    │   ├───layout
-    │   └───pages
-    ├───services
-    │   └───requires
-    ├───stores
-    │   └───apps
-    │       └───userprofile
-    ├───theme
-    ├───utils
-    └───views
-        ├───authentication
-        └───model
+.
+└── frontend/vue-vite
+    ├── cypress/
+    │   ├── e2e/
+    │   │   ├── generate.ts
+    │   │   └── step_definitions/
+    │   │       ├── generate.ts
+    │   │       └── generateDelete.ts
+    │   ├── generate.ts
+    │   └── pageObjects/
+    │       ├── generate.ts
+    │       ├── generateDetails.ts
+    │       ├── generateForms.ts
+    │       └── generateIndex.ts
+    ├── generate.ts
+    ├── generateTree.cjs
+    ├── helpers-generator.ts
+    ├── public/
+    │   └── generate.ts
+    └── src/
+        ├── components/
+        │   └── generate.ts
+        ├── composition/
+        │   └── generate.ts
+        ├── generate.ts
+        ├── layouts/
+        │   ├── full/
+        │   │   ├── customizer/
+        │   │   │   └── generate.ts
+        │   │   ├── generate.ts
+        │   │   ├── horizontal-header/
+        │   │   │   └── generate.ts
+        │   │   ├── horizontal-sidebar/
+        │   │   │   └── generate.ts
+        │   │   ├── logo/
+        │   │   │   └── generate.ts
+        │   │   ├── vertical-header/
+        │   │   │   └── generate.ts
+        │   │   └── vertical-sidebar/
+        │   │       └── generate.ts
+        │   └── generate.ts
+        ├── plugins/
+        │   └── generate.ts
+        ├── router/
+        │   └── generate.ts
+        ├── scss/
+        │   ├── components/
+        │   │   └── generate.ts
+        │   ├── generate.ts
+        │   ├── layout/
+        │   │   └── generate.ts
+        │   └── pages/
+        │       └── generate.ts
+        ├── services/
+        │   ├── generate.ts
+        │   └── requires/
+        │       └── generate.ts
+        ├── stores/
+        │   ├── apps/
+        │   │   ├── generate.ts
+        │   │   └── userprofile/
+        │   │       └── generate.ts
+        │   └── generate.ts
+        ├── theme/
+        │   └── generate.ts
+        ├── utils/
+        │   └── generate.ts
+        └── views/
+            ├── authentication/
+            │   └── generate.ts
+            ├── generate.ts
+            └── model/
+                ├── generate.ts
+                ├── generateDetails.ts
+                ├── generateForms.ts
+                └── generateIndex.ts
