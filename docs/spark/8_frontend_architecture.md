@@ -11,51 +11,59 @@ The generators are organized acordingly with what they create.
 The generators on the superiors parts create the structure and call the generators in the level below them. This generators will create a specific part of the code and the respective files and/or will create other folders and call their respective generators.
 
 # Generator's Organization
-## Gerador principal
-- Create the App.vue and configuration files.
+## Main Generator
+- Creates the App.vue and configuration files.
 - - Vue's main file.
 - - Calls the router (src/router).
-- Create the cypress folder.
-- Create the public folder.
-- Create the src folder.
+- Creates the cypress folder.
+- Creates the public folder.
+- Creates the src folder.
 
 ### frontend/cypress
+Folder with subfolders responsible for generating the structure of Cypress, an automated front-end testing tool.
+
+#### e2e
+Defines the tests that are going to be made.
+
+#### PageObjects
+Applies the Page Object Pattern, organizing and encapsulating page elements and actions into reusable components.
 
 ### frontend/public
+Defines the public assets for the project, like the favicon image, environment variables and redirect configs.
 
 ### frontend/src
 Folder with multiple subfolders.
 Each subfolder is responsible for part of the frontend components.
 
 #### Components
-Define the options for colors.
+Defines the options for colors.
 
 #### Composition
-Define the available funcionabilities (e.g.: get by id, post, delete).
+Defines the available funcionabilities (e.g.: get by id, post, delete).
 
 #### Layout
-Define the components disposition on the screen.
+Defines the components disposition on the screen.
 
 #### Plugins
 Imports Vuetify to style the components and define the default theme.
 
 #### Router
-Define the routes for src/composition.
+Defines the routes for src/composition.
 
 #### Scss
-Define the components used in src/layout.
+Defines the components used in src/layout.
 
 #### Services
-Generate the Factory and the Api (localhost port).
+Generates the Factory and the Api (localhost port).
 
 #### Stores
-Make the user configurations (e.g.: authentication, followers, posts)
+Makes the user configurations (e.g.: authentication, followers, posts)
 
 #### Theme
-Define the colors to light theme and dark theme.
+Defines the colors to light theme and dark theme.
 
 #### Utils
-Define colors used in each theme.
+Defines colors used in each theme.
 
 #### Views
 src/views/model: Create the responsible files for the Index, Detail and Form screens to each class.
