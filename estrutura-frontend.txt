@@ -1,0 +1,8 @@
+.
+└── my-project/
+    ├── src/
+    │   ├── index.html
+    │   └── my-project.scss
+    └── build/
+        ├── index.html
+        └── my-project.css
