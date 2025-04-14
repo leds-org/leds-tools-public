@@ -1,5 +1,5 @@
 .
-└── frontend/vue-vite
+└── frontend/vue-vite/
     ├── cypress/
     │   ├── e2e/
     │   │   ├── generate.ts
@@ -13,7 +13,6 @@
     │       ├── generateForms.ts
     │       └── generateIndex.ts
     ├── generate.ts
-    ├── generateTree.cjs
     ├── helpers-generator.ts
     ├── public/
     │   └── generate.ts
