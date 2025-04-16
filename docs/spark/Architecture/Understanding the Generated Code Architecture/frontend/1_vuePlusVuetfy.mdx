@@ -120,3 +120,12 @@ The stores layer is responsible for storing configurations locally in the client
 
 ## 2.11 Theme
 The theme layer contains the application's color configuration. It is loaded by Vue itself and applies color styling across all layers of the application.
+
+# 3. Suggestions for Improvements:
+The view files are very large. In a single file, both interface control and entity manipulation are handled. It is preferable that for each page, a corresponding script be created to handle the entities, and the .vue file should deal only with the interface.
+
+The routes file is very large. It would be better to create a folder for each module, and each entity should have its own routes file to make searching and reading easier.
+
+The pages make little use of request interface definitions from each other. It would be better to have a layer to centralize the Data Transformation Objects from requests into JS objects.
+
+Request handling is being done in a decentralized manner. It would be better to have a layer to configure and manage the requests and entities, while the views focus on displaying this data on the screen and calling these actions when necessary.
