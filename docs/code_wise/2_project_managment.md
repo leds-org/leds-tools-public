@@ -86,18 +86,35 @@ The team meets weekly with all project members every **Monday afternoon** (or **
 - Planning upcoming tasks and priorities
 
 ## Backlog
-
+<!--
 | ID | Feature | Description | Importance |Proposal|
 | -- | ------- | ----------- |----------- |--------|
 | 1  | Send Feedback about a code to developer| Implements a code review automaticaly seen Performance and Code Smell | 100 |Improve software developmen quality in 10% |
 | 2  | Create Improvement/Refactor test on management program| When a improment is detected a Improvement/Refactor Task is created on management software (e.g., Jira) | 90 |Improve software developmen quality and management in 15% |
 | 3  | Send informartion about quality of code to a database to improve the developer| Send information about code smell and performance of code to a database to identify means to improve the developer that creates the code | 95 |Improve software developmen quality and management in 20% |
+-->
+
+| ID | Feature | Description | Importance | Proposal |
+|----|---------|-------------|------------|----------|
+| 1  | Code Analysis | Implement validation rules (style, security, performance, best practices), with integration to Gemini API and AgentOps. Include incremental analysis to avoid reprocessing. | 100 | Improve code quality by 20% |
+| 2  | Platform Integration | Connect via GitHub Webhooks, n8n, and allow automatic comments on GitHub and messages on Discord. Add future support for Slack/GitLab. | 95 | Automate code review process by 70% |
+| 3  | Intelligent Feedback | Create contextualized improvement suggestions, format comments and messages clearly for channels. | 90 | Increase adoption of best practices by 25% |
+| 4  | Visualization and Metrics | Display individual and collective statistics, PR scores, activity history, and monitoring dashboard. Interface for visualization in API frontend. | 85 | Provide visibility on quality evolution |
+| 5  | Observability and Monitoring | Monitor response time, log errors, and agent activities with AgentOps support. Implement cache and parallel workers. | 80 | Ensure 99.5% service availability |
+| 6  | Administration and Configuration | Manage API keys, permissions, URLs, and database via configuration interface. | 75 | Simplify platform management |
+| 7  | Testability and Quality | Refactor to use dependency injection, mocks, and unit tests in Models and Controllers. Automated coverage. | 70 | Achieve 80% test coverage |
+| 8  | Performance and Scalability | Add asynchronous processing with queues (Redis, RabbitMQ, etc.). Process multiple PRs in parallel. | 65 | Reduce response time by 40% |
+| 9  | Documentation (Docusaurus) | Migrate all documentation to Markdown structure in Docusaurus, with technical guides, overview, and usage instructions. | 60 | Improve adoption by new users |
+| 10 | Tests and Quality | Implement automated test coverage with Jest and Pytest, separation of logic and external services for easy mocking, dependency injection for APIs, and incremental code analysis. | 55 | Reduce production bugs by 30% |
 
 ## General planning
 
 * Release 1.0 (Done): Send Feedback about a code to developer
-* Release 2.0 (Undefined): Create Improvement/Refactor test on management program
-* Release 3.0 (Undefined): Send informartion about quality of code to a database to improve the developerr
+<!--* Release 2.0 (Undefined): Create Improvement/Refactor test on management program
+* Release 3.0 (Undefined): Send informartion about quality of code to a database to improve the developerr-->
+* Release 2.0 (Undefined): Code Analysis & Platform Integration
+* Release 3.0 (Undefined): Feedback System & Visualization
+* Release 4.0 (Undefined): Performance & Quality Enhancements
 
 ## Release 1.0 - 01/11/2024
 
