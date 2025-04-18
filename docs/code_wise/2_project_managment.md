@@ -81,6 +81,23 @@ An API developed using FastAPI, integrated with OpenAI GPT-3 to analyze code in 
 
 Our team follows the **Platform Team** topology model.
 
+The CodeWise project is being developed by a platform team composed of the following members:
+
+### 📌 Platform Team – CodeWise Project
+
+#### Project Management
+- **Perceu Oliveira**
+- **Miguel Malini**
+- **João Ferrareis**
+- **Wal Candeia** *(currently inactive due to a health issue)*
+
+#### Systems and Development
+- **Arthur Miguel**
+- **Michele Altavilla**
+- **Bernardo Rosa**
+- **Gabriel Brito**
+---
+
 The CodeWise project is being developed by a platform team because our main customer is an internal client — specifically, the software development teams within the IT department. These internal teams are responsible for delivering direct value to end users and are aligned with the **Stream-Aligned Team** topology.
 
 In this context, CodeWise serves as a **support tool** that enhances the efficiency and quality of the code produced by stream-aligned teams. It operates by analyzing already-written code and offering suggestions for improvements, thus contributing indirectly to the final value delivery.
