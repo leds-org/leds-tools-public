@@ -63,8 +63,9 @@ An API developed using FastAPI, integrated with OpenAI GPT-3 to analyze code in 
   The CodeWise team provides internal services and tools to **Stream-Aligned Teams** (e.g., the IT development teams), who deliver value directly to end users.  
   CodeWise supports them by enhancing the quality and efficiency of their code through automated analysis.
 
-### Deliverables *(To be completed)*  
-<!-- Define the major deliverables of the CodeWise project, e.g.:
+### Deliverables 
+<!--*(To be completed)*  
+ Define the major deliverables of the CodeWise project, e.g.:
 - Code Analysis Module
 - Discord Notification Integration
 - Web-based Documentation Portal
@@ -74,8 +75,9 @@ An API developed using FastAPI, integrated with OpenAI GPT-3 to analyze code in 
 - **Feedback Engine** – Smart improvement suggestions with clean formatting.  
 - **Metrics Dashboard** – PR scores, activity history, developer stats.
 
-### Timeline *(To be completed)*  
-<!-- Example structure:
+### Timeline   
+<!--*(To be completed)*
+Example structure:
 - Month 1: Requirement gathering, design, prototyping
 - Month 2: Module development, GPT-3 integration, early testing
 - Month 3: Final testing, documentation, beta release
