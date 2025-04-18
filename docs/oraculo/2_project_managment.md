@@ -128,8 +128,8 @@ Advisors, scholarship holders, staff, and other stakeholders involved in LEDS an
 ---
 
 ## TIMELINE
-*Sprints 1 to 8 over the course of 3 months.*  
-(Visual timeline diagram available in the original image)
+![Timeline](img/timeline.png)
+
 
 ---
 
