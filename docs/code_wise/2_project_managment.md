@@ -110,11 +110,11 @@ The team meets weekly with all project members every **Monday afternoon** (or **
 ## General planning
 
 * Release 1.0 (Done): Send Feedback about a code to developer
-<!--* Release 2.0 (Undefined): Create Improvement/Refactor test on management program
-* Release 3.0 (Undefined): Send informartion about quality of code to a database to improve the developerr-->
 * Release 2.0 (Undefined): Code Analysis & Platform Integration
 * Release 3.0 (Undefined): Feedback System & Visualization
 * Release 4.0 (Undefined): Performance & Quality Enhancements
+<!--* Release 2.0 (Undefined): Create Improvement/Refactor test on management program
+* Release 3.0 (Undefined): Send informartion about quality of code to a database to improve the developerr-->
 
 ## Release 1.0 - 01/11/2024
 
