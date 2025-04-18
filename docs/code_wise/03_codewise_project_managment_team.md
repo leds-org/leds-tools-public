@@ -1,10 +1,8 @@
 ---
 sidebar_position: 3
-title: Project Management
+title: Project Management Team
 description: Presents the project`s managment and develop team.
 ---
-
-# CodeWise Project
 
 ## 1. Project Model Canvas – CodeWise
 
