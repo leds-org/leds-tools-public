@@ -69,6 +69,10 @@ An API developed using FastAPI, integrated with OpenAI GPT-3 to analyze code in 
 - Discord Notification Integration
 - Web-based Documentation Portal
 -->
+- **Code Analysis Module** – Rule-based code validation with Gemini API.  
+- **Platform Integration** – GitHub Webhooks, Discord alerts via n8n.  
+- **Feedback Engine** – Smart improvement suggestions with clean formatting.  
+- **Metrics Dashboard** – PR scores, activity history, developer stats.
 
 ### Timeline *(To be completed)*  
 <!-- Example structure:
@@ -76,6 +80,9 @@ An API developed using FastAPI, integrated with OpenAI GPT-3 to analyze code in 
 - Month 2: Module development, GPT-3 integration, early testing
 - Month 3: Final testing, documentation, beta release
 -->
+- **Month 1**: Planning, prototyping, Gemini integration  
+- **Month 2**: Core development, GitHub/Discord integration, testing  
+- **Month 3**: Dashboard, final testing, documentation, beta release
 
 ## Team Topology
 
@@ -89,7 +96,7 @@ The CodeWise project is being developed by a platform team composed of the follo
 - **Perceu Oliveira**
 - **Miguel Malini**
 - **João Ferrareis**
-- **Wal Candeia** *(currently inactive due to a health issue)*
+- **Wal Candeia**
 
 #### Systems and Development
 - **Arthur Miguel**
