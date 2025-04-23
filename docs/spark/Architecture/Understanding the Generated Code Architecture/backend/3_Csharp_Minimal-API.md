@@ -1,6 +1,6 @@
 ---
 sidebar_position: 8
-title: Minimal API csharp
+title: Minimal API Csharp
 ---
 
 # C# Minimal API Architecture
