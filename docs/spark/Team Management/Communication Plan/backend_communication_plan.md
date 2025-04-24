@@ -21,11 +21,12 @@ Ensure clear, efficient, and continuous communication among the members of the S
 | Alex Rossoni   |  GPS Team Member      | High                  |
 | Davi Breda    |  GPS Team Member         | High                  |
 | Thalison Vinícius      | GPS Team Member    | High            |
-|   |Project Development Team Leader| High |
-|   |Project Development Team Member| High |
-|   |Project Development Team Member| High |
-|   |Project Development Team Member| High |
-|   |Project Development Team Member| High |
+| Lucas Gabriel Araújo |Project Development Team Member| High |
+| Bruno Alves  |Project Development Team Member| High |
+| Arthur Valentim  |Project Development Team Member| High |
+| Murilo Dias de Oliveira  |Project Development Team Member| High |
+| Caio chiabai de Oliveira  |Project Development Team Member| High |
+| Diego Bourguignon  |Project Development Team Member| High |
 
 ---
 
