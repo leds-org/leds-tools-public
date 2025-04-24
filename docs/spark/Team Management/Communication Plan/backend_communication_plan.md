@@ -16,11 +16,11 @@ Ensure clear, efficient, and continuous communication among the members of the S
 | Name             | Role               | Level of Engagement |
 |------------------|-----------------------------|------------------------|
 | João Vitor Lopes       | GPS Team Leader     | High                  |
-| João Victor    | GPS Team Member  | High             |
+| João Victor Vieira    | GPS Team Member  | High             |
 | João Pedro Pagotto   | GPS Team Member        | High                   |
 | Alex Rossoni   |  GPS Team Member      | High                  |
 | Davi Breda    |  GPS Team Member         | High                  |
-| Thalisson      | GPS Team Member    | High            |
+| Thalison Vinícius      | GPS Team Member    | High            |
 |   |Project Development Team Leader| High |
 |   |Project Development Team Member| High |
 |   |Project Development Team Member| High |
