@@ -57,5 +57,5 @@ authors: {}
 ### 💬 Communication
 
 - **Main channel**: Discord (dedicated channel per team)
-- **Quick support**: WhatsApp  
-- **Task management**: GitHub Issues, Trello/Asana for sprint management
+- **Quick support**: WhatsApp/Discord
+- **Task management**: GitHub Issues/Kanban for sprint management
