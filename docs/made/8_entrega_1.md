@@ -2,7 +2,11 @@
 
 Para suportar os módulos de Gestão Ágil com MADE (EPICs, histórias, backlog, sprints, releases e dashboards) em uma aplicação web escalável e testável, adoto a **Clean Architecture**:
 
-# Arquitetura em Camadas
+![Diagrama de Camadas](img.png)
+
+---
+
+## Camadas da Arquitetura
 
 ### 1. Camada de Apresentação
 - UI / Web / API Gateway
@@ -20,14 +24,13 @@ Para suportar os módulos de Gestão Ágil com MADE (EPICs, histórias, backlog,
 - Repositórios
 - Integrações (ex: MADE)
 
-
 ---
 
-## 2. Explicação de Cada Camada
+# 2. Explicação de Cada Camada
 
 1. **Camada de Apresentação**  
    - Responsável por expor interfaces REST/GraphQL ou UI web (React/Vue) para o usuário e outros sistemas.  
-   - Orquestra requisições e converte dados de entrada/saída em DTOs.  
+   - Orquestra requisições e converte dados de entrada/saída em DTOs.
 
 2. **Camada de Aplicação**  
    - Contém _Use Cases_ (casos de uso) que implementam cenários de negócio (ex.: “Criar Sprint”, “Gerar Roadmap” etc.).  
@@ -43,16 +46,16 @@ Para suportar os módulos de Gestão Ágil com MADE (EPICs, histórias, backlog,
 
 ---
 
-## 3. Referências Bibliográficas
+# 3. Referências Bibliográficas
 
 - **Robert C. Martin**, *Clean Architecture: A Craftsman’s Guide to Software Structure and Design*, 2017.  
 - **Eric Evans**, *Domain-Driven Design: Tackling Complexity in the Heart of Software*, 2004.  
 - **Vaughn Vernon**, *Implementing Domain-Driven Design*, 2013.  
-- **Martin Fowler**, *Patterns of Enterprise Application Architecture*, 2002.  
+- **Martin Fowler**, *Patterns of Enterprise Application Architecture*, 2002.
 
 ---
 
-## 4. Pontos de Melhoria
+# 4. Pontos de Melhoria
 
 1. **Isolamento de Interfaces**  
    - Extrair interfaces de repositórios e serviços em pacotes separados para facilitar testes e permitir trocas de implementação sem impacto.
