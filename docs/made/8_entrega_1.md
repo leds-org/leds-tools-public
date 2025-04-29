@@ -1,52 +1,52 @@
-# 1. Arquitetura Proposta
+# 1. Proposed Architecture
 
-Para suportar os módulos de Gestão Ágil com MADE (EPICs, histórias, backlog, sprints, releases e dashboards) em uma aplicação web escalável e testável, adoto a **Clean Architecture**:
+To support Agile Management modules with MADE (EPICs, user stories, backlog, sprints, releases, and dashboards) in a scalable and testable web application, I adopt **Clean Architecture**:
 
-![Diagrama de Camadas](img.png)
+![Layered Diagram](img.png)
 
 ---
 
-## Camadas da Arquitetura
+## Architecture Layers
 
-### 1. Camada de Apresentação
+### 1. Presentation Layer
 - UI / Web / API Gateway
 
-### 2. Camada de Aplicação
-- Casos de uso (Use Cases)
-- Serviços
+### 2. Application Layer
+- Use Cases
+- Services
 
-### 3. Camada de Domínio
-- Entidades
-- Regras de Negócio
+### 3. Domain Layer
+- Entities
+- Business Rules
 
-### 4. Camada de Infraestrutura
-- Banco de Dados
-- Repositórios
-- Integrações (ex: MADE)
-
----
-
-# 2. Explicação de Cada Camada
-
-1. **Camada de Apresentação**  
-   - Responsável por expor interfaces REST/GraphQL ou UI web (React/Vue) para o usuário e outros sistemas.  
-   - Orquestra requisições e converte dados de entrada/saída em DTOs.
-
-2. **Camada de Aplicação**  
-   - Contém _Use Cases_ (casos de uso) que implementam cenários de negócio (ex.: “Criar Sprint”, “Gerar Roadmap” etc.).  
-   - Não deve conter lógica de infraestrutura nem acesso direto a bancos.
-
-3. **Camada de Domínio**  
-   - Núcleo da aplicação, com entidades (por exemplo, `Epic`, `UserStory`, `Sprint`) e suas regras de negócio puras (validações, cálculos).  
-   - É independente de frameworks e bibliotecas externas.
-
-4. **Camada de Infraestrutura**  
-   - Implementa detalhes como repositórios de dados (SQL/NoSQL), clientes HTTP para integrar com o engine do MADE, serviços de fila, mecanismos de cache e logging.  
-   - Fornece implementações concretas das interfaces definidas na camada de aplicação e domínio.
+### 4. Infrastructure Layer
+- Database
+- Repositories
+- Integrations (e.g., MADE)
 
 ---
 
-# 3. Referências Bibliográficas
+# 2. Layer Explanation
+
+1. **Presentation Layer**  
+   - Responsible for exposing REST/GraphQL interfaces or web UI (React/Vue) to users and other systems.  
+   - Orchestrates requests and converts input/output data into DTOs.
+
+2. **Application Layer**  
+   - Contains _Use Cases_ that implement business scenarios (e.g., "Create Sprint," "Generate Roadmap," etc.).  
+   - Should not contain infrastructure logic or direct database access.
+
+3. **Domain Layer**  
+   - The core of the application, with entities (such as `Epic`, `UserStory`, `Sprint`) and their pure business rules (validations, calculations).  
+   - Independent of frameworks and external libraries.
+
+4. **Infrastructure Layer**  
+   - Implements details such as data repositories (SQL/NoSQL), HTTP clients to integrate with the MADE engine, queue services, caching mechanisms, and logging.  
+   - Provides concrete implementations of the interfaces defined in the application and domain layers.
+
+---
+
+# 3. Bibliographic References
 
 - **Robert C. Martin**, *Clean Architecture: A Craftsman’s Guide to Software Structure and Design*, 2017.  
 - **Eric Evans**, *Domain-Driven Design: Tackling Complexity in the Heart of Software*, 2004.  
@@ -55,24 +55,24 @@ Para suportar os módulos de Gestão Ágil com MADE (EPICs, histórias, backlog,
 
 ---
 
-# 4. Pontos de Melhoria
+# 4. Improvement Points
 
-1. **Isolamento de Interfaces**  
-   - Extrair interfaces de repositórios e serviços em pacotes separados para facilitar testes e permitir trocas de implementação sem impacto.
+1. **Interface Isolation**  
+   - Extract repository and service interfaces into separate packages to facilitate testing and allow implementation swaps without impact.
 
-2. **CQRS e Event Sourcing**  
-   - Para módulos de relatórios e dashboards (burn-down, velocity), separar leitura de escrita, usando _Command Query Responsibility Segregation_ e potencialmente _Event Sourcing_ para rastreabilidade detalhada.
+2. **CQRS and Event Sourcing**  
+   - For reporting and dashboard modules (burn-down, velocity), separate read and write operations using _Command Query Responsibility Segregation_ and potentially _Event Sourcing_ for detailed traceability.
 
-3. **Micro–frontends ou APIs Moduladas**  
-   - Dividir a camada de apresentação em micro-frontends (gestão de backlog, planejamento de sprints, roadmap) ou micro-APIs para escalabilidade e deploy independente.
+3. **Micro–frontends or Modularized APIs**  
+   - Split the presentation layer into micro-frontends (backlog management, sprint planning, roadmap) or micro-APIs for scalability and independent deployment.
 
-4. **Automação de Testes de Integração**  
-   - Introduzir testes automatizados que simulem fluxos completos (end-to-end) contra um ambiente de staging do MADE, garantindo regressões mínimas em cada release.
+4. **Integration Test Automation**  
+   - Introduce automated tests that simulate complete end-to-end flows against a MADE staging environment, ensuring minimal regressions in each release.
 
-5. **Observabilidade e Telemetria**  
-   - Incorporar ferramentas de métricas (Prometheus/Grafana) e tracing distribuído (OpenTelemetry) para monitorar performance e depurar problemas em produção.
+5. **Observability and Telemetry**  
+   - Incorporate metrics tools (Prometheus/Grafana) and distributed tracing (OpenTelemetry) to monitor performance and debug production issues.
 
-6. **Documentação de Contratos (OpenAPI/AsyncAPI)**  
-   - Gerar documentação interativa dos endpoints e eventos para facilitar integração de novos clientes e equipes externas.
+6. **Contract Documentation (OpenAPI/AsyncAPI)**  
+   - Generate interactive documentation for endpoints and events to facilitate the integration of new clients and external teams.
 
 ---
