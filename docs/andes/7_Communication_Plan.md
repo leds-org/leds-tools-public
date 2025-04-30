@@ -4,7 +4,6 @@ title: Communication Plan
 
 ---
 
-
 📱 WhatsApp: for quick exchanges of messages and informal decisions
 
 📂 Google Drive: for sharing project documents and artifacts

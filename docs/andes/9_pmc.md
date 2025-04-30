@@ -35,7 +35,6 @@ The main deliverable of the project will be a VSCode extension with the followin
 
 - Greater standardization and professionalism in project records
 
-
 ### External Stakeholders
 
 - LEDS 
