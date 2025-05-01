@@ -91,3 +91,6 @@ description: Presents the project`s developing planning - 2025.
 | 04  | Review usage of data-test in .vue components and suggest a consistent pattern       | Analysis/Improvement | Medium | Helps ensure quality in Cypress test generation                        |
 | 05  | Run generated Cypress tests to validate proper execution                               | Testing          | High      | Ensure the tests actually validate the UI as expected                  |
 | 06  | Create a basic tutorial in the README for using main frontend functionalities          | Documentation    | Medium    | Helpful for onboarding new developers or testers                       |
+
+## Plano de Comunicação
+[Discord](https://discord.com/channels/1361281159954173952/1361281159954173955)
