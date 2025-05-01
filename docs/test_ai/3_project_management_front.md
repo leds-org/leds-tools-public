@@ -82,6 +82,7 @@ description: Presents the project`s developing planning - 2025.
 ---
 
 ## Backlog
+[Backlog atualizado no Github](https://github.com/users/eduardo-pitanga/projects/3/views/1)
 | ID  | Task                                                                                   | Type            | Priority  | Notes                                                                 |
 |-----|----------------------------------------------------------------------------------------|------------------|-----------|------------------------------------------------------------------------|
 | 01  | Validate generation of .feature (Gherkin) files from .andes                       | Validation       | High      | Test if the “Generate BDD feature” button works as expected            |
