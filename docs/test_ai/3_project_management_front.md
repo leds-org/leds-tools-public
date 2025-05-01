@@ -92,5 +92,17 @@ description: Presents the project`s developing planning - 2025.
 | 05  | Run generated Cypress tests to validate proper execution                               | Testing          | High      | Ensure the tests actually validate the UI as expected                  |
 | 06  | Create a basic tutorial in the README for using main frontend functionalities          | Documentation    | Medium    | Helpful for onboarding new developers or testers                       |
 
+## Design Structure Matrix (DSM)
+
+| Tarefa ↓ que depende | 01 - Validate generation of .feature | 02 - Test generation of Cypress tests | 03 - Create step-by-step documentation | 04 - Review usage of data-test in .vue | 05 - Run generated Cypress tests | 06 - Create a basic tutorial in the README |
+|---------------------|--------------------------------------|--------------------------------------|-----------------------------------------|-----------------------------------------|--------------------------------------|---------------------------------------------|
+| 01 - Validate generation of .feature  |                                     |                                        |                                           |                                           |                                        |                                               |
+| 02 - Test generation of Cypress tests |                                      |                                       |                                           |                                           |                                        |                                               |
+| 03 - Create step-by-step documentation | X                                    | X                                      |                                          |                                           |                                        |                                               |
+| 04 - Review usage of data-test in .vue |                                      |                                        |                                           |                                          |                                        |                                               |
+| 05 - Run generated Cypress tests       | X                                    | X                                      |                                           |                                           |                                       |                                               |
+| 06 - Create a basic tutorial in the README | X                                 | X                                      | X                                         | X                                         | X                                      |                                              |
+
+
 ## Plano de Comunicação
-[Discord](https://discord.com/channels/1361281159954173952/1361281159954173955)
+[Canal no Discord](https://discord.com/channels/1361281159954173952/1361281159954173955)
