@@ -53,7 +53,7 @@ Inside the requirements Model
         depend: RequirementsID.FR01
     }
 
-    bussines_rule BR01
+    business_rule BR01
     {
         description: "This system should be link with paypal"
         priority: "Low" 
@@ -87,7 +87,7 @@ usecase UC01 // Replace "UC01" with the identifier for the use case
     description: "Description of the use case" // Detailed description of the use case
     depend: UC01, UC02 // Optional: list of dependent use cases
     performer: ActorID // The actor(s) involved in the use case
-    requirements: RequirementsID.RF01 // The requirement(s) involved in the use case
+    requirements: RequirementsID.FR01 // The requirement(s) involved in the use case
 
     // Here are the Events
 }
@@ -101,7 +101,7 @@ event EventID // Replace "EventID" with the identifier for the event
     name: "Event Name" // Name of the event
     description: "Description of the event" // Detailed description of the event
     depend: UC01.EventID // Optional: identifier of the dependent use case and event
-    requirements: RequirementsID.RF01 // Optional: The requirement(s) involved in the event
+    requirements: RequirementsID.FR01 // Optional: The requirement(s) involved in the event
     action: "Action description" // Optional: description of the action performed during the event
 }
 ```
