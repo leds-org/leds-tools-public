@@ -1,0 +1,84 @@
+{
+  "name": "codeWise",
+  "nodes": [
+    {
+      "parameters": {
+        "owner": {
+          "__rl": true,
+          "value": "gabrieldev131",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "CodeWise",
+          "mode": "list",
+          "cachedResultName": "CodeWise",
+          "cachedResultUrl": "https://github.com/gabrieldev131/CodeWise"
+        },
+        "events": [
+          "pull_request"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.githubTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "235aaf40-be7e-4345-b17d-4f3f1a49a665",
+      "name": "Github Trigger",
+      "webhookId": "e61061c1-67de-477e-8393-b91d9f6337b0",
+      "credentials": {
+        "githubApi": {
+          "id": "A2f0FwwNnRmW0WR2",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $execution.resumeUrl }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "48dcbe95-e57b-4f9a-9341-b97c2f649e82",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Github Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a2ffa4fe-03fd-43f5-9549-48b577e1d535",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8c0d133aedbd2315584dd4de8d42493702953e89aed534f75c602cee4f5c6a06"
+  },
+  "id": "IUO95azIjNdcdBzx",
+  "tags": []
+}
