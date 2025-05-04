@@ -40,7 +40,7 @@
     },
     {
       "parameters": {
-        "url": "=\nhttps://api.github.com/repos/{{ $json.body.repository.owner.login }}/{{ $json.body.repository.name }}/git/trees/{{ $json.body.workflow_run.head_sha }}?recursive=1\n\n",
+        "url": "=\nhttps://api.github.com/repos/{{ $json.body.repository.owner.login }}/{{ $json.body.repository.name }}/git/trees/{{ $json.body.head_commit.tree_id }}?recursive=1\n\n",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "githubOAuth2Api",
         "options": {}
@@ -59,19 +59,6 @@
           "name": "GitHub Oauth2"
         }
       }
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        280,
-        -220
-      ],
-      "id": "c89db014-6dfe-48e3-871f-79c476b5c1b1",
-      "name": "Edit Fields"
     },
     {
       "parameters": {
@@ -156,7 +143,9 @@
             }
           ]
         },
-        "options": {}
+        "options": {
+          "ignoreConversionErrors": true
+        }
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
@@ -169,7 +158,8 @@
     },
     {
       "parameters": {
-        "jsCode": "const base64String = $input.first().json.content;\n\n// Decodifica a string Base64 para texto\nconst decodedText = Buffer.from(base64String, 'base64').toString('utf8');\n\n// Retorna o texto decodificado\nreturn { decoded_text: decodedText };"
+        "language": "python",
+        "pythonCode": "import base64\n\ndef decode_base64(item):\n    base64_str = item['json'].get('content', '')\n    try:\n        decoded = base64.b64decode(base64_str).decode('utf-8')\n        return { \"decoded\": decoded }\n    except Exception as e:\n        return { \"decoded\": f\"Erro: {str(e)}\" }\n\nreturn [decode_base64(item) for item in items]\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -182,29 +172,1713 @@
     },
     {
       "parameters": {
-        "content": "## Encontrar um jeito de converter base64 em string",
-        "height": 380
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b9654b7d-2d94-4a2b-92ab-3ab980aeed6e",
+              "name": "decoded",
+              "value": "={{ $json.decoded }}",
+              "type": "string"
+            },
+            {
+              "id": "ca7f0e5e-6837-474e-8e7f-14fe59c9e909",
+              "name": "path",
+              "value": "={{ $('Split Out').item.json.path }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
       },
-      "type": "n8n-nodes-base.stickyNote",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
       "position": [
-        140,
-        100
+        420,
+        220
       ],
+      "id": "2c8f127c-31d1-488d-ab83-80e86342fe68",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "promptType": "={{ $json.path }}\n{{ $json.decoded }}",
+        "text": "",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        640,
+        220
+      ],
+      "id": "c13f8712-3642-4bb4-8b9f-952b624cbf68",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-1.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
-      "id": "60ba6445-dbeb-43b8-a7e1-94b89815e6f1",
-      "name": "Sticky Note"
+      "position": [
+        600,
+        440
+      ],
+      "id": "4c560ab7-5894-4125-8e8e-ae272c814250",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Yb4wqSyHV24yE03h",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Github Trigger": [
+      {
+        "json": {
+          "body": {
+            "ref": "refs/heads/codewise",
+            "before": "fed181821831b7a8050ce2766a9f3b850a96a6a1",
+            "after": "1951bf335a14547010d2910749a04d811c65e25b",
+            "repository": {
+              "id": 968888108,
+              "node_id": "R_kgDOOcAPLA",
+              "name": "CodeWise",
+              "full_name": "gabrieldev131/CodeWise",
+              "private": false,
+              "owner": {
+                "name": "gabrieldev131",
+                "email": "119118315+gabrieldev131@users.noreply.github.com",
+                "login": "gabrieldev131",
+                "id": 119118315,
+                "node_id": "U_kgDOBxmZ6w",
+                "avatar_url": "https://avatars.githubusercontent.com/u/119118315?v=4",
+                "gravatar_id": "",
+                "url": "https://api.github.com/users/gabrieldev131",
+                "html_url": "https://github.com/gabrieldev131",
+                "followers_url": "https://api.github.com/users/gabrieldev131/followers",
+                "following_url": "https://api.github.com/users/gabrieldev131/following{/other_user}",
+                "gists_url": "https://api.github.com/users/gabrieldev131/gists{/gist_id}",
+                "starred_url": "https://api.github.com/users/gabrieldev131/starred{/owner}{/repo}",
+                "subscriptions_url": "https://api.github.com/users/gabrieldev131/subscriptions",
+                "organizations_url": "https://api.github.com/users/gabrieldev131/orgs",
+                "repos_url": "https://api.github.com/users/gabrieldev131/repos",
+                "events_url": "https://api.github.com/users/gabrieldev131/events{/privacy}",
+                "received_events_url": "https://api.github.com/users/gabrieldev131/received_events",
+                "type": "User",
+                "user_view_type": "public",
+                "site_admin": false
+              },
+              "html_url": "https://github.com/gabrieldev131/CodeWise",
+              "description": "Documentação das ferramentas do LEDS de interesse aos alunos das disciplinas de DOO, PROJS e GPS ministradas por @paulossjunior durante o período 2025/1.",
+              "fork": true,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise",
+              "forks_url": "https://api.github.com/repos/gabrieldev131/CodeWise/forks",
+              "keys_url": "https://api.github.com/repos/gabrieldev131/CodeWise/keys{/key_id}",
+              "collaborators_url": "https://api.github.com/repos/gabrieldev131/CodeWise/collaborators{/collaborator}",
+              "teams_url": "https://api.github.com/repos/gabrieldev131/CodeWise/teams",
+              "hooks_url": "https://api.github.com/repos/gabrieldev131/CodeWise/hooks",
+              "issue_events_url": "https://api.github.com/repos/gabrieldev131/CodeWise/issues/events{/number}",
+              "events_url": "https://api.github.com/repos/gabrieldev131/CodeWise/events",
+              "assignees_url": "https://api.github.com/repos/gabrieldev131/CodeWise/assignees{/user}",
+              "branches_url": "https://api.github.com/repos/gabrieldev131/CodeWise/branches{/branch}",
+              "tags_url": "https://api.github.com/repos/gabrieldev131/CodeWise/tags",
+              "blobs_url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs{/sha}",
+              "git_tags_url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/tags{/sha}",
+              "git_refs_url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/refs{/sha}",
+              "trees_url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees{/sha}",
+              "statuses_url": "https://api.github.com/repos/gabrieldev131/CodeWise/statuses/{sha}",
+              "languages_url": "https://api.github.com/repos/gabrieldev131/CodeWise/languages",
+              "stargazers_url": "https://api.github.com/repos/gabrieldev131/CodeWise/stargazers",
+              "contributors_url": "https://api.github.com/repos/gabrieldev131/CodeWise/contributors",
+              "subscribers_url": "https://api.github.com/repos/gabrieldev131/CodeWise/subscribers",
+              "subscription_url": "https://api.github.com/repos/gabrieldev131/CodeWise/subscription",
+              "commits_url": "https://api.github.com/repos/gabrieldev131/CodeWise/commits{/sha}",
+              "git_commits_url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/commits{/sha}",
+              "comments_url": "https://api.github.com/repos/gabrieldev131/CodeWise/comments{/number}",
+              "issue_comment_url": "https://api.github.com/repos/gabrieldev131/CodeWise/issues/comments{/number}",
+              "contents_url": "https://api.github.com/repos/gabrieldev131/CodeWise/contents/{+path}",
+              "compare_url": "https://api.github.com/repos/gabrieldev131/CodeWise/compare/{base}...{head}",
+              "merges_url": "https://api.github.com/repos/gabrieldev131/CodeWise/merges",
+              "archive_url": "https://api.github.com/repos/gabrieldev131/CodeWise/{archive_format}{/ref}",
+              "downloads_url": "https://api.github.com/repos/gabrieldev131/CodeWise/downloads",
+              "issues_url": "https://api.github.com/repos/gabrieldev131/CodeWise/issues{/number}",
+              "pulls_url": "https://api.github.com/repos/gabrieldev131/CodeWise/pulls{/number}",
+              "milestones_url": "https://api.github.com/repos/gabrieldev131/CodeWise/milestones{/number}",
+              "notifications_url": "https://api.github.com/repos/gabrieldev131/CodeWise/notifications{?since,all,participating}",
+              "labels_url": "https://api.github.com/repos/gabrieldev131/CodeWise/labels{/name}",
+              "releases_url": "https://api.github.com/repos/gabrieldev131/CodeWise/releases{/id}",
+              "deployments_url": "https://api.github.com/repos/gabrieldev131/CodeWise/deployments",
+              "created_at": 1745018872,
+              "updated_at": "2025-05-02T15:20:25Z",
+              "pushed_at": 1746388500,
+              "git_url": "git://github.com/gabrieldev131/CodeWise.git",
+              "ssh_url": "git@github.com:gabrieldev131/CodeWise.git",
+              "clone_url": "https://github.com/gabrieldev131/CodeWise.git",
+              "svn_url": "https://github.com/gabrieldev131/CodeWise",
+              "homepage": "",
+              "size": 10530,
+              "stargazers_count": 0,
+              "watchers_count": 0,
+              "language": "JavaScript",
+              "has_issues": false,
+              "has_projects": true,
+              "has_downloads": true,
+              "has_wiki": true,
+              "has_pages": true,
+              "has_discussions": false,
+              "forks_count": 0,
+              "mirror_url": null,
+              "archived": false,
+              "disabled": false,
+              "open_issues_count": 0,
+              "license": null,
+              "allow_forking": true,
+              "is_template": false,
+              "web_commit_signoff_required": false,
+              "topics": [],
+              "visibility": "public",
+              "forks": 0,
+              "open_issues": 0,
+              "watchers": 0,
+              "default_branch": "main",
+              "stargazers": 0,
+              "master_branch": "main"
+            },
+            "pusher": {
+              "name": "gabrieldev131",
+              "email": "119118315+gabrieldev131@users.noreply.github.com"
+            },
+            "sender": {
+              "login": "gabrieldev131",
+              "id": 119118315,
+              "node_id": "U_kgDOBxmZ6w",
+              "avatar_url": "https://avatars.githubusercontent.com/u/119118315?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/gabrieldev131",
+              "html_url": "https://github.com/gabrieldev131",
+              "followers_url": "https://api.github.com/users/gabrieldev131/followers",
+              "following_url": "https://api.github.com/users/gabrieldev131/following{/other_user}",
+              "gists_url": "https://api.github.com/users/gabrieldev131/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/gabrieldev131/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/gabrieldev131/subscriptions",
+              "organizations_url": "https://api.github.com/users/gabrieldev131/orgs",
+              "repos_url": "https://api.github.com/users/gabrieldev131/repos",
+              "events_url": "https://api.github.com/users/gabrieldev131/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/gabrieldev131/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "created": false,
+            "deleted": false,
+            "forced": false,
+            "base_ref": null,
+            "compare": "https://github.com/gabrieldev131/CodeWise/compare/fed181821831...1951bf335a14",
+            "commits": [
+              {
+                "id": "1951bf335a14547010d2910749a04d811c65e25b",
+                "tree_id": "2e1c5d0e7af76a0c99a77f7c543ce03fbb14864b",
+                "distinct": true,
+                "message": "testando conversão2",
+                "timestamp": "2025-05-04T16:54:47-03:00",
+                "url": "https://github.com/gabrieldev131/CodeWise/commit/1951bf335a14547010d2910749a04d811c65e25b",
+                "author": {
+                  "name": "gabriel",
+                  "email": "gabrieldev131@gmail.com",
+                  "username": "gabrieldev131"
+                },
+                "committer": {
+                  "name": "gabriel",
+                  "email": "gabrieldev131@gmail.com",
+                  "username": "gabrieldev131"
+                },
+                "added": [],
+                "removed": [],
+                "modified": [
+                  "docs/code_wise/codewise/src/codewise/main.py"
+                ]
+              }
+            ],
+            "head_commit": {
+              "id": "1951bf335a14547010d2910749a04d811c65e25b",
+              "tree_id": "2e1c5d0e7af76a0c99a77f7c543ce03fbb14864b",
+              "distinct": true,
+              "message": "testando conversão2",
+              "timestamp": "2025-05-04T16:54:47-03:00",
+              "url": "https://github.com/gabrieldev131/CodeWise/commit/1951bf335a14547010d2910749a04d811c65e25b",
+              "author": {
+                "name": "gabriel",
+                "email": "gabrieldev131@gmail.com",
+                "username": "gabrieldev131"
+              },
+              "committer": {
+                "name": "gabriel",
+                "email": "gabrieldev131@gmail.com",
+                "username": "gabrieldev131"
+              },
+              "added": [],
+              "removed": [],
+              "modified": [
+                "docs/code_wise/codewise/src/codewise/main.py"
+              ]
+            }
+          },
+          "headers": {
+            "host": "3b7d-2804-3540-900-fd5a-d1f5-bb10-c870-6699.ngrok-free.app",
+            "user-agent": "GitHub-Hookshot/eea6a71",
+            "content-length": "7891",
+            "accept": "*/*",
+            "content-type": "application/json",
+            "x-forwarded-for": "140.82.115.9",
+            "x-forwarded-host": "3b7d-2804-3540-900-fd5a-d1f5-bb10-c870-6699.ngrok-free.app",
+            "x-forwarded-proto": "https",
+            "x-github-delivery": "a9adf346-2921-11f0-9efd-81d21b2b34cb",
+            "x-github-event": "push",
+            "x-github-hook-id": "544087240",
+            "x-github-hook-installation-target-id": "968888108",
+            "x-github-hook-installation-target-type": "repository",
+            "accept-encoding": "gzip"
+          },
+          "query": {}
+        }
+      }
+    ],
+    "HTTP Request": [
+      {
+        "json": {
+          "sha": "2e1c5d0e7af76a0c99a77f7c543ce03fbb14864b",
+          "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/2e1c5d0e7af76a0c99a77f7c543ce03fbb14864b",
+          "tree": [
+            {
+              "path": ".cz.toml",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "5352e9893c334f553279ec2ffdee4bcd1ea56c7b",
+              "size": 3166,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/5352e9893c334f553279ec2ffdee4bcd1ea56c7b"
+            },
+            {
+              "path": ".github",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "1c99d6f806f1105766309f0a1190946ec9b0dfa1",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/1c99d6f806f1105766309f0a1190946ec9b0dfa1"
+            },
+            {
+              "path": ".github/workflows",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "f25bb2332a9f27d10d44cf72eab0549088bc23eb",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/f25bb2332a9f27d10d44cf72eab0549088bc23eb"
+            },
+            {
+              "path": ".github/workflows/sync-to-gitlab.yml",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "ad92fb1bdaa7ca3026f1a210cfc9e731b18bd2c3",
+              "size": 442,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/ad92fb1bdaa7ca3026f1a210cfc9e731b18bd2c3"
+            },
+            {
+              "path": ".gitignore",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "7dc7454f7329554ce4fa71b2fe53a2d1f6000a4a",
+              "size": 253,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/7dc7454f7329554ce4fa71b2fe53a2d1f6000a4a"
+            },
+            {
+              "path": ".gitlab-ci.yml",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "565b134a2bf7fdf316d8eec36f0b472b215b29f2",
+              "size": 243,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/565b134a2bf7fdf316d8eec36f0b472b215b29f2"
+            },
+            {
+              "path": "README.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "530fa92c04049c9a4a9927350f1c35ec432ebad5",
+              "size": 158,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/530fa92c04049c9a4a9927350f1c35ec432ebad5"
+            },
+            {
+              "path": "babel.config.js",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "92d391e31ebcc2f53ea66a6f2d2b1ec4737c11b7",
+              "size": 92,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/92d391e31ebcc2f53ea66a6f2d2b1ec4737c11b7"
+            },
+            {
+              "path": "docs",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "01c2f40544828516a89f2b565c13a70935384fb7",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/01c2f40544828516a89f2b565c13a70935384fb7"
+            },
+            {
+              "path": "docs/andes",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "66ca0c65920a24c3b595b9c8fc142a83aee86d34",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/66ca0c65920a24c3b595b9c8fc142a83aee86d34"
+            },
+            {
+              "path": "docs/andes/1_overview.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "6c193790b182cbafd36728f992434f06b4b56726",
+              "size": 666,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/6c193790b182cbafd36728f992434f06b4b56726"
+            },
+            {
+              "path": "docs/andes/2_project_managment.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "874dab869e4fd11d438983214372258e34149d84",
+              "size": 3587,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/874dab869e4fd11d438983214372258e34149d84"
+            },
+            {
+              "path": "docs/andes/3_installation.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "59ec97a10425fd29cae098c54730900d5eb2fd69",
+              "size": 223,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/59ec97a10425fd29cae098c54730900d5eb2fd69"
+            },
+            {
+              "path": "docs/andes/4_lang.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "3b63922254970b4911c21430a562c246921e33bb",
+              "size": 4554,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/3b63922254970b4911c21430a562c246921e33bb"
+            },
+            {
+              "path": "docs/andes/5_howtouse.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "b7980578224ad5e1aac3bec9f3054c027557ed34",
+              "size": 381,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/b7980578224ad5e1aac3bec9f3054c027557ed34"
+            },
+            {
+              "path": "docs/andes/6_faq.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "8842f6ce5e2810568fe43466eb6c0fcbe289f338",
+              "size": 75,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/8842f6ce5e2810568fe43466eb6c0fcbe289f338"
+            },
+            {
+              "path": "docs/andes/_category_.json",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "cd5c95331b45be529452ef55c87dad9196f36de9",
+              "size": 231,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/cd5c95331b45be529452ef55c87dad9196f36de9"
+            },
+            {
+              "path": "docs/andes/img",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "12e2bf3d96a2ca9bd827894fece53cb82866e3f7",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/12e2bf3d96a2ca9bd827894fece53cb82866e3f7"
+            },
+            {
+              "path": "docs/andes/img/andes_plugin.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "e25fc54a20d460772d7a3c66b1dc40a5c8550f49",
+              "size": 19306,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/e25fc54a20d460772d7a3c66b1dc40a5c8550f49"
+            },
+            {
+              "path": "docs/andes/img/create_andes.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "faf887060621e7d13c19b6c199b975f133caae1e",
+              "size": 100965,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/faf887060621e7d13c19b6c199b975f133caae1e"
+            },
+            {
+              "path": "docs/andes/img/folders.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "c2fa0ff4d275e8435c52e870bf3d68e934994e9f",
+              "size": 9866,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/c2fa0ff4d275e8435c52e870bf3d68e934994e9f"
+            },
+            {
+              "path": "docs/andes/metamodel.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "f7fa4549c333ac0430ec1f45bf9328c6483ad6c6",
+              "size": 5721,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/f7fa4549c333ac0430ec1f45bf9328c6483ad6c6"
+            },
+            {
+              "path": "docs/code_wise",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "19ac6595dc1149ee50c82647d34366366c190f32",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/19ac6595dc1149ee50c82647d34366366c190f32"
+            },
+            {
+              "path": "docs/code_wise/2_project_managment.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "706de06a644b2dd9653613c80987d06f01a27faf",
+              "size": 2521,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/706de06a644b2dd9653613c80987d06f01a27faf"
+            },
+            {
+              "path": "docs/code_wise/_category_.json",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "767fa0f0efd72f7429ac31ce8d046a0a8d48efb8",
+              "size": 176,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/767fa0f0efd72f7429ac31ce8d046a0a8d48efb8"
+            },
+            {
+              "path": "docs/code_wise/code_wise.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "b909eebf3556da159a434c42460041a9a5535723",
+              "size": 6224,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/b909eebf3556da159a434c42460041a9a5535723"
+            },
+            {
+              "path": "docs/code_wise/codewise",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "eb3c01415c07556de92d8ef70d8c5cd1ea98e9b8",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/eb3c01415c07556de92d8ef70d8c5cd1ea98e9b8"
+            },
+            {
+              "path": "docs/code_wise/codewise/.gitignore",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "c1a1ea8a3794202e04bf7fe8d6b6ce0921559a12",
+              "size": 43,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/c1a1ea8a3794202e04bf7fe8d6b6ce0921559a12"
+            },
+            {
+              "path": "docs/code_wise/codewise/README.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "81ada47c54aa11c83feb7f916968e71966878dcd",
+              "size": 2408,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/81ada47c54aa11c83feb7f916968e71966878dcd"
+            },
+            {
+              "path": "docs/code_wise/codewise/knowledge",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "7e5772f498ad65e261d23ad4f38ee062c62bf6fb",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/7e5772f498ad65e261d23ad4f38ee062c62bf6fb"
+            },
+            {
+              "path": "docs/code_wise/codewise/knowledge/user_preference.txt",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "dd63a17bf3c8387a80dfcdc6cf274d5396501c85",
+              "size": 124,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/dd63a17bf3c8387a80dfcdc6cf274d5396501c85"
+            },
+            {
+              "path": "docs/code_wise/codewise/pyproject.toml",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "4ae784376229f6b283294231beae089ccb4f516c",
+              "size": 509,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/4ae784376229f6b283294231beae089ccb4f516c"
+            },
+            {
+              "path": "docs/code_wise/codewise/report.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "7a85616a8da5e3936d6995dfb3f60f0876d845a5",
+              "size": 8814,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/7a85616a8da5e3936d6995dfb3f60f0876d845a5"
+            },
+            {
+              "path": "docs/code_wise/codewise/src",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "f1cf009a09bc9867f78a6fee14aac8ec1281d196",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/f1cf009a09bc9867f78a6fee14aac8ec1281d196"
+            },
+            {
+              "path": "docs/code_wise/codewise/src/codewise",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "e37ca00262692a66d16680fc99c4a128c79c95ee",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/e37ca00262692a66d16680fc99c4a128c79c95ee"
+            },
+            {
+              "path": "docs/code_wise/codewise/src/codewise/__init__.py",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+              "size": 0,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+            },
+            {
+              "path": "docs/code_wise/codewise/src/codewise/config",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "08ea97a628e666c5792e075f174db8bc942b9835",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/08ea97a628e666c5792e075f174db8bc942b9835"
+            },
+            {
+              "path": "docs/code_wise/codewise/src/codewise/config/agents.yaml",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "72ed6939e4f230cff1f914e55a0e3bb6b26c6232",
+              "size": 739,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/72ed6939e4f230cff1f914e55a0e3bb6b26c6232"
+            },
+            {
+              "path": "docs/code_wise/codewise/src/codewise/config/tasks.yaml",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "44bd89865623cf8d18bc97e45301ecfafbc8cc05",
+              "size": 692,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/44bd89865623cf8d18bc97e45301ecfafbc8cc05"
+            },
+            {
+              "path": "docs/code_wise/codewise/src/codewise/crew.py",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "ff1123985e0f344c101a160aba036d36a5e0fe5f",
+              "size": 2013,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/ff1123985e0f344c101a160aba036d36a5e0fe5f"
+            },
+            {
+              "path": "docs/code_wise/codewise/src/codewise/main.py",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "2eb0df6924742517c228a9179718833a2e2b6444",
+              "size": 1696,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/2eb0df6924742517c228a9179718833a2e2b6444"
+            },
+            {
+              "path": "docs/code_wise/codewise/src/codewise/tools",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "bcbdbfe2be925be8fc54446cc0027b42af180334",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/bcbdbfe2be925be8fc54446cc0027b42af180334"
+            },
+            {
+              "path": "docs/code_wise/codewise/src/codewise/tools/__init__.py",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+              "size": 0,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+            },
+            {
+              "path": "docs/code_wise/codewise/src/codewise/tools/custom_tool.py",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "154beae8e0d0b0a2ceb4f480d1db08dfcfad7afb",
+              "size": 668,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/154beae8e0d0b0a2ceb4f480d1db08dfcfad7afb"
+            },
+            {
+              "path": "docs/code_wise/codewise/uv.lock",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "292799190a42f74ca58b60571d4a6f62804e137d",
+              "size": 527767,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/292799190a42f74ca58b60571d4a6f62804e137d"
+            },
+            {
+              "path": "docs/code_wise/docussaurus",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "a8aa1ffc604acb20459032bc76055c669c7715c0",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/a8aa1ffc604acb20459032bc76055c669c7715c0"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/README.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "35ad92cc2ae14560a84d6dde500d6900e6e3dc71",
+              "size": 788,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/35ad92cc2ae14560a84d6dde500d6900e6e3dc71"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/blog",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "2a281e9e21e8e8765a08ccf27d60faa61cadbf9e",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/2a281e9e21e8e8765a08ccf27d60faa61cadbf9e"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/blog/2019-05-28-first-blog-post.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "d3032efb35cfffa1b6b63da26c1b74325c9b1e5c",
+              "size": 312,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/d3032efb35cfffa1b6b63da26c1b74325c9b1e5c"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/blog/2019-05-29-long-blog-post.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "eb4435de591c2bbf9de1f6c371313436929f52b4",
+              "size": 3122,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/eb4435de591c2bbf9de1f6c371313436929f52b4"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/blog/2021-08-01-mdx-blog-post.mdx",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "0c4b4a48b9886d03b2911bc35d5c5a57b4d1ab7d",
+              "size": 512,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/0c4b4a48b9886d03b2911bc35d5c5a57b4d1ab7d"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/blog/2021-08-26-welcome",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "14d1d297d408123bf41ba5144023cd31b6d866c0",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/14d1d297d408123bf41ba5144023cd31b6d866c0"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/blog/2021-08-26-welcome/docusaurus-plushie-banner.jpeg",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "11bda0928456b12f8e53d0ba5709212a4058d449",
+              "size": 96122,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/11bda0928456b12f8e53d0ba5709212a4058d449"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/blog/2021-08-26-welcome/index.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "349ea075f5bb919175f095c894c613b1172c2faa",
+              "size": 846,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/349ea075f5bb919175f095c894c613b1172c2faa"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/blog/authors.yml",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "8bfa5c7c4b539ab9e2f2c42a4f36a337f062669a",
+              "size": 614,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/8bfa5c7c4b539ab9e2f2c42a4f36a337f062669a"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/blog/tags.yml",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "bfaa778fbdb0cf88a032cad98cfba476e9e0b496",
+              "size": 347,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/bfaa778fbdb0cf88a032cad98cfba476e9e0b496"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "c760e316003f62a25caddba50cbd662574136165",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/c760e316003f62a25caddba50cbd662574136165"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/How was building",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "399ffc9b8b0988eee37283cae14e8c12d5d44631",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/399ffc9b8b0988eee37283cae14e8c12d5d44631"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/How was building/01-Design-of-the-architecture.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "a9d1efc369841327b540eed2e9d539b667536c3f",
+              "size": 823,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/a9d1efc369841327b540eed2e9d539b667536c3f"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/How was building/02-Explanation-of-each-component-and-layer.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "64f6dc804a09a06fa269ab2796d37d469d56bc9a",
+              "size": 1547,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/64f6dc804a09a06fa269ab2796d37d469d56bc9a"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/How was building/03-Analysis-of-improvement-points-based-on-software-architecture-concepts.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "38cd065b587b36f220b1dbd385bcbe26792d7c86",
+              "size": 2656,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/38cd065b587b36f220b1dbd385bcbe26792d7c86"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/How was building/04-Bibliographical-references-on-the-adopted-architecture.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "a4bddbb612d0db690bd5ee867fd207e6bd15cb69",
+              "size": 473,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/a4bddbb612d0db690bd5ee867fd207e6bd15cb69"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/intro.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "45e8604c8bf8fe674fd34a11874f15294b9362b2",
+              "size": 1403,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/45e8604c8bf8fe674fd34a11874f15294b9362b2"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/tutorial-basics",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "91acd980180241463d81f7e6d3858ae2cfd85c2d",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/91acd980180241463d81f7e6d3858ae2cfd85c2d"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/tutorial-basics/_category_.json",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "2e6db55b1eb61147f3aef1965dbdd79fdd505406",
+              "size": 180,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/2e6db55b1eb61147f3aef1965dbdd79fdd505406"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/tutorial-basics/congratulations.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "04771a00b72f80ee4d829890a8229085da77db4d",
+              "size": 1078,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/04771a00b72f80ee4d829890a8229085da77db4d"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/tutorial-basics/create-a-blog-post.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "550ae17ee1a2348bf4c66e75bf3a68f48a5a8083",
+              "size": 886,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/550ae17ee1a2348bf4c66e75bf3a68f48a5a8083"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/tutorial-basics/create-a-document.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "c22fe29446877a1485793edc1ea6ab3573acc09d",
+              "size": 1042,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/c22fe29446877a1485793edc1ea6ab3573acc09d"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/tutorial-basics/create-a-page.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "20e2ac300556e9baedcaf67474244f7059a53c40",
+              "size": 1015,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/20e2ac300556e9baedcaf67474244f7059a53c40"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/tutorial-basics/deploy-your-site.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "1c50ee063ef416333b994a910d10d05f984bf589",
+              "size": 702,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/1c50ee063ef416333b994a910d10d05f984bf589"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/tutorial-basics/markdown-features.mdx",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "35e00825ed77df7e9f1aa6b7d2a9f4715616df0f",
+              "size": 3006,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/35e00825ed77df7e9f1aa6b7d2a9f4715616df0f"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/tutorial-extras",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "b3ba1ec6779bc750fe188f6ddd55c8a27b65a7f4",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/b3ba1ec6779bc750fe188f6ddd55c8a27b65a7f4"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/tutorial-extras/_category_.json",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "a8ffcc19300ec5973db4c87090a2bc9e5cf73aa0",
+              "size": 99,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/a8ffcc19300ec5973db4c87090a2bc9e5cf73aa0"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/tutorial-extras/img",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "fae2b907d1174a9c2cfdefd08959dafddadd34a2",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/fae2b907d1174a9c2cfdefd08959dafddadd34a2"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/tutorial-extras/img/docsVersionDropdown.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "97e4164618b5f8beda34cfa699720aba0ad2e342",
+              "size": 25427,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/97e4164618b5f8beda34cfa699720aba0ad2e342"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/tutorial-extras/img/localeDropdown.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "e257edc1f932985396bf59584c7ccfaddf955779",
+              "size": 27841,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/e257edc1f932985396bf59584c7ccfaddf955779"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/tutorial-extras/manage-docs-versions.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "ccda0b9076bf760b16ef068675035a5ee90e3290",
+              "size": 1232,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/ccda0b9076bf760b16ef068675035a5ee90e3290"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docs/tutorial-extras/translate-your-site.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "b5a644abdf9670b573f902c5caef2ec7854bf7c4",
+              "size": 1587,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/b5a644abdf9670b573f902c5caef2ec7854bf7c4"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/docusaurus.config.js",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "2eed42edde006a07a8024d2667be52ec2c9afb94",
+              "size": 4521,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/2eed42edde006a07a8024d2667be52ec2c9afb94"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/package.json",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "5b2695049f8cd3d45e2236a76da0ae752b1ac071",
+              "size": 1139,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/5b2695049f8cd3d45e2236a76da0ae752b1ac071"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/sandbox.config.json",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "fe547f732fe2f13fbe85ead1957a6154709dd1c6",
+              "size": 171,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/fe547f732fe2f13fbe85ead1957a6154709dd1c6"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/sidebars.js",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "f77355c3ef92fde96b2deff4e1ff5a137220a1bd",
+              "size": 855,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/f77355c3ef92fde96b2deff4e1ff5a137220a1bd"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/src",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "38b2ebb724df6a97dbe07717416ce5a13300e642",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/38b2ebb724df6a97dbe07717416ce5a13300e642"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/src/components",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "3b62ab562cf797325a27bfb8d8ba613214b9839a",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/3b62ab562cf797325a27bfb8d8ba613214b9839a"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/src/components/HomepageFeatures",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "e07292f4e2d19a92d857e6238b206685e4d10df0",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/e07292f4e2d19a92d857e6238b206685e4d10df0"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/src/components/HomepageFeatures/index.js",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "31b2b6e2a817e5175116808c9da5269b830cc70d",
+              "size": 1839,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/31b2b6e2a817e5175116808c9da5269b830cc70d"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/src/components/HomepageFeatures/styles.module.css",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "b248eb2e5dee2c37f58ab867ab87be47ef804386",
+              "size": 138,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/b248eb2e5dee2c37f58ab867ab87be47ef804386"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/src/css",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "e52f01cb45236cb67699cfef90df8e1cd67bbda5",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/e52f01cb45236cb67699cfef90df8e1cd67bbda5"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/src/css/custom.css",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "2bc6a4cfdef4e06006b9a2501525889aa5e597c9",
+              "size": 1042,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/2bc6a4cfdef4e06006b9a2501525889aa5e597c9"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/src/pages",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "09583d6a16dd060f8a2d99d6d8973111b58f0af9",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/09583d6a16dd060f8a2d99d6d8973111b58f0af9"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/src/pages/index.js",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "a4521889ca64b1f7361ec2dca2d2c62187879c99",
+              "size": 1250,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/a4521889ca64b1f7361ec2dca2d2c62187879c99"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/src/pages/index.module.css",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "9f71a5da775bd99379fa5c4d5bb73dc816d78bdd",
+              "size": 365,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/9f71a5da775bd99379fa5c4d5bb73dc816d78bdd"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/src/pages/markdown-page.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "9756c5b6685a7fa67f41e11bc2cb6b990c2b12b2",
+              "size": 118,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/9756c5b6685a7fa67f41e11bc2cb6b990c2b12b2"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/static",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "f5c3cf29617fa453723d7ef14d6dc583097226fc",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/f5c3cf29617fa453723d7ef14d6dc583097226fc"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/static/img",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "50818f794a57b11989176d1baf4e643d93d198f6",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/50818f794a57b11989176d1baf4e643d93d198f6"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/static/img/docusaurus-social-card.jpg",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "ffcb448210e1a456cb3588ae8b396a597501f187",
+              "size": 55746,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/ffcb448210e1a456cb3588ae8b396a597501f187"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/static/img/docusaurus.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "f458149e3c8f53335f28fbc162ae67f55575c881",
+              "size": 5142,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/f458149e3c8f53335f28fbc162ae67f55575c881"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/static/img/favicon.ico",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "c01d54bcd39a5f853428f3cd5aa0f383d963c484",
+              "size": 3626,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/c01d54bcd39a5f853428f3cd5aa0f383d963c484"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/static/img/logo.svg",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "9db6d0d066e3df092350a71e4c4ec5a90190b7c3",
+              "size": 6438,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/9db6d0d066e3df092350a71e4c4ec5a90190b7c3"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/static/img/undraw_docusaurus_mountain.svg",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "af961c49a8888259853fe621b30052e8ae1c8128",
+              "size": 31486,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/af961c49a8888259853fe621b30052e8ae1c8128"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/static/img/undraw_docusaurus_react.svg",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "94b5cf08f88f2202ce8c7abe820c4f6c5336b836",
+              "size": 36002,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/94b5cf08f88f2202ce8c7abe820c4f6c5336b836"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/static/img/undraw_docusaurus_tree.svg",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "d9161d33920c9708a2f809cdb8b7c410917ce302",
+              "size": 11887,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/d9161d33920c9708a2f809cdb8b7c410917ce302"
+            },
+            {
+              "path": "docs/code_wise/docussaurus/yarn.lock",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "34076fcaa60d28710bf41e99daa6009ce06828f2",
+              "size": 424290,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/34076fcaa60d28710bf41e99daa6009ce06828f2"
+            },
+            {
+              "path": "docs/code_wise/n8n",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "8cf030be012ae3145ab64fc296482c8420d628a5",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/8cf030be012ae3145ab64fc296482c8420d628a5"
+            },
+            {
+              "path": "docs/code_wise/n8n/README.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+              "size": 0,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+            },
+            {
+              "path": "docs/code_wise/n8n/n8n_workFlows",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "4a4058c18c9af742a5154a3fdc389cf843b7a9a3",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/4a4058c18c9af742a5154a3fdc389cf843b7a9a3"
+            },
+            {
+              "path": "docs/code_wise/n8n/n8n_workFlows/codeWise.json",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "e425a2eb68bc218fe32b49a81955ab7449ea7b4e",
+              "size": 6656,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/e425a2eb68bc218fe32b49a81955ab7449ea7b4e"
+            },
+            {
+              "path": "docs/intro.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "239e7df091d7434fca000accfbb1e13ed7de7797",
+              "size": 417,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/239e7df091d7434fca000accfbb1e13ed7de7797"
+            },
+            {
+              "path": "docs/made",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "8faa3580f1e33e81f339d0d1ef673ef739e1c20a",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/8faa3580f1e33e81f339d0d1ef673ef739e1c20a"
+            },
+            {
+              "path": "docs/made/1_overview.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "e3673d53f812738ce6267fa7703fcbf0e6d43439",
+              "size": 407,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/e3673d53f812738ce6267fa7703fcbf0e6d43439"
+            },
+            {
+              "path": "docs/made/2_project_managment.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "dd2735fbcc7c2a164752856fa5723446c6858fab",
+              "size": 1370,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/dd2735fbcc7c2a164752856fa5723446c6858fab"
+            },
+            {
+              "path": "docs/made/3_installation.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "ea5d9e8c1a4558356f549256e5d86bb46dd8c452",
+              "size": 216,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/ea5d9e8c1a4558356f549256e5d86bb46dd8c452"
+            },
+            {
+              "path": "docs/made/4_metamodel.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "eece4f30df4ae4eb57bc351d6577804f0bf207a6",
+              "size": 24850,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/eece4f30df4ae4eb57bc351d6577804f0bf207a6"
+            },
+            {
+              "path": "docs/made/5_lang.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "a9011b610b2ddfa0bc90f70d88dda7f10396ba49",
+              "size": 7444,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/a9011b610b2ddfa0bc90f70d88dda7f10396ba49"
+            },
+            {
+              "path": "docs/made/6_howtouse.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "5c04fab6afaa5ab180c73f4ac83e1d9b4b17bd56",
+              "size": 407,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/5c04fab6afaa5ab180c73f4ac83e1d9b4b17bd56"
+            },
+            {
+              "path": "docs/made/7_faq.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "0cd785daa6d027e193c1e8591536115047222a9e",
+              "size": 1390,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/0cd785daa6d027e193c1e8591536115047222a9e"
+            },
+            {
+              "path": "docs/made/_category_.json",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "62743976c731b1246e1c49f7721f4825c7dda8b7",
+              "size": 232,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/62743976c731b1246e1c49f7721f4825c7dda8b7"
+            },
+            {
+              "path": "docs/made/img",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "a8d14f85a4b1d90fdc90d696c63b16e5540fdcf1",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/a8d14f85a4b1d90fdc90d696c63b16e5540fdcf1"
+            },
+            {
+              "path": "docs/made/img/extension.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "e0d7a1636b100c55bb563f7ca2238c309bae488b",
+              "size": 14663,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/e0d7a1636b100c55bb563f7ca2238c309bae488b"
+            },
+            {
+              "path": "docs/made/simple-example-roadmap.made",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "087580044606de92235aafdeb86730f035df0c44",
+              "size": 3069,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/087580044606de92235aafdeb86730f035df0c44"
+            },
+            {
+              "path": "docs/made/simple-example.made",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "434f5f26364caba778b1ba39cba7bdfd59bb4e00",
+              "size": 2871,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/434f5f26364caba778b1ba39cba7bdfd59bb4e00"
+            },
+            {
+              "path": "docs/oraculo",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "ecbcd60377592e1bfeb2db6d370a10440b0f3eb5",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/ecbcd60377592e1bfeb2db6d370a10440b0f3eb5"
+            },
+            {
+              "path": "docs/oraculo/1_overview.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "2e26fb58dd87f095b5615fe03908862133c8d3a6",
+              "size": 299,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/2e26fb58dd87f095b5615fe03908862133c8d3a6"
+            },
+            {
+              "path": "docs/spark",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "3aea9bed9810678d5e9157b648bee308f9546a27",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/3aea9bed9810678d5e9157b648bee308f9546a27"
+            },
+            {
+              "path": "docs/spark/1_overview.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "4b5d8bb89389ad631980cafde66b01757e1f204c",
+              "size": 729,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/4b5d8bb89389ad631980cafde66b01757e1f204c"
+            },
+            {
+              "path": "docs/spark/2_project_managment.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "3b995ac15920c207ae0e1044b90d71068b8638dd",
+              "size": 2677,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/3b995ac15920c207ae0e1044b90d71068b8638dd"
+            },
+            {
+              "path": "docs/spark/3_installation.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "2edbeabb5e3febd1589100a7d2979666b3484be3",
+              "size": 219,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/2edbeabb5e3febd1589100a7d2979666b3484be3"
+            },
+            {
+              "path": "docs/spark/4_metamodel.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "4877b9b71cfc90070830d8d554633df38c667590",
+              "size": 21524,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/4877b9b71cfc90070830d8d554633df38c667590"
+            },
+            {
+              "path": "docs/spark/5_lang.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "46e34bb3a245a4e50999e3f78a10002603f6df07",
+              "size": 3311,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/46e34bb3a245a4e50999e3f78a10002603f6df07"
+            },
+            {
+              "path": "docs/spark/6_howtouse.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "b249178040e7832b8307f226860aa82f748b1502",
+              "size": 442,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/b249178040e7832b8307f226860aa82f748b1502"
+            },
+            {
+              "path": "docs/spark/7_release-plan.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "a9c0e19474d38d45801eae111f29148085c92210",
+              "size": 1496,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/a9c0e19474d38d45801eae111f29148085c92210"
+            },
+            {
+              "path": "docs/spark/_category_.json",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "285ef7a58e1d8febe7ad225e257391064bb7cc40",
+              "size": 350,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/285ef7a58e1d8febe7ad225e257391064bb7cc40"
+            },
+            {
+              "path": "docs/spark/img",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "c00b5aa9a6da26028e5fc3bf615935743c5cc2c7",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/c00b5aa9a6da26028e5fc3bf615935743c5cc2c7"
+            },
+            {
+              "path": "docs/spark/img/extension.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "209da6b26c1a395883663ece55b24b93e5b0127f",
+              "size": 21273,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/209da6b26c1a395883663ece55b24b93e5b0127f"
+            },
+            {
+              "path": "docs/spark/img/folders.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "c2fa0ff4d275e8435c52e870bf3d68e934994e9f",
+              "size": 9866,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/c2fa0ff4d275e8435c52e870bf3d68e934994e9f"
+            },
+            {
+              "path": "docs/spark/img/right-click.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "9a205b2a148d966ee3c2c04c8e075605527790b3",
+              "size": 49910,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/9a205b2a148d966ee3c2c04c8e075605527790b3"
+            },
+            {
+              "path": "docs/test_ai",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "7e5dae0e59f023e92a2375290df7b51ef3b5f02c",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/7e5dae0e59f023e92a2375290df7b51ef3b5f02c"
+            },
+            {
+              "path": "docs/test_ai/2_project_managment.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "a0a7b3180b786b1240952ff9c25dd886679e0bb9",
+              "size": 837,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/a0a7b3180b786b1240952ff9c25dd886679e0bb9"
+            },
+            {
+              "path": "docs/test_ai/_category_.json",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "ee268bdf2a40bce66d986e6df2bd0581ac6ea4b3",
+              "size": 193,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/ee268bdf2a40bce66d986e6df2bd0581ac6ea4b3"
+            },
+            {
+              "path": "docs/test_ai/img",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "a19788d28cfb19a4835e3ce6ecb7942197b485b1",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/a19788d28cfb19a4835e3ce6ecb7942197b485b1"
+            },
+            {
+              "path": "docs/test_ai/img/fluxograma_gherkin.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "f9e996731a97b817d584ae6fa14ef478215d8b9e",
+              "size": 205770,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/f9e996731a97b817d584ae6fa14ef478215d8b9e"
+            },
+            {
+              "path": "docs/test_ai/testai.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "24eab53e151e9e17187b50c6ffb907a5c84999b5",
+              "size": 6714,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/24eab53e151e9e17187b50c6ffb907a5c84999b5"
+            },
+            {
+              "path": "docusaurus.config.ts",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "6e6c1f56a2b112f5c8c5597fda81df51f3ebb83e",
+              "size": 3429,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/6e6c1f56a2b112f5c8c5597fda81df51f3ebb83e"
+            },
+            {
+              "path": "package-lock.json",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "4360efe555fd315ad3782a778a6c1439ec47f0ba",
+              "size": 677169,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/4360efe555fd315ad3782a778a6c1439ec47f0ba"
+            },
+            {
+              "path": "package.json",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "341bb4907d34a606893bf0d82ab43a017015ac3f",
+              "size": 1461,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/341bb4907d34a606893bf0d82ab43a017015ac3f"
+            },
+            {
+              "path": "sidebars.ts",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "77fa380dc1f05ea2e2a8d4979b31d19769e8b689",
+              "size": 490,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/77fa380dc1f05ea2e2a8d4979b31d19769e8b689"
+            },
+            {
+              "path": "src",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "850e32165a76f15f193a9fa6f396f7d82e31b913",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/850e32165a76f15f193a9fa6f396f7d82e31b913"
+            },
+            {
+              "path": "src/components",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "50e04d8170c81ebf0136bc650bfd8987cac74bf6",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/50e04d8170c81ebf0136bc650bfd8987cac74bf6"
+            },
+            {
+              "path": "src/components/BpmnViewer.js",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "8c1815ef8a61feea2aa1db2605b8e33b8845276a",
+              "size": 1354,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/8c1815ef8a61feea2aa1db2605b8e33b8845276a"
+            },
+            {
+              "path": "src/components/HomepageFeatures",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "9f42f4514f273772fee82e1886a666728a25df14",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/9f42f4514f273772fee82e1886a666728a25df14"
+            },
+            {
+              "path": "src/components/HomepageFeatures/index.tsx",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "3973c203ff63c9ac050bfd734618701bb34fdc55",
+              "size": 1959,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/3973c203ff63c9ac050bfd734618701bb34fdc55"
+            },
+            {
+              "path": "src/components/HomepageFeatures/styles.module.css",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "c82262276ebd068053b40308eaf163851e6348bf",
+              "size": 149,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/c82262276ebd068053b40308eaf163851e6348bf"
+            },
+            {
+              "path": "src/css",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "480e9d90b7bd9c2a9e0aeafa65851ce017c96234",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/480e9d90b7bd9c2a9e0aeafa65851ce017c96234"
+            },
+            {
+              "path": "src/css/custom.css",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "eaa6c655c3b1889dc9e474b5248ab342fb83c2f6",
+              "size": 2482,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/eaa6c655c3b1889dc9e474b5248ab342fb83c2f6"
+            },
+            {
+              "path": "src/pages",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "5f749c705ff786747ab9f1f3049ce925a40302f8",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/5f749c705ff786747ab9f1f3049ce925a40302f8"
+            },
+            {
+              "path": "src/pages/index.module.css",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "8908865195c40dfa7d2becdf1cef4ba8ae72090a",
+              "size": 2727,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/8908865195c40dfa7d2becdf1cef4ba8ae72090a"
+            },
+            {
+              "path": "src/pages/index.tsx",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "310092684f27c5dee9a8e0ea2d4d102135f572e9",
+              "size": 1062,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/310092684f27c5dee9a8e0ea2d4d102135f572e9"
+            },
+            {
+              "path": "src/pages/markdown-page.md",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "4718f87891ea002a405cd09b2bb6e70c36fef416",
+              "size": 125,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/4718f87891ea002a405cd09b2bb6e70c36fef416"
+            },
+            {
+              "path": "static",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "989d66d36e24a5ac13e23e241245f2a212fbcb1d",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/989d66d36e24a5ac13e23e241245f2a212fbcb1d"
+            },
+            {
+              "path": "static/.nojekyll",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+              "size": 0,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+            },
+            {
+              "path": "static/commitizen",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "92a4f02f376f11c264885b8853990d2108023607",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/92a4f02f376f11c264885b8853990d2108023607"
+            },
+            {
+              "path": "static/commitizen/example.cz.toml",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "7b9ab0fa7b61435967a67910fe5f0c2b4ebf452c",
+              "size": 3308,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/7b9ab0fa7b61435967a67910fe5f0c2b4ebf452c"
+            },
+            {
+              "path": "static/diagrams",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "0aaf650ace60c1348e5baa7e77aeb41b22235ae4",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/0aaf650ace60c1348e5baa7e77aeb41b22235ae4"
+            },
+            {
+              "path": "static/diagrams/processo_software",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "af10b0adec36278e4087cb6e401cd216d310d883",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/af10b0adec36278e4087cb6e401cd216d310d883"
+            },
+            {
+              "path": "static/diagrams/processo_software/inception",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "1a6bd3762e68eef89736c2b85542170f5d88c751",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/1a6bd3762e68eef89736c2b85542170f5d88c751"
+            },
+            {
+              "path": "static/diagrams/processo_software/inception/example.bpmn",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "82f599382a75da20fa8a1bf2f42213d7e38fab36",
+              "size": 9506,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/82f599382a75da20fa8a1bf2f42213d7e38fab36"
+            },
+            {
+              "path": "static/diagrams/processo_software/visao_geral.bpmn",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "9e91dafa5049e61d50ed16a4fe333e294f0dc2b9",
+              "size": 14377,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/9e91dafa5049e61d50ed16a4fe333e294f0dc2b9"
+            },
+            {
+              "path": "static/diagrams/project_decision",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "d63d05d768546a0fe1640aebbb7befcbc7bd26ba",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/d63d05d768546a0fe1640aebbb7befcbc7bd26ba"
+            },
+            {
+              "path": "static/diagrams/project_decision/mapping_analysis_to_managemen_class_model.bpmn",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "3029635d5f47e251174db79b50369a9407b240ab",
+              "size": 2491,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/3029635d5f47e251174db79b50369a9407b240ab"
+            },
+            {
+              "path": "static/diagrams/project_decision/mapping_analysis_to_managemen_prototype.bpmn",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "7c3bcd58deddaaa7ab92ad62a40750777b4a6706",
+              "size": 3157,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/7c3bcd58deddaaa7ab92ad62a40750777b4a6706"
+            },
+            {
+              "path": "static/diagrams/project_decision/mapping_analysis_to_management_use_case.bpmn",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "701194d3163ed8336d097f485c81726c43b726b9",
+              "size": 3862,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/701194d3163ed8336d097f485c81726c43b726b9"
+            },
+            {
+              "path": "static/diagrams/project_decision/mapping_project_to_management_project_model.bpmn",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "03119fc35fb47c9534ef11bf6e986680e1143fd0",
+              "size": 3860,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/03119fc35fb47c9534ef11bf6e986680e1143fd0"
+            },
+            {
+              "path": "static/img",
+              "mode": "040000",
+              "type": "tree",
+              "sha": "3012cb841ad221662235de5f445195fe49fa57fd",
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/trees/3012cb841ad221662235de5f445195fe49fa57fd"
+            },
+            {
+              "path": "static/img/ANDES.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "c4c8777b3ead251f776e116e586d6f025ef3d4ab",
+              "size": 3914,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/c4c8777b3ead251f776e116e586d6f025ef3d4ab"
+            },
+            {
+              "path": "static/img/bb8.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "f42732f422f5fb8f3fd4c456946c34846780e602",
+              "size": 3113,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/f42732f422f5fb8f3fd4c456946c34846780e602"
+            },
+            {
+              "path": "static/img/codeto.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "2939720f157016ac2b0cffa1a012c07d372f4483",
+              "size": 4525,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/2939720f157016ac2b0cffa1a012c07d372f4483"
+            },
+            {
+              "path": "static/img/favicon.ico",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "408d75a2253bf78661a4112b5b15d7c25b42d201",
+              "size": 15406,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/408d75a2253bf78661a4112b5b15d7c25b42d201"
+            },
+            {
+              "path": "static/img/leds-social-card.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "e903cbb9fd54a188a18491e3c45b015e2a76d292",
+              "size": 213078,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/e903cbb9fd54a188a18491e3c45b015e2a76d292"
+            },
+            {
+              "path": "static/img/leds.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "3d8628a90efa59a7d65196c31b0a1b5ca6380b29",
+              "size": 6997,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/3d8628a90efa59a7d65196c31b0a1b5ca6380b29"
+            },
+            {
+              "path": "static/img/logo.svg",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "c97e472294eed5ecc9e80262ee8d372f032e3261",
+              "size": 99719,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/c97e472294eed5ecc9e80262ee8d372f032e3261"
+            },
+            {
+              "path": "static/img/made.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "72036ee610741caf6f51b599594e7f6f9dfa6123",
+              "size": 4339,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/72036ee610741caf6f51b599594e7f6f9dfa6123"
+            },
+            {
+              "path": "static/img/r2d2.png",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "97e0b45d6c8259712b593f31d961fa04ed382aee",
+              "size": 4673,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/97e0b45d6c8259712b593f31d961fa04ed382aee"
+            },
+            {
+              "path": "tsconfig.json",
+              "mode": "100644",
+              "type": "blob",
+              "sha": "3c2167899f10cef94cf3d213f22e4458d8cfd7a9",
+              "size": 183,
+              "url": "https://api.github.com/repos/gabrieldev131/CodeWise/git/blobs/3c2167899f10cef94cf3d213f22e4458d8cfd7a9"
+            }
+          ],
+          "truncated": false
+        }
+      }
+    ]
+  },
   "connections": {
     "Github Trigger": {
       "main": [
         [
-          {
-            "node": "Edit Fields",
-            "type": "main",
-            "index": 0
-          },
           {
             "node": "HTTP Request",
             "type": "main",
@@ -222,11 +1896,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "Edit Fields": {
-      "main": [
-        []
       ]
     },
     "Split Out": {
@@ -272,13 +1941,46 @@
           }
         ]
       ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "f2d25583-10c2-4f63-9d22-8ae28f28d30f",
+  "versionId": "131fa787-1d47-4f2d-830a-2ab7b8d34af7",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "8c0d133aedbd2315584dd4de8d42493702953e89aed534f75c602cee4f5c6a06"
