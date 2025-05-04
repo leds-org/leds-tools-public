@@ -18,7 +18,9 @@
         "events": [
           "pull_request"
         ],
-        "options": {}
+        "options": {
+          "insecureSSL": false
+        }
       },
       "type": "n8n-nodes-base.githubTrigger",
       "typeVersion": 1,
@@ -38,17 +40,159 @@
     },
     {
       "parameters": {
-        "url": "={{ $execution.resumeUrl }}",
+        "url": "=\nhttps://api.github.com/repos/{{ $json.body.repository.owner.login }}/{{ $json.body.repository.name }}/git/trees/{{ $json.body.workflow_run.head_sha }}?recursive=1\n\n",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubOAuth2Api",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        220,
+        460,
         0
       ],
       "id": "48dcbe95-e57b-4f9a-9341-b97c2f649e82",
-      "name": "HTTP Request"
+      "name": "HTTP Request",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "eOFMZFOLUKD3MTFb",
+          "name": "GitHub Oauth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        280,
+        -220
+      ],
+      "id": "c89db014-6dfe-48e3-871f-79c476b5c1b1",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a3ddb84d-eb40-4787-894b-c085508cbf29",
+              "name": "path",
+              "value": "={{ $json.path }}",
+              "type": "string"
+            },
+            {
+              "id": "864c6243-183d-4958-bda7-8bca3079e035",
+              "name": "url",
+              "value": "={{ $json.url }}",
+              "type": "string"
+            },
+            {
+              "id": "e58bd8ac-7abe-4cc3-a3b4-ab37d23f1368",
+              "name": "sha",
+              "value": "={{ $json.sha }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        940,
+        0
+      ],
+      "id": "60b0448c-848d-4e3d-aaff-1819db622974",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "tree",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        680,
+        0
+      ],
+      "id": "30f25f5a-b156-4142-a7bd-6382ab120655",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubOAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1160,
+        0
+      ],
+      "id": "2b304075-e0c9-4833-af29-ba98f76eb94a",
+      "name": "HTTP Request1",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "eOFMZFOLUKD3MTFb",
+          "name": "GitHub Oauth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e8b41932-c39b-4d61-84db-df5b547dbc6b",
+              "name": "content",
+              "value": "={{ $json.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        220
+      ],
+      "id": "032d00e5-c7da-4800-8e13-17869b0c3437",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "jsCode": "const base64String = $input.first().json.content;\n\n// Decodifica a string Base64 para texto\nconst decodedText = Buffer.from(base64String, 'base64').toString('utf8');\n\n// Retorna o texto decodificado\nreturn { decoded_text: decodedText };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        200,
+        220
+      ],
+      "id": "ac7cec09-226c-48d1-80d1-0e385fcdb18c",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "content": "## Encontrar um jeito de converter base64 em string",
+        "height": 380
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        140,
+        100
+      ],
+      "typeVersion": 1,
+      "id": "60ba6445-dbeb-43b8-a7e1-94b89815e6f1",
+      "name": "Sticky Note"
     }
   ],
   "pinData": {},
@@ -56,6 +200,11 @@
     "Github Trigger": {
       "main": [
         [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          },
           {
             "node": "HTTP Request",
             "type": "main",
@@ -66,7 +215,62 @@
     },
     "HTTP Request": {
       "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
         []
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -74,7 +278,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "a2ffa4fe-03fd-43f5-9549-48b577e1d535",
+  "versionId": "f2d25583-10c2-4f63-9d22-8ae28f28d30f",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "8c0d133aedbd2315584dd4de8d42493702953e89aed534f75c602cee4f5c6a06"
