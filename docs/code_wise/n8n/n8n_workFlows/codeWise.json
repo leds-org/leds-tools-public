@@ -334,14 +334,18 @@
     {
       "parameters": {
         "chatId": "965891600",
-        "text": "={{ $json.data }}",
-        "additionalFields": {}
+        "text": "={{ $json.parte }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "disable_web_page_preview": true,
+          "parse_mode": "HTML"
+        }
       },
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        2440,
-        240
+        1880,
+        320
       ],
       "id": "e38a048f-712b-47b8-9bcf-079fad4ff4a9",
       "name": "Telegram",
@@ -370,85 +374,25 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1520,
-        340
+        1500,
+        320
       ],
       "id": "2cf902c5-575f-4a8b-aa9b-c5cf7e95fbd2",
       "name": "Edit Fields3"
     },
     {
       "parameters": {
-        "aggregate": "={{ $json.output }}",
-        "fieldsToAggregate": {
-          "fieldToAggregate": [
-            {}
-          ]
-        },
-        "options": {
-          "mergeLists": true
-        }
+        "language": "python",
+        "pythonCode": "import re\nimport html\n\noutput = []\n\nfor item in items:\n    texto = item['json'].get('output', '')\n    # remove tags HTML suspeitas\n    texto_limpo = re.sub(r'<[^>]+>', '', texto)\n    # escapa qualquer símbolo HTML restante (&, <, >, etc.)\n    texto_html_safe = html.escape(texto_limpo)\n    \n    for i in range(0, len(texto_html_safe), 4096):\n        output.append({\n            \"json\": {\n                \"parte\": texto_html_safe[i:i+4096]\n            }\n        })\n\nreturn output\n\n\n"
       },
-      "type": "n8n-nodes-base.aggregate",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
-        1760,
-        240
+        1700,
+        320
       ],
-      "id": "e99923ad-6048-4e66-8173-8fc1dad80d33",
-      "name": "Aggregate"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "7bba05b5-7de5-4a6e-986f-4223e549278d",
-              "name": "data",
-              "value": "={{ $json.data }}",
-              "type": "array"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1980,
-        240
-      ],
-      "id": "7093e45d-9dc4-45a7-b16e-401edcf692b1",
-      "name": "Edit Fields4"
-    },
-    {
-      "parameters": {
-        "mode": "raw",
-        "jsonOutput": "={{(() => {\n  const arr = $json.data;\n  return arr.map(item => item.output).join(' ');\n})()}}\n\n\n",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        2200,
-        240
-      ],
-      "id": "bde7953f-d572-4dba-bec2-a690c2c2b07d",
-      "name": "Edit Fields5"
-    },
-    {
-      "parameters": {
-        "mode": "raw",
-        "jsonOutput": "={{(() => {\n  const arr = $json.output;\n  return arr.map(item => item.output).join(' ');\n})()}}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1900,
-        500
-      ],
-      "id": "ffd06893-be47-4e5e-ac3a-e5d2cd746186",
-      "name": "Edit Fields6"
+      "id": "837bd9f1-3081-4bbc-a783-77dc2096b3a0",
+      "name": "Code1"
     }
   ],
   "pinData": {
@@ -1176,41 +1120,19 @@
       "main": [
         [
           {
-            "node": "Aggregate",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Edit Fields6",
+            "node": "Code1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Aggregate": {
+    "Telegram": {
       "main": [
-        [
-          {
-            "node": "Edit Fields4",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
-    "Edit Fields4": {
-      "main": [
-        [
-          {
-            "node": "Edit Fields5",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields5": {
+    "Code1": {
       "main": [
         [
           {
@@ -1226,7 +1148,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "845f1a90-3cee-49a1-a9f1-e35f657ecc53",
+  "versionId": "703a61c2-ebc6-4632-af4c-c836d3f35fb7",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "8c0d133aedbd2315584dd4de8d42493702953e89aed534f75c602cee4f5c6a06"
