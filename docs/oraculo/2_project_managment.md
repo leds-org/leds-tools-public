@@ -4,9 +4,13 @@ title: Project Management
 description: Presents the project`s developing planning.
 ---
 
-Presents the project`s developing planning.
+# 📌 Project Development Plan
 
-## Backlog
+Presents the project's overall development planning and structure, including backlog, team organization, goals, and estimated costs.
+
+---
+
+## 📋 Backlog
 
 | ID | Team         | Feature                            | Description                                                                                      | Importance | Proposal                                |
 |----|--------------|------------------------------------|--------------------------------------------------------------------------------------------------|------------|------------------------------------------|
@@ -19,28 +23,28 @@ Presents the project`s developing planning.
 | 7  | Developers   | Code Improvement & Docs            | Refactor code, enhance documentation, and ensure alignment with best practices.                 | 85         | Improve code quality and maintainability |
 | 8  | Developers   | Functional App                     | Deliver the fully functional and documented application, ready for deployment.                  | 100        | Ensure delivery of project goal          |
 
+---
 
+## 🧩 Project Model Canvas
 
-# Project Model Canvas
-
-## JUSTIFICATIONS
+### 🔍 Justifications
 1. LEDS mentors have difficulty discovering the efficiency of students in completing tasks.  
 2. Students lack a platform to check tasks and have them assigned.  
 3. The repository analysis process is time-consuming when done manually.
 
 ---
 
-## PRODUCT
+### 🎯 Product
 A chatbot to assist in managing LEDS projects.
 
 ---
 
-## SMART GOAL
-Collect data from GitHub repositories and Discord conversations to create a chatbot that provides information about the progress of LEDS projects.
+### 🧠 SMART Goal
+Collect data from GitHub repositories and Discord conversations to create a chatbot that provides real-time information about the LEDS project progress.
 
 ---
 
-## REQUIREMENTS
+### ✅ Requirements
 - Friendly interface;  
 - Extract data from GitHub repositories;  
 - Extract information from Discord workgroup conversations;  
@@ -48,49 +52,49 @@ Collect data from GitHub repositories and Discord conversations to create a chat
 
 ---
 
-## BENEFITS 
+### 🎁 Benefits
 - Display team performance in sprint progress;  
 - Improve decision-making;  
 - Check individual performance metrics.
 
 ---
 
-## EXTERNAL STAKEHOLDERS & External Factors
+### 👥 External Stakeholders & Factors
 Advisors, scholarship holders, staff, and other stakeholders involved in LEDS and FAPES.
 
 ---
 
-## ASSUMPTIONS
+### 🔮 Assumptions
 - Team commitment.  
 - Knowledge of the required technologies.
 
 ---
 
-## RISKS
+### ⚠️ Risks
 
-### 1. Requirement changes during the project  
+#### 1. Requirement changes during the project  
 - **Probability**: 20%  
 - **Mitigation**: Ensure a solid requirements phase and allow flexibility in development to accommodate changes.
 
-### 2. Lack of technical knowledge  
+#### 2. Lack of technical knowledge  
 - **Probability**: 60%  
 - **Mitigation**: Allocate time during sprints for learning and mastery.
 
-### 3. Team member time constraints  
+#### 3. Team member time constraints  
 - **Probability**: 80%  
 - **Mitigation**: Coordinate schedules and design viable sprints based on available time.
 
 ---
 
-## TEAM
+### 👥 Team
 
-### Management:
+#### 🧭 Management:
 - Ana Júlia Caetano (Dominance)  
 - Caio Lessa  (Compliance)
 - Davidson Santos (Steadiness)
 - Thiago Borges (Compliance)
 
-### Developers:
+#### 🛠️ Developers:
 - Alicia Caporalli (Steadiness)  
 - Lívia Hombre (Steadiness)
 - Pedro Henrique Fonseca (Steadiness) 
@@ -99,20 +103,22 @@ Advisors, scholarship holders, staff, and other stakeholders involved in LEDS an
 
 ---
 
-### Team Topology
-- Plataform
-  - Platform teams enable stream-aligned teams to deliver work with substantial autonomy.
-    While the stream-aligned team maintains full ownership of building, running, and fixing an application in production, the platform team provides internal services that the stream-aligned team can use
+### 🧱 Team Topology
 
-## DELIVERABLES
+**Platform Team**  
+Enables stream-aligned teams to deliver work autonomously. While stream-aligned teams maintain full ownership of their work, the platform team provides internal services and tools to support delivery.
 
-### Management:
+---
+
+### 📦 Deliverables
+
+#### Management:
 - **Sprint 1**: PMC and documentation  
 - **Sprint 2**: Technology research and metric definition  
 - **Sprints 3, 4, 5, 6**: Results with collected metrics  
 - **Sprints 7 and 8**: Automated metrics and performance report
 
-### Developers:
+#### Developers:
 - **Sprint 1**: Architectural documentation  
 - **Sprint 2**: Implementation of discussed technologies  
 - **Sprints 3, 4, 5**: Code improvements and documentation  
@@ -120,29 +126,26 @@ Advisors, scholarship holders, staff, and other stakeholders involved in LEDS an
 
 ---
 
-## CONSTRAINTS
-- The product must be developed using LangChain, DevLake, n8n, SonarQube, and OpenWebUI.  
-- Dependency on AWS Marketplace/VSC environment.  
-- Project deadline: 3 months.
+### ⛓ Constraints
+- Must use LangChain, DevLake, n8n, SonarQube, and OpenWebUI  
+- Dependent on AWS Marketplace / VSC environment  
+- Delivery deadline: 3 months
 
 ---
 
-## TIMELINE
+### 🗓 Timeline
 ![Timeline](img/timeline.png)
 
-
 ---
 
-## COSTS
+### 💰 Costs
 
-- **Team time**: R$1,000.00 × 9 members = **R$9,000.00**  
-- **Transportation (round trip for 3 months)**:  
-  R$4.90 × 60 days × 9 members = **R$2,646.00**  
-- **Food for team members**:  
-  R$12.00 × 60 days × 9 members = **R$6,480.00**  
-- **Mental health of team members**: **R$0.00**
+- **Team effort**: R$1,000.00 × 9 members = **R$9,000.00**  
+- **Transportation (3 months)**: R$4.90 × 60 days × 9 members = **R$2,646.00**  
+- **Food**: R$12.00 × 60 days × 9 members = **R$6,480.00**  
+- **Team mental health**: **R$0.00**
 
-**Total: R$18,126.00**
+#### **Total: R$18,126.00**
 
 ---
 
