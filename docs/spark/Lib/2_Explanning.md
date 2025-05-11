@@ -4,9 +4,9 @@ title: Explanning
 ---
 
 
-Para modularizar copiamos a estrutura de pasta dos geradores de backend para dentro da nossa lib, afim de remover essa parte do processamento de dentro do programa principal.
+To modularize, we copy the folder structure of the backend generators into our lib, in order to remove this part of the processing from within the main program.
 
-Criamos essa estrutura de diretório
+We created this directory structure
 ```mermaid
 graph TD
   A[packages/]
@@ -20,8 +20,8 @@ graph TD
   A --> E[index.ts]
 
 ```
-Criamos a pasta generators para tornar as chamadas uniformes e num mesmo diretório, isso se torna necessário
-
+We created the generators folder to make the calls uniform and in the same directory, this is necessary npm
+The final use of the lib is in referencing these generators folder
 ```mermaid
 graph TD
 
@@ -33,7 +33,7 @@ graph TD
   C --> C5[springboot.ts]
 ```
 
-A pasta Shared foi criada devido a necessidade comum de utilizar arquivos que eram também compartilhado na pasta util/ dentro da estrutura original do Spark.
+The Shared folder was created due to the common need to use files that were also shared in the application within the original Spark structure.
 
 ```mermaid
 
@@ -41,5 +41,8 @@ graph TD
   Shared/ --> D[ast.js]
   Shared/ --> A[generator-util.js]
   Shared/ --> B[relations.js]
-  Shared/ --> C[index.js]
+  Shared/ --> C[index.ts]
+
 ```
+
+Index.ts is an extremely important part in the construction of our lib, it is where the logic imports are scaled between folders and referenced at the time of import for use in the source code.
