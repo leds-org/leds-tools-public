@@ -2,6 +2,5 @@
 sidebar_position: 1
 title: Overview
 ---
-Com intuito de modularizar, gerar reuso e simplificar o entendimento do código fonte do Spark, criamos uma lib que faz todo o processamento das gerações dos back-end's.
-Passamos todo conceito dos geradores de back-end que antes era feito dentro do Spark pra dentro da lib spark-generators-lib, deixando apenas uma arquivo dentro de cada respectiva pasta dentro do spark, apenas referenciado a chamada da lib e mantendo o processamento.
-
+In order to modularize, generate reuse and simplify the understanding of the Spark source code, we created a lib that does all the processing of the back-end generations.
+We moved the entire concept of back-end generators that was previously done within Spark into the spark-generators-lib lib, leaving only one file within each respective folder within Spark, just referencing the lib call and maintaining the processing.
