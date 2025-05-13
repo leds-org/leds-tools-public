@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 9
 title: Team Topology
 ---
 The ANDES Project team was structured as a Platform Team, a strategic choice that aligns directly with the core purpose of the project: to develop a reusable solution that facilitates and standardizes software documentation for other teams.

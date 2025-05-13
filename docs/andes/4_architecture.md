@@ -1,4 +1,7 @@
-
+---
+sidebar_position: 4
+title: Architecture
+---
 This file is an analysis of the Andes Architecture and aims to guide new developers of the tool in understanding each file or segment and how they communicate.
 
 # Architecture Used
