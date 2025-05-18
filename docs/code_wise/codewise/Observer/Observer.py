@@ -4,6 +4,8 @@ from pathlib import Path
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from git import Repo
+from git import NULL_TREE
+
 
 class GitCommitObserver(FileSystemEventHandler):
     def __init__(self, git_path):
@@ -37,13 +39,23 @@ class GitCommitObserver(FileSystemEventHandler):
         print("Arquivos alterados:")
 
         parent = commit.parents[0] if commit.parents else None
-        diffs = commit.diff(parent, create_patch=True)
+
+        if parent:
+            diffs = parent.diff(commit, create_patch=True)
+        else:
+            diffs = commit.diff(NULL_TREE, create_patch=True)  # para commit inicial
 
         for diff in diffs:
             change_type = diff.change_type.upper() if diff.change_type else "DESCONHECIDO"
             file_path = diff.a_path if diff.a_path else diff.b_path
-            print(f"[{change_type}] {file_path}")
-#test
+            print(f"\n[{change_type}] {file_path}")
+            
+            if diff.diff:
+                try:
+                    print(diff.diff.decode('utf-8', errors='replace'))
+                except Exception as e:
+                    print(f"(Erro ao exibir diff: {e})")
+
 def find_git_repo(start_path="."):
     path = Path(start_path).resolve()
     while path != path.parent:
