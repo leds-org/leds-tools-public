@@ -40,7 +40,7 @@ class GitCommitObserver(FileSystemEventHandler):
         diffs = commit.diff(parent, create_patch=True)
 
         for diff in diffs:
-            change_type = diff.change_type.upper()
+            change_type = diff.change_type.upper() if diff.change_type else "DESCONHECIDO"
             file_path = diff.a_path if diff.a_path else diff.b_path
             print(f"[{change_type}] {file_path}")
 
