@@ -5,6 +5,7 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from git import Repo
 
+#teste
 class GitCommitObserver(FileSystemEventHandler):
     def __init__(self, git_path):
         self.repo_path = git_path.parent  # A pasta do projeto, não .git
