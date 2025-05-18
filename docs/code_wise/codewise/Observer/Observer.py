@@ -7,8 +7,8 @@ from git import Repo
 
 class GitCommitObserver(FileSystemEventHandler):
     def __init__(self, git_path):
-        self.repo_path = git_path.parent  # caminho da raiz do repositório
-        self.head_file = os.path.join(git_path, "HEAD")
+        self.repo_path = git_path.parent
+        self.logs_head_file = os.path.join(git_path, "logs", "HEAD")
         self.last_commit_hash = self.get_last_commit_hash()
 
     def get_last_commit_hash(self):
@@ -19,10 +19,9 @@ class GitCommitObserver(FileSystemEventHandler):
             return None
 
     def on_modified(self, event):
-        if event.src_path == self.head_file:
-            time.sleep(0.5)  # aguarda atualizações do Git
+        if event.src_path == self.logs_head_file:
+            time.sleep(0.5)
             new_commit_hash = self.get_last_commit_hash()
-
             if new_commit_hash != self.last_commit_hash:
                 self.last_commit_hash = new_commit_hash
                 self.show_commit_details(new_commit_hash)
@@ -57,9 +56,9 @@ def find_git_repo(start_path="."):
 def start_observing(git_dir):
     event_handler = GitCommitObserver(git_dir)
     observer = Observer()
-    observer.schedule(event_handler, path=str(git_dir), recursive=False)
+    observer.schedule(event_handler, path=os.path.join(git_dir, "logs"), recursive=False)
     observer.start()
-    print(f"Observando commits em: {git_dir.parent}")
+    print(f"Observando commits pelo arquivo: {event_handler.logs_head_file}")
 
     try:
         while True:
