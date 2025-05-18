@@ -43,7 +43,7 @@ class GitCommitObserver(FileSystemEventHandler):
             change_type = diff.change_type.upper() if diff.change_type else "DESCONHECIDO"
             file_path = diff.a_path if diff.a_path else diff.b_path
             print(f"[{change_type}] {file_path}")
-
+#test
 def find_git_repo(start_path="."):
     path = Path(start_path).resolve()
     while path != path.parent:
