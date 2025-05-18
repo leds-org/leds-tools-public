@@ -5,10 +5,9 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from git import Repo
 
-#teste
 class GitCommitObserver(FileSystemEventHandler):
     def __init__(self, git_path):
-        self.repo_path = git_path.parent  # A pasta do projeto, não .git
+        self.repo_path = git_path.parent  # caminho da raiz do repositório
         self.head_file = os.path.join(git_path, "HEAD")
         self.last_commit_hash = self.get_last_commit_hash()
 
@@ -21,7 +20,9 @@ class GitCommitObserver(FileSystemEventHandler):
 
     def on_modified(self, event):
         if event.src_path == self.head_file:
+            time.sleep(0.5)  # aguarda atualizações do Git
             new_commit_hash = self.get_last_commit_hash()
+
             if new_commit_hash != self.last_commit_hash:
                 self.last_commit_hash = new_commit_hash
                 self.show_commit_details(new_commit_hash)
@@ -29,23 +30,22 @@ class GitCommitObserver(FileSystemEventHandler):
     def show_commit_details(self, commit_hash):
         repo = Repo(self.repo_path)
         commit = repo.commit(commit_hash)
-        print(f"\nNovo commit detectado!")
+        print("\nNovo commit detectado:")
         print(f"Hash: {commit.hexsha}")
         print(f"Autor: {commit.author.name} <{commit.author.email}>")
         print(f"Data: {commit.committed_datetime}")
         print(f"Mensagem: {commit.message.strip()}")
         print("Arquivos alterados:")
 
-        for diff in commit.diff(commit.parents[0] if commit.parents else None, create_patch=True):
-            change_type = diff.change_type
-            filepath = diff.a_path if diff.a_path else diff.b_path
-            print(f"  [{change_type}] {filepath}")
+        parent = commit.parents[0] if commit.parents else None
+        diffs = commit.diff(parent, create_patch=True)
 
-            # Se quiser ver o conteúdo do patch:
-            # print(diff.diff.decode(errors='ignore'))
+        for diff in diffs:
+            change_type = diff.change_type.upper()
+            file_path = diff.a_path if diff.a_path else diff.b_path
+            print(f"[{change_type}] {file_path}")
 
 def find_git_repo(start_path="."):
-    """Procura por um diretório .git em um diretório atual ou acima."""
     path = Path(start_path).resolve()
     while path != path.parent:
         git_dir = path / ".git"
