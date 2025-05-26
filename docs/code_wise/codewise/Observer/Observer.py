@@ -31,12 +31,14 @@ class GitCommitObserver(FileSystemEventHandler):
     def show_commit_details(self, commit_hash):
         repo = Repo(self.repo_path)
         commit = repo.commit(commit_hash)
-        print("\nNovo commit detectado:")
-        print(f"Hash: {commit.hexsha}")
-        print(f"Autor: {commit.author.name} <{commit.author.email}>")
-        print(f"Data: {commit.committed_datetime}")
-        print(f"Mensagem: {commit.message.strip()}")
-        print("Arquivos alterados:")
+
+        lines = []
+        lines.append("\nNovo commit detectado:")
+        lines.append(f"Hash: {commit.hexsha}")
+        lines.append(f"Autor: {commit.author.name} <{commit.author.email}>")
+        lines.append(f"Data: {commit.committed_datetime}")
+        lines.append(f"Mensagem: {commit.message.strip()}")
+        lines.append("Arquivos alterados:")
 
         parent = commit.parents[0] if commit.parents else None
 
@@ -48,15 +50,24 @@ class GitCommitObserver(FileSystemEventHandler):
         for diff in diffs:
             change_type = diff.change_type.upper() if diff.change_type else "DESCONHECIDO"
             file_path = diff.a_path if diff.a_path else diff.b_path
-            print(f"\n[{change_type}] {file_path}")
-            
+            lines.append(f"\n[{change_type}] {file_path}")
+
             if diff.diff:
                 try:
-                    print(diff.diff.decode('utf-8', errors='replace'))
+                    diff_text = diff.diff.decode('utf-8', errors='replace')
+                    lines.append(diff_text)
                 except Exception as e:
-                    print(f"(Erro ao exibir diff: {e})")
+                    lines.append(f"(Erro ao exibir diff: {e})")
 
-def find_git_repo(start_path="."):
+        # Salva tudo em test.txt
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        output_path = os.path.join(script_dir, 'test.txt')
+        with open(output_path, "a", encoding="utf-8") as f:
+            f.write("\n".join(lines))
+            f.write("\n" + "="*60 + "\n")
+
+
+def find_git_repo(start_path):
     path = Path(start_path).resolve()
     while path != path.parent:
         git_dir = path / ".git"
@@ -78,10 +89,4 @@ def start_observing(git_dir):
     except KeyboardInterrupt:
         observer.stop()
     observer.join()
-
-if __name__ == "__main__":
-    git_repo = find_git_repo()
-    if git_repo:
-        start_observing(git_repo)
-    else:
-        print("Nenhum repositório Git encontrado no caminho atual ou acima.")
+ 

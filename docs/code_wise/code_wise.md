@@ -2,7 +2,7 @@
 sidebar_position: 1
 title: Code Wise
 ---
-**Code Wise** is an automated solution that uses **Artificial Intelligence** to review programmers' code, identifying and suggesting improvements for **performance** and **code smells**. With Code Wise, you can efficiently optimize your code, receiving real-time feedback directly in your workflow.
+**Code Wise** is an automated solution that uses **Artificial Intelligence** to review programmers code, identifying and suggesting improvements for **performance** and **code smells**. With Code Wise, you can efficiently optimize your code, receiving real-time feedback directly in your workflow.
 
 ## Code Wise as GitHub Action
 
