@@ -28,17 +28,17 @@ class GitCommitObserver(FileSystemEventHandler):
                 self.last_commit_hash = new_commit_hash
                 self.show_commit_details(new_commit_hash)
 
-    def show_commit_details(self, commit_hash):
+    def show_commit_details(self, commit_hash, output_path=None):
         repo = Repo(self.repo_path)
         commit = repo.commit(commit_hash)
 
         lines = []
-        lines.append("\nNovo commit detectado:")
+        lines.append("\nNew commit detected:")
         lines.append(f"Hash: {commit.hexsha}")
         lines.append(f"Autor: {commit.author.name} <{commit.author.email}>")
-        lines.append(f"Data: {commit.committed_datetime}")
-        lines.append(f"Mensagem: {commit.message.strip()}")
-        lines.append("Arquivos alterados:")
+        lines.append(f"Date: {commit.committed_datetime}")
+        lines.append(f"Mensage: {commit.message.strip()}")
+        lines.append("changes files:")
 
         parent = commit.parents[0] if commit.parents else None
 
@@ -48,7 +48,7 @@ class GitCommitObserver(FileSystemEventHandler):
             diffs = commit.diff(NULL_TREE, create_patch=True)  # para commit inicial
 
         for diff in diffs:
-            change_type = diff.change_type.upper() if diff.change_type else "DESCONHECIDO"
+            change_type = diff.change_type.upper() if diff.change_type else "UNDEFINED"
             file_path = diff.a_path if diff.a_path else diff.b_path
             lines.append(f"\n[{change_type}] {file_path}")
 
@@ -57,11 +57,12 @@ class GitCommitObserver(FileSystemEventHandler):
                     diff_text = diff.diff.decode('utf-8', errors='replace')
                     lines.append(diff_text)
                 except Exception as e:
-                    lines.append(f"(Erro ao exibir diff: {e})")
+                    lines.append(f"(Erro to print diff: {e})")
 
-        # Salva tudo em test.txt
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        output_path = os.path.join(script_dir, 'test.txt')
+        #save anything in gitInput.txt
+        if output_path is None:
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            output_path = os.path.join(script_dir, 'gitInput.txt')
         with open(output_path, "a", encoding="utf-8") as f:
             f.write("\n".join(lines))
             f.write("\n" + "="*60 + "\n")
@@ -81,7 +82,6 @@ def start_observing(git_dir):
     observer = Observer()
     observer.schedule(event_handler, path=os.path.join(git_dir, "logs"), recursive=False)
     observer.start()
-    print(f"Observando commits pelo arquivo: {event_handler.logs_head_file}")
 
     try:
         while True:
