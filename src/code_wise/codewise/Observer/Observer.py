@@ -61,8 +61,11 @@ class GitCommitObserver(FileSystemEventHandler):
 
         #save anything in gitInput.txt
         if output_path is None:
-            script_dir = os.path.dirname(os.path.abspath(__file__))
-            output_path = os.path.join(script_dir, 'gitInput.txt')
+            script_dir = Path(__file__).resolve()
+            project_root = script_dir.parents[1]  
+            output_path = os.path.join(project_root, 'crewAI_workflow', 'gitInput.txt')
+            
+
         with open(output_path, "a", encoding="utf-8") as f:
             f.write("\n".join(lines))
             f.write("\n" + "="*60 + "\n")

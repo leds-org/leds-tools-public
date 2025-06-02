@@ -10,6 +10,5 @@ class ObserverController():
 
     def start(self):
         if self.userGitPath == None:
-            print("Nenhum repositório Git encontrado no caminho atual ou acima.")
             return
         start_observing(self.userGitPath)
