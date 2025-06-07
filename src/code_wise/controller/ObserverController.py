@@ -8,7 +8,7 @@ class ObserverController():
         self.path = getJson.get_repo_path_from_json()
         self.userGitPath = find_git_repo(self.path)
 
-    def start(self):
+    async def start(self):
         if self.userGitPath == None:
             return
         start_observing(self.userGitPath)

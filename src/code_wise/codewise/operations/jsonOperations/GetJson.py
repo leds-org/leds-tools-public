@@ -7,7 +7,6 @@ class GetJson():
     
     def get_repo_path_from_json(self):
         json_path = Path(__file__).resolve().parents[3] / "repo_path.json"
-        print(json_path)
         if not json_path.exists():
             return None
 

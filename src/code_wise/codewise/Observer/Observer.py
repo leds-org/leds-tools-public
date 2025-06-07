@@ -93,3 +93,4 @@ def start_observing(git_dir):
         observer.stop()
     observer.join()
  
+
