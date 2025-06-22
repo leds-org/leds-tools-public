@@ -1,4 +1,4 @@
-#  CodeWise
+# CodeWise
 
 * Ferramenta instalável via pip que usa IA para analisar o código e automatizar a documentação de Pull Requests através de hooks do Git.
 
