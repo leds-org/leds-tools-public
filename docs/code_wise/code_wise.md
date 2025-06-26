@@ -1,6 +1,6 @@
 #  CodeWise
 
-* Ferramenta instalável via pip que usa IA para analisar o código e automatizar a documentação de Pull Requests através de hooks do Git.
+** Ferramenta instalável via pip que usa IA para analisar o código e automatizar a documentação de Pull Requests através de hooks do Git.
 
 ## Funcionalidades Principais
 - **Geração de Título:** Cria títulos de PR claros e concisos seguindo o padrão *Conventional Commits*.
