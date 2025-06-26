@@ -1,4 +1,4 @@
-# CodeWise
+#  CodeWise
 
 * Ferramenta instalável via pip que usa IA para analisar o código e automatizar a documentação de Pull Requests através de hooks do Git.
 
@@ -7,28 +7,6 @@
 - **Geração de Descrição:** Escreve descrições detalhadas baseadas nas alterações do código.
 - **Análise Técnica:** Posta um comentário no PR com um resumo executivo de melhorias de arquitetura, aderência a princípios S.O.L.I.D. e outros pontos de qualidade.
 - **Automação com hooks:** Integra-se ao seu fluxo de trabalho Git para rodar automaticamente a cada `git commit` e `git push`.
-
----
-
-## Guia de Instalação e Primeiro Uso
-
-### Pré-requisitos (Instalar antes de tudo)
-
-Antes de começar, garanta que você tenha as seguintes ferramentas instaladas em seu sistema:
-
-1.  **Python** (versão 3.11 ou superior).
-2.  **Git**.
-3.  **GitHub CLI (`gh`)**: Após instalar, logue com sua conta do GitHub executando `gh auth login` no seu terminal (só precisa fazer isso uma vez por PC).
----
-
-# Resumo dos passos que serão melhor detalhados:
-
-1. **Logue com seu gh cli no pc que for usar.**
-2. **Crie o ambiente virtual no repositório que irá usar a ferramenta**
-3. **Crie o arquivo .env para configurar sua key do gemini**
-4. **Instale a lib do codewise.**
-5. **Use o comando para ativar a automação de hooks.**
- 
 
 ---
 
@@ -92,7 +70,7 @@ Para evitar conflitos com outros projetos Python, use um ambiente virtual (`venv
 Com o ambiente virtual ativo, instale a biblioteca com o `pip`.
 
 ```bash
-pip install codewise
+pip install codewise-lib
 ```
  **Pode demorar um pouco pra instalar todas as dependências na primeira vez.**
 
@@ -124,17 +102,40 @@ Para que a IA funcione, você precisa configurar sua chave da API do Google Gemi
 
 ---
 
+## Nota Importante: A ferramenta CodeWise espera que seus remotes sigam a convenção padrão do GitHub:
+
+origin: Deve apontar para o seu fork pessoal do repositório.
+
+upstream: (caso você adicione ao repositório)Deve apontar para o repositório principal do qual você fez o fork.
+
+
 #### 2.4 Agora apenas uma vez > Ative a Automação no Repositório com um comando.
 Na raiz do projeto onde também está a pasta .git use:
 
 ```bash
 codewise-init --all
 ```
+**Use esse comando sempre que você quiser mudar para onde o PULL REQUEST SERÁ CRIADO nos hooks de pre push, pois se você adicionar um remoto upstream você tem que alternar entre qual o PR será gerado.**
+
+Aqui está a configuração do Alvo do Pull Request:
+
+Se o seu repositório tiver um remote upstream configurado, o instalador fará uma pergunta depois que você usou o comando "codewise-init --all"
+para definir o comportamento padrão do hook pre-push:
+
+ Um remote 'upstream' foi detectado.
+Qual deve ser o comportamento padrão do 'git push' para este repositório?
+1: Criar Pull Request no 'origin' (seu fork)
+2: Criar Pull Request no 'upstream' (projeto principal)
+Escolha o padrão (1 ou 2):
+
+Sua escolha será salva no hook, e você não precisará mais se preocupar com isso. Se não houver upstream, ele será configurado para origin por padrão.
+
 Você verá uma mensagem de sucesso confirmando que a automação está ativa.
 
 Com esse comando os arquivos de pre-commit e pre-push já terão sido adicionados ao seu hooks do repositório.
 
 ---
+
 Tudo está funcionando agora no repositório que você configurou.
 Caso queira instalar em um novo repositório basta repetir os passos.
 
@@ -159,4 +160,4 @@ Com a configuração concluída, você já tem acesso aos comandos **codewise-li
     ```bash
     git push
     ```
-    * Agora, o **hook `pre-push` será ativado**. O `codewise-pr` irá criar um novo/atualizar seu Pull Request com título, descrição e análise técnica gerados pela IA.
+    * Agora, o **hook `pre-push` será ativado**. O `codewise-pr` vai perguntar para qual remote você quer enviar caso haja um upstream além do seu origin em seguida irá criar um novo/atualizar seu Pull Request com título, descrição e análise técnica gerados pela IA.
