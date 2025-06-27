@@ -20,7 +20,7 @@ Siga estes passos para instalar e configurar o CodeWise em qualquer um dos seus 
 Antes de começar, garanta que você tenha as seguintes ferramentas instaladas em seu sistema:
 
 1.  **Python** (versão 3.11 ou superior).
-2.  **Git**.
+2.  **Git**...
 3.  **GitHub CLI (`gh`)**: Após instalar em (https://cli.github.com), logue com sua conta do GitHub executando `gh auth login` no seu terminal (só precisa fazer isso uma vez por PC).
 ---
 
