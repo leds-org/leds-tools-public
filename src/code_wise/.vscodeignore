@@ -10,6 +10,5 @@ vsc-extension-quickstart.md
 **/*.ts
 **/.vscode-test.*
 **/.env
+**/*.vsix
 **/*.txt
-**/__pycache__
-**/gitInput.txt
