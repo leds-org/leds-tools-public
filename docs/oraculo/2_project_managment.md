@@ -40,14 +40,13 @@ A chatbot to assist in managing LEDS projects.
 ---
 
 ### 🧠 SMART Goal
-Collect data from GitHub repositories and Discord conversations to create a chatbot that provides real-time information about the LEDS project progress.
+Collect data from GitHub repositories to create a chatbot that uses AI (Google Gemini) to provide real-time information about LEDS project progress in natural language.
 
 ---
 
 ### ✅ Requirements
 - Friendly interface;  
 - Extract data from GitHub repositories;  
-- Extract information from Discord workgroup conversations;  
 - Automate analysis of team and individual performance.
 
 ---
@@ -127,7 +126,7 @@ Enables stream-aligned teams to deliver work autonomously. While stream-aligned 
 ---
 
 ### ⛓ Constraints
-- Must use LangChain, DevLake, n8n, SonarQube, and OpenWebUI  
+- Must use OpenWebUI, FastAPI, Airbyte, PostgreSQL, and Gemini (via MyVanna) 
 - Dependent on AWS Marketplace / VSC environment  
 - Delivery deadline: 3 months
 

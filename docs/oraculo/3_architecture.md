@@ -6,52 +6,94 @@ description: The modular architecture of the project.
 
 # Architecture and Modularization
 
-The project is divided into well-defined modules that follow a decoupled architecture with specific responsibilities. Below is a clear explanation of the role of each component:
+The Oráculo project is organized into well-defined modules with specific responsibilities, forming a decoupled and scalable architecture. Below is a clear explanation of each component’s role:
 
 ## Main Components
 
+
 - 🔁 **Airbyte (ETL)**  
-  Responsible for extracting data from external sources like GitHub. It collects this information and sends it to the database.
+  Responsible for extracting data from GitHub (issues, pull requests, etc.), transforming and loading it into the PostgreSQL database.  
+  The current approach captures data from Airbyte's temporary cache, transforms it, and inserts it into a **custom relational schema** with normalized tables. This improves compatibility with Vanna and enables more accurate SQL generation.
 
 - ⚙️ **Backend (FastAPI)**  
-  API developed with FastAPI, responsible for receiving questions, processing them with the help of AI (Vanna.AI), generating the SQL query, and returning the response to the user.  
-  Location: `src/fastapi/`
+  API developed with FastAPI. It acts as a bridge between the user and the database: receives questions, uses the AI to generate SQL queries, executes them, and formats the responses.   
+  Pattern used: MVC (Model, View, Controller)
 
-- 🧠 **Vanna.AI (LLM)**  
-  Language model used to interpret natural language questions and generate the corresponding SQL.  
-  Location: `src/vanna/`
+- 🧠 **MyVanna (LLM/AI)**  
+  AI component that uses Google's Gemini model and ChromaDB. It interprets user questions, generates SQL, runs queries, and translates responses into natural language.  
+  Responsibilities:
+  - Understands the database schema
+  - Generates and runs SQL queries
+  - Learns from custom examples
+  
+  Additionally, to validate AI responses, the system now includes **semantic similarity tests** using Google BERT. These tests compare the generated SQL with expected queries using cosine similarity. If similarity is below 60%, the response is flagged as poor quality.  
 
-- 🌐 **OpenWebUI (Interface)**  
-  Web interface used to interact with the end user. Allows sending questions and viewing responses.  
-  Location: `src/open-web-ui/`
+- 🌐 **OpenWebUI (Graphical Interface)**  
+  The visual interface where the user interacts with the system, submits questions, and receives responses.  
 
-- 🔗 **n8n (Automation)**  
-  Automation platform that connects OpenWebUI to the backend via Webhook. Manages communication between components.  
-  Location: `src/n8n/`
 
 ## Overview of the Data Flow
 
 User (OpenWebUI interface)  
         ↓  
-     Webhook  
-        ↓  
-      n8n (automation)  
+  `pipeline_api.py`  
         ↓  
  FastAPI (backend/API)  
         ↓  
     Vanna.AI (LLM)  
         ↓  
- SQL → Database  
+ SQL → PostgreSQL Database  
         ↓  
  ↪ Response shown to the user
 
 ## Architecture Summary by Role
 
-| Component     | Role             | Description |
-|---------------|------------------|-------------|
-| OpenWebUI     | Interface         | Frontend for user interaction |
-| FastAPI       | Backend/API       | Processes questions and coordinates responses |
-| Airbyte       | ETL               | Collects external data and injects into the database |
-| Vanna.AI      | LLM / AI          | Converts natural language questions into SQL |
-| n8n           | Orchestrator      | Routes data between frontend, backend, and AI using Webhooks |
-| Postgres/Chroma | Database        | Stores collected data used by the AI |
+| Component       | Role              | Description |
+|----------------|-------------------|-------------|
+| OpenWebUI      | Interface          | Frontend for user interaction |
+| FastAPI (API)  | Backend/API        | Receives questions, uses AI, queries database |
+| Airbyte        | ETL                | Extracts GitHub data and loads it into PostgreSQL |
+| MyVanna        | LLM / AI           | Generates SQL and natural language responses using Gemini + Chroma |
+| PostgreSQL     | Database           | Stores GitHub data queried by the system |
+
+## Design Patterns Used
+
+- **Singleton**  
+  Ensures only one instance of key components like:
+  - `AskController` (question logic)
+  - `MyVanna` (AI client)
+  - `airbyte` (ETL process)
+
+- **MVC (Model-View-Controller)**  
+  Applied in the API:
+  - **Models**: Define the structure of questions/responses
+  - **Controllers**: Process the logic (e.g. `AskController.py`)
+  - **Views/Routes**: Handle API endpoints (e.g. `routes.py`)
+
+## Deployment
+
+The entire system is containerized using Docker. Components defined in `docker-compose.yml` include:
+- `db`: PostgreSQL database
+- `back-end`: Python-based API and ETL
+- `front-end`: OpenWebUI interface
+
+Configuration files include `Dockerfile.dev`, `Dockerfile.pub`, and `Dockerfile`.
+
+## Security and Configuration
+
+Sensitive data is stored in `.env` files. This includes:
+- GitHub token
+- Database password
+- Gemini API key
+
+## Testing
+
+Tests are implemented using `pytest`, including:
+- MyVanna tests (SQL generation and DB connection)
+- Pipeline tests (question handling)
+- API tests (`/ask` endpoint)
+- AI Response Quality Tests: Implemented with BERT to evaluate the semantic similarity between expected and generated SQL queries. Tests fail if similarity drops below 60%.  
+
+---
+
+The Oráculo system demonstrates how AI and GitHub integration can simplify development tracking through natural language. Its architecture is modular, follows good design principles, and is production-ready with testing, containerization, and secure configuration.
