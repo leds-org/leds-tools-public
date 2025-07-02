@@ -72,3 +72,26 @@
   --ifm-navbar-link-color: #efefef;
   --ifm-footer-background-color: #1c1e21;
 }
+
+/* ==========================================================================
+   Custom Metric Card Styles
+   ========================================================================== */
+
+/* Make the entire card a clickable link without the default underline */
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Ensure the card fills the link height */
+.card-link .card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border: 1px solid var(--ifm-card-border-color); /* Use theme variable */
+}
+
+/* The hover effect itself */
+.card-link:hover .card {
+  transform: translateY(-5px);
+  box-shadow: var(--ifm-global-shadow-lw);
+  border-color: var(--ifm-color-primary); /* Highlight with the site's primary color */
+}
