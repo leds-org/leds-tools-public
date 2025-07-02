@@ -1,164 +1,163 @@
+#  CodeWise
+
+** Ferramenta instalável via pip que usa IA para analisar o código e automatizar a documentação de Pull Requests através de hooks do Git.
+
+## Funcionalidades Principais
+- **Geração de Título:** Cria títulos de PR claros e concisos seguindo o padrão *Conventional Commits*.
+- **Geração de Descrição:** Escreve descrições detalhadas baseadas nas alterações do código.
+- **Análise Técnica:** Posta um comentário no PR com um resumo executivo de melhorias de arquitetura, aderência a princípios S.O.L.I.D. e outros pontos de qualidade.
+- **Automação com hooks:** Integra-se ao seu fluxo de trabalho Git para rodar automaticamente a cada `git commit` e `git push`.
+
 ---
-sidebar_position: 1
-title: Code Wise
+
+## Guia de Instalação 
+Siga estes passos para instalar e configurar o CodeWise em qualquer um dos seus repositórios.
+
 ---
-**Code Wise** is an automated solution that uses **Artificial Intelligence** to review programmers' code, identifying and suggesting improvements for **performance** and **code smells**. With Code Wise, you can efficiently optimize your code, receiving real-time feedback directly in your workflow.
 
-## Code Wise as GitHub Action
+### Passo 1: Pré-requisitos (ter no PC antes de tudo)
 
-It is a GitHub Action that automatically analyzes code changes in your repository, identifies potential performance improvements, and detects code smells using OpenAI's GPT model. It is designed to review code files such as Python, JavaScript, TypeScript, Java, C, C++, Go, Ruby, PHP, and C#. The analysis results are sent to a specified Discord channel for easy review and creates a comment in a Pull Request.
+Antes de começar, garanta que você tenha as seguintes ferramentas instaladas em seu sistema:
 
+1.  **Python** (versão 3.11 ou superior).
+2.  **Git**.
+3.  **GitHub CLI (`gh`)**: Após instalar em (https://cli.github.com), logue com sua conta do GitHub executando `gh auth login` no seu terminal (só precisa fazer isso uma vez por PC).
+---
 
-### Installation
+### Passo 2: Configurando Seu Repositório
 
-To use this action in your repository, follow the steps below:
+**Para cada novo Repositório em que você desejar usar o CodeWise, siga os passos abaixo.**
+ 
+"*O ideal é sempre criar um ambiente virtual na pasta raiz do novo repositório para evitar conflitos das dependências.*"
 
-1. Copy the YAML configuration into the .github/workflows directory of your project.
-2. Ensure you have the following secrets added to your repository:
-    * OPENAI_API_KEY: Your OpenAI API key to send requests for code analysis.
-    * DISCORD_WEBHOOK_URL: A Discord webhook URL where the analysis results will be sent.
-    * AGENTOPS_API_KEY: API KEY FROM AGENT OPS.
-3. Ensure your project has the necessary dependencies:
-    * Python 3.x
-    * jq installed for JSON manipulation.
+---
+#### 2.1 Crie e Utilize um Ambiente Virtual
 
-### How to Use
+Para evitar conflitos com outros projetos Python, use um ambiente virtual (`venv`).
 
-This action runs automatically on every push to the main branch. It analyzes code files changed in the commit and sends performance and code smell suggestions to a Discord channel. The following file types are supported: .py, .js, .ts, .java, .c, .cpp, .go, .rb, .php, and .cs.
+* **Para Criar o Ambiente:**
 
-### Workflow Breakdown
+    * Este comando cria uma pasta `.venv` com uma instalação limpa do Python. Faça isso uma única vez por repositório,
+    *Lembrando que o ".venv" é o nome da pasta que foi criada, voce pode escolher qualquer outro nome pra ela.*
+ 
 
-1. Checkout the repository: The action first checks out the repository to analyze the latest commit.
-2. Set up Python: The Python environment is set up with the required version (3.x).
-3. Install dependencies: Installs jq and the requests library for making HTTP requests.
-4. Get committer's name: Retrieves the name of the person who made the commit.
-5. Check for code files: The workflow identifies any code files that were changed and sends them to GPT for analysis.
-6. Send suggestions to Discord: Suggestions for improving code quality and performance are sent to the configured Discord channel
+(**dentro da raíz do repositório onde está a pasta .git**)
 
-## Code Wise as API 
+    ```bash
+    # No Windows
+    py -m venv .venv
+    
+    # No Linux/WSL
+    python3 -m venv .venv
+    ```
 
-This project is an API built with FastAPI that accepts code snippets in Python, C#, or Java and sends them to the OpenAI GPT-3 API for suggestions on how to improve the code. It allows developers to receive real-time feedback on their code for better practices, potential optimizations, or error handling.
+* **Para Ativar o Ambiente:**
 
-The API provides endpoints to submit code, specify the programming language, and get back suggestions. The system is containerized with Docker for easy deployment.
+    * Sempre que for trabalhar no projeto, você precisa ativar o ambiente.
 
-### Features
+    * **Dica para Windows/PowerShell:** Se o comando de ativação der um erro de política de execução, rode este comando primeiro: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
 
-* Code Analysis: Submit code snippets in Python, C#, or Java and receive feedback.
-* Language Support: Python, C#, and Java.
-* FastAPI: Built with FastAPI for quick, asynchronous API calls and automatic generation of interactive API documentation.
-* OpenAI Integration: Leverages GPT-3 for code analysis and improvement suggestions.
-* Dockerized: Fully containerized for easy setup and deployment.
+    ```bash
+    # No Windows (PowerShell)
+    .\.venv\Scripts\activate
+    
+    # No Linux/WSL
+    source .venv/bin/activate
+    ```
+    *Você saberá que funcionou porque o nome `(.venv)` aparecerá no início da linha do seu terminal.*
+---
+#### 2.2 Instale a Ferramenta CodeWise
+Com o ambiente virtual ativo, instale a biblioteca com o `pip`.
 
-### Requirements
-
-* Python 3.10+
-* FastAPI
-* Uvicorn (ASGI server for FastAPI)
-* OpenAI Python SDK
-* Docker (optional, for containerized deployment)
-
-### Installation
-
-1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/code-improvement-api.git
-cd code-improvement-api
+pip install codewise-lib
 ```
-2. Install dependencies:
+ **Pode demorar um pouco pra instalar todas as dependências na primeira vez.**
 
-You can install the dependencies by running:
+
+*Após instalar a lib, você pode confirmar se está tudo certo com o comando `codewise-help`*
+
+---
+
+#### 2.3 Configure a Chave da API (.env)
+Para que a IA funcione, você precisa configurar sua chave da API do Google Gemini.
+
+1.  **Na raiz do seu projeto**, crie um arquivo chamado `.env`. Você pode usar os seguintes comandos no terminal:
+
+    * **Windows**
+        ```bash
+        notepad .env
+        ```
+    * **Linux/WSL:**
+        ```bash
+        touch .env && nano .env
+        ```
+
+2.  Dentro do arquivo `.env`, cole o seguinte conteúdo, adicione sua chave e salve:
+        ```
+        GEMINI_API_KEY=SUA_CHAVE_AQUI
+        MODEL_NAME=gemini-2.0-flash
+        ```
+    ⚠️ **Importante:** Lembre-se de adicionar o arquivo `.env` ao seu `.gitignore` para não enviar sua chave secreta para o GitHub ao dar push e que ele deve ser do tipo "arquivo ENV" e não .txt ou coisa do tipo.
+
+---
+
+## Nota Importante: A ferramenta CodeWise espera que seus remotes sigam a convenção padrão do GitHub:
+
+origin: Deve apontar para o seu fork pessoal do repositório.
+
+upstream: (caso você adicione ao repositório)Deve apontar para o repositório principal do qual você fez o fork.
+
+
+#### 2.4 Agora apenas uma vez > Ative a Automação no Repositório com um comando.
+Na raiz do projeto onde também está a pasta .git use:
 
 ```bash
-pip install -r requirements.txt
-``` 
-
-3. Set up your OpenAI API Key:
-
-Make sure you have an OpenAI API key. Replace "YOUR_API_KEY_HERE" in the app.py file with your actual API key.
-
-4. Running the API locally:
-
-You can run the API locally using uvicorn:
-
-```bash
-uvicorn app:app --reload
+codewise-init --all
 ```
-This will start the FastAPI app, and you can access it at http://127.0.0.1:8000.
+**Use esse comando sempre que você quiser mudar para onde o PULL REQUEST SERÁ CRIADO nos hooks de pre push, pois se você adicionar um remoto upstream você tem que alternar entre qual o PR será gerado.**
 
-5. Run with Docker: If you want to run the app in a Docker container:
+Aqui está a configuração do Alvo do Pull Request:
 
-   1. Build the Docker image:
-   ```bash
-   docker build -t code-improvement-api .
+Se o seu repositório tiver um remote upstream configurado, o instalador fará uma pergunta depois que você usou o comando "codewise-init --all"
+para definir o comportamento padrão do hook pre-push:
 
-   ```
-   2. Run the container:
-   ```bash
-     docker run -p 8000:8000 code-improvement-api
-   ```
-   Now, the API should be available at http://127.0.0.1:8000.
+ Um remote 'upstream' foi detectado.
+Qual deve ser o comportamento padrão do 'git push' para este repositório?
+1: Criar Pull Request no 'origin' (seu fork)
+2: Criar Pull Request no 'upstream' (projeto principal)
+Escolha o padrão (1 ou 2):
 
-### Usage
+Sua escolha será salva no hook, e você não precisará mais se preocupar com isso. Se não houver upstream, ele será configurado para origin por padrão.
 
-1. Submitting a Code Snippet
+Você verá uma mensagem de sucesso confirmando que a automação está ativa.
 
-You can use curl to submit code and receive suggestions. The /improve_code endpoint expects two fields:
+Com esse comando os arquivos de pre-commit e pre-push já terão sido adicionados ao seu hooks do repositório.
 
-    * code: The code snippet you want to analyze.
-    * language: The language of the code snippet (either "python", "c#", or "java").
+---
 
-Example Request for Python Code:
+Tudo está funcionando agora no repositório que você configurou.
+Caso queira instalar em um novo repositório basta repetir os passos.
 
-```bash
-curl -X POST http://127.0.0.1:8000/improve_code \
-    -H "Content-Type: application/json" \
-    -d '{
-        "code": "class Calculator:\n    def add(self, a, b):\n        return a + b\n", 
-        "language": "python"
-    }'
+# Usando o CodeWise 
+Com a configuração concluída, você já tem acesso aos comandos **codewise-lint** e **codewise-pr** de forma manual e automatizada após instalar os hooks.
 
-```
-Example Request for C# Code:
-```bash
-curl -X POST http://127.0.0.1:8000/improve_code \
-    -H "Content-Type: application/json" \
-    -d '{
-        "code": "public class Calculator {\n    public int Add(int a, int b) { return a + b; }\n}", 
-        "language": "c#"
-    }'
+1.  **Adicione suas alterações**
 
-```
+    * Após modificar seus arquivos, adicione-os à "staging area":
+    ```bash
+    git add .
+    ```
+    * Aqui você já pode usar o comando `codewise-lint` para analisar os arquivos e você poder fazer ajustes antes de commitar.
 
-Example Request for Java Code:
-```bash
-curl -X POST http://127.0.0.1:8000/improve_code \
-    -H "Content-Type: application/json" \
-    -d '{
-        "code": "public class Calculator {\n    public int add(int a, int b) { return a + b; }\n}", 
-        "language": "java"
-    }'
+2.  **Faça o commit**
+    ```bash
+    git commit -m "implementa novo recurso "
+    ```
+    * Neste momento, o **hook `pre-commit` será ativado**, e o `codewise-lint` fará a análise rápida no seu terminal.
 
-``` 
-2. Response Format
-
-The API will return a JSON response containing suggestions for improvements:
-```bash
-{
-  "suggestion": "You could improve this class by adding type checks for the method parameters..."
-}
-
-```
-
-3. Accessing API Documentation
-
-FastAPI automatically generates interactive API documentation. You can access this by going to:
-
-    Swagger UI: http://127.0.0.1:8000/docs
-    ReDoc: http://127.0.0.1:8000/redoc
-
-These interfaces allow you to test the API directly from your browser.
-
-### Customization
-
-* **OpenAI Model**: The current model used is gpt-4. You can customize the model by changing the engine parameter in the suggest_improvements function.
-* **OpenIA Key**:  OpenIA Key
+3.  **Envie para o GitHub**
+    ```bash
+    git push
+    ```
+    * Agora, o **hook `pre-push` será ativado**. O `codewise-pr` vai perguntar para qual remote você quer enviar caso haja um upstream além do seu origin em seguida irá criar um novo/atualizar seu Pull Request com título, descrição e análise técnica gerados pela IA.
