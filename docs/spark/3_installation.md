@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: Instalation
+title: Installation
 ---
 
 To install Spark, follow these steps:
