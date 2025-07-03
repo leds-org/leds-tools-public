@@ -1,0 +1,57 @@
+{
+  "name": "codewise",
+  "displayName": "CodeWise (beta)",
+  "description": "automated solution that uses Artificial Intelligence to review programmers' code, identifying and suggesting improvements for performance and code smells. With Code Wise, you can efficiently optimize your code, receiving real-time feedback directly in your workflow.",
+  "version": "1.0.9",
+  "preview": true,
+  "publisher": "GabrielDiasBrito",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "license": "MIT",
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/gabrieldev131/CodeWise.git"
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {},
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.25.1",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@langchain/anthropic": "^0.3.23",
+    "@langchain/cohere": "^0.3.4",
+    "@langchain/community": "^0.3.46",
+    "@langchain/core": "^0.3.58",
+    "@langchain/google-genai": "^0.2.12",
+    "@langchain/groq": "^0.2.3",
+    "@langchain/langgraph": "^0.3.3",
+    "@langchain/mistralai": "^0.2.1",
+    "@langchain/openai": "^0.5.13",
+    "dotenv": "^16.5.0",
+    "langchain": "^0.3.28",
+    "simple-git": "3.27.0"
+  }
+}
