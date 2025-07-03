@@ -2,166 +2,137 @@
 sidebar_position: 1
 title: Code Wise
 ---
-**Code Wise** is an automated solution that uses **Artificial Intelligence** to review programmers code, identifying and suggesting improvements for **performance** and **code smells**. With Code Wise, you can efficiently optimize your code, receiving real-time feedback directly in your workflow.
 
-** Ferramenta instalável via pip que usa IA para analisar o código e automatizar a documentação de Pull Requests através de hooks do Git.
+**Code Wise** is a Visual Studio Code extension that automatically **analyzes** your codebase at pre-commit, leveraging state-of-the-art Large Language Models (LLMs) such as OpenAI, Gemini, Groq, Ollama, Mistral, and others. It helps developers identify **architectural** improvements, **SOLID** principle violations, **code smells**, and suggest **design patterns** — all seamlessly integrated into their daily workflow.
 
-## Funcionalidades Principais
-- **Geração de Título:** Cria títulos de PR claros e concisos seguindo o padrão *Conventional Commits*.
-- **Geração de Descrição:** Escreve descrições detalhadas baseadas nas alterações do código.
-- **Análise Técnica:** Posta um comentário no PR com um resumo executivo de melhorias de arquitetura, aderência a princípios S.O.L.I.D. e outros pontos de qualidade.
-- **Automação com hooks:** Integra-se ao seu fluxo de trabalho Git para rodar automaticamente a cada `git commit` e `git push`.
+### Overview
 
----
-
-## Guia de Instalação 
-Siga estes passos para instalar e configurar o CodeWise em qualquer um dos seus repositórios.
-
----
-
-### Passo 1: Pré-requisitos (ter no PC antes de tudo)
-
-Antes de começar, garanta que você tenha as seguintes ferramentas instaladas em seu sistema:
-
-1.  **Python** (versão 3.11 ou superior).
-2.  **Git**.
-3.  **GitHub CLI (`gh`)**: Após instalar em (https://cli.github.com), logue com sua conta do GitHub executando `gh auth login` no seu terminal (só precisa fazer isso uma vez por PC).
----
-
-### Passo 2: Configurando Seu Repositório
-
-**Para cada novo Repositório em que você desejar usar o CodeWise, siga os passos abaixo.**
- 
-"*O ideal é sempre criar um ambiente virtual na pasta raiz do novo repositório para evitar conflitos das dependências.*"
-
----
-#### 2.1 Crie e Utilize um Ambiente Virtual
-
-Para evitar conflitos com outros projetos Python, use um ambiente virtual (`venv`).
-
-* **Para Criar o Ambiente:**
-
-    * Este comando cria uma pasta `.venv` com uma instalação limpa do Python. Faça isso uma única vez por repositório,
-    *Lembrando que o ".venv" é o nome da pasta que foi criada, voce pode escolher qualquer outro nome pra ela.*
- 
-
-(**dentro da raíz do repositório onde está a pasta .git**)
-
-    ```bash
-    # No Windows
-    py -m venv .venv
-    
-    # No Linux/WSL
-    python3 -m venv .venv
-    ```
-
-* **Para Ativar o Ambiente:**
-
-    * Sempre que for trabalhar no projeto, você precisa ativar o ambiente.
-
-    * **Dica para Windows/PowerShell:** Se o comando de ativação der um erro de política de execução, rode este comando primeiro: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
-
-    ```bash
-    # No Windows (PowerShell)
-    .\.venv\Scripts\activate
-    
-    # No Linux/WSL
-    source .venv/bin/activate
-    ```
-    *Você saberá que funcionou porque o nome `(.venv)` aparecerá no início da linha do seu terminal.*
----
-#### 2.2 Instale a Ferramenta CodeWise
-Com o ambiente virtual ativo, instale a biblioteca com o `pip`.
-
-```bash
-pip install codewise-lib
-```
- **Pode demorar um pouco pra instalar todas as dependências na primeira vez.**
+Once installed and configured, CodeWise operates silently in the background. It monitors your Git repository for new commits and automatically triggers a set of intelligent agents that review the code changes, offering structured, insightful feedback saved directly into your workspace.
 
 
-*Após instalar a lib, você pode confirmar se está tudo certo com o comando `codewise-help`*
+1. Install the extension locally
+2. Configure your .env file with the appropriate LLM credentials:
+    (name of your provider)_API_KEY=your-api-key (ex. GEMINI_API_KEY)
+    MODEL=your-model-name
+    PROVIDER=gemini 
+    - Supported providers:
+        openai
 
----
+        google (Gemini)
 
-#### 2.3 Configure a Chave da API (.env)
-Para que a IA funcione, você precisa configurar sua chave da API do Google Gemini.
+        groq
 
-1.  **Na raiz do seu projeto**, crie um arquivo chamado `.env`. Você pode usar os seguintes comandos no terminal:
+        ollama
 
-    * **Windows**
-        ```bash
-        notepad .env
-        ```
-    * **Linux/WSL:**
-        ```bash
-        touch .env && nano .env
-        ```
+        mistral
 
-2.  Dentro do arquivo `.env`, cole o seguinte conteúdo, adicione sua chave e salve:
-        ```
-        GEMINI_API_KEY=SUA_CHAVE_AQUI
-        MODEL_NAME=gemini-2.0-flash
-        ```
-    ⚠️ **Importante:** Lembre-se de adicionar o arquivo `.env` ao seu `.gitignore` para não enviar sua chave secreta para o GitHub ao dar push e que ele deve ser do tipo "arquivo ENV" e não .txt ou coisa do tipo.
+        cohere
 
----
+        anthropic
 
-## Nota Importante: A ferramenta CodeWise espera que seus remotes sigam a convenção padrão do GitHub:
+        together  
 
-origin: Deve apontar para o seu fork pessoal do repositório.
+3. Ensure your project has the necessary dependencies:
+    * "@types/node": "20.x"
+    * "typescript": "^5.8.3"
+    * "node.js": "^v20.18.0"
+    * "npm": "^11.4.1"
+    * Visual Studio Code (v1.85+)
 
-upstream: (caso você adicione ao repositório)Deve apontar para o repositório principal do qual você fez o fork.
+### How to Use
 
+This action runs automatically on every commit. It analyzes code files changed in the commit and sends a file (commit_analysis_report.md) with analysis about performance and code smell suggestions to the root of projects. 
 
-#### 2.4 Agora apenas uma vez > Ative a Automação no Repositório com um comando.
-Na raiz do projeto onde também está a pasta .git use:
+### Workflow Breakdown
 
-```bash
-codewise-init --all
-```
-**Use esse comando sempre que você quiser mudar para onde o PULL REQUEST SERÁ CRIADO nos hooks de pre push, pois se você adicionar um remoto upstream você tem que alternar entre qual o PR será gerado.**
+The following steps describe the internal process behind CodeWise:
 
-Aqui está a configuração do Alvo do Pull Request:
+1. **Git Commit Detection**  
+   CodeWise watches the `.git/logs/HEAD` file to detect when a new commit is made. This enables real-time, non-intrusive monitoring of commit activity without requiring Git hooks.
 
-Se o seu repositório tiver um remote upstream configurado, o instalador fará uma pergunta depois que você usou o comando "codewise-init --all"
-para definir o comportamento padrão do hook pre-push:
+2. **Extract Commit Information**  
+   Once a commit is detected, the system extracts:
+   - Commit hash, author, date, and message
+   - Changed files and corresponding diffs
 
- Um remote 'upstream' foi detectado.
-Qual deve ser o comportamento padrão do 'git push' para este repositório?
-1: Criar Pull Request no 'origin' (seu fork)
-2: Criar Pull Request no 'upstream' (projeto principal)
-Escolha o padrão (1 ou 2):
+   This information is formatted and saved in a temporary file (`gitInput.txt`) to serve as input for the language models.
 
-Sua escolha será salva no hook, e você não precisará mais se preocupar com isso. Se não houver upstream, ele será configurado para origin por padrão.
+3. **Invoke LLM Agents in Parallel**  
+   CodeWise leverages a set of specialized agents (built on top of LangChain + LangGraph), each trained to analyze a specific dimension of the codebase:
+   - **Architect Agent**: Analyzes folder structure and determines the architectural pattern used (e.g., MVC, Clean Architecture).
+   - **Integration Agent**: Reviews module coupling and suggests integration improvements.
+   - **SOLID Agent**: Detects violations of SOLID principles and proposes corrections.
+   - **Framework Analyst**: Suggests alternative frameworks or improvements in the usage of existing ones.
+   - **Design Pattern Advisor**: Recommends design patterns suitable for scalability, reusability, or maintainability.
 
-Você verá uma mensagem de sucesso confirmando que a automação está ativa.
+4. **Merge Results into Markdown Report**  
+   The results from all LLMs are aggregated into a structured markdown report (`commit_analysis_report.md`), which includes individual sections for each agent’s findings.
 
-Com esse comando os arquivos de pre-commit e pre-push já terão sido adicionados ao seu hooks do repositório.
+5. **Clean Up and Await Next Commit**  
+   After the report is generated, temporary files are deleted and the extension continues monitoring for future commits.
 
----
+This automated cycle ensures that every commit is reviewed by AI before it even reaches the remote repository — enabling proactive quality control and faster feedback for developers.
 
-Tudo está funcionando agora no repositório que você configurou.
-Caso queira instalar em um novo repositório basta repetir os passos.
+### Features
 
-# Usando o CodeWise 
-Com a configuração concluída, você já tem acesso aos comandos **codewise-lint** e **codewise-pr** de forma manual e automatizada após instalar os hooks.
+- **Pre-commit Code Analysis**  
+  Automatically analyzes code right after a local commit is made, ensuring issues are caught before pushing to the repository.
 
-1.  **Adicione suas alterações**
+- **LLM-Based Multi-Agent Architecture**  
+  Utilizes multiple specialized Language Model agents (Architect, Integration Analyst, SOLID Reviewer, Design Pattern Advisor, etc.) working in parallel for deep, context-aware code evaluation.
 
-    * Após modificar seus arquivos, adicione-os à "staging area":
-    ```bash
-    git add .
-    ```
-    * Aqui você já pode usar o comando `codewise-lint` para analisar os arquivos e você poder fazer ajustes antes de commitar.
+- **Support for Multiple LLM Providers**  
+  Compatible with various LLM providers (OpenAI, Google Gemini, Ollama, Mistral, Groq, Cohere, and more) with plug-and-play extensibility via a factory pattern and reflection-based dynamic loading.
 
-2.  **Faça o commit**
-    ```bash
-    git commit -m "implementa novo recurso "
-    ```
-    * Neste momento, o **hook `pre-commit` será ativado**, e o `codewise-lint` fará a análise rápida no seu terminal.
+- **Automatic Report Generation**  
+  Produces a detailed markdown report (`commit_analysis_report.md`) after each commit, summarizing architectural insights, design flaws, and suggestions.
 
-3.  **Envie para o GitHub**
-    ```bash
-    git push
-    ```
-    * Agora, o **hook `pre-push` será ativado**. O `codewise-pr` vai perguntar para qual remote você quer enviar caso haja um upstream além do seu origin em seguida irá criar um novo/atualizar seu Pull Request com título, descrição e análise técnica gerados pela IA.
+- **No User Disruption**  
+  Fully background operation – developers commit code as usual while CodeWise silently processes and reports.
+
+- **Multi-language Project Support**  
+  Can analyze projects written in multiple programming languages, especially those structured around standard architectural patterns (e.g., MVC, DDD).
+
+- **Cross-Platform Compatibility**  
+  Designed to work on Windows, macOS, and Linux environments (as long as Node.js and VS Code are installed).
+
+- **Modular and Extensible Design**  
+  Easy to extend with new agent roles, models, or analysis types using a clean and maintainable architecture.
+
+- **CI/CD Ready**  
+  CodeWise is built to support packaging and publishing via GitHub Actions, enabling streamlined deployment of new versions.
+
+### Requirements
+
+* "@types/node": "20.x"
+
+* "typescript": "^5.8.3"
+
+* "node.js": "^v20.18.0"
+
+* "npm": "^11.4.1"
+
+* Visual Studio Code (v1.85+)
+
+### Usage
+
+Once installed and activated, CodeWise automatically monitors your Git workspace for new commits. When a commit is made, the extension triggers a background process that analyzes the committed code and generates a comprehensive report with architectural insights and improvement suggestions.
+
+Follow these steps to use CodeWise:
+
+1. **Open a Git-based project in VS Code.**  
+   Ensure the project is tracked by Git and has at least one workspace folder opened.
+
+2. **Make a commit.**  
+   When you commit code, CodeWise detects the change and analyzes it automatically.
+
+3. **Wait for the analysis.**  
+   Within seconds, CodeWise runs a set of LLM agents to analyze your code based on architecture, integration, design patterns, SOLID principles, and framework usage.
+
+4. **Check the output report.**  
+   A new file named `commit_analysis_report.md` will be created in the root of your project, containing a detailed summary of findings and suggestions.
+
+5. **Review and refactor.**  
+   Open the report to review the suggestions. Use the insights to refactor and improve your code quality before pushing to remote repositories.
+
+> The process is fully automated and non-intrusive. Developers commit code as usual; CodeWise works silently in the background.
