@@ -1,71 +1,71 @@
-
 # Project Model Canvas
 
-## Justificativas (Passado)
-- Baixa visibilidade sobre prioridades e progresso  
-- Dificuldade de adaptação rápida a mudanças de escopo  
-- Retrabalho e atraso nas entregas devido à falta de padronização  
-- Esforço repetitivo na configuração de sprints, backlogs e releases  
+## Justifications (Past)
+- Low visibility of priorities and progress  
+- Difficulty adapting quickly to scope changes  
+- Rework and delivery delays due to lack of standardization  
+- Repetitive effort configuring sprints, backlogs, and releases  
 
 
-## OBJ SMART
-- **Reduzir em 50%** o tempo médio de planejamento de sprints  
-- **Diminuir em 30%** as ocorrências de retrabalho derivadas de processos manuais e falta de padronização  
-- **Aumentar em 100%** a transparência sobre progresso e prioridades para todos os stakeholders  
+## SMART Objectives
+- **Reduce by 50 %** the average sprint-planning time  
+- **Decrease by 30 %** the occurrences of rework caused by manual processes and lack of standardization  
+- **Increase by 100 %** transparency about progress and priorities for all stakeholders  
 
 
-## Benefícios (Futuro)
-- **Entregas mais rápidas:** ciclos de desenvolvimento e releases mais curtos, acelerando o time-to-market  
-- **Redução de retrabalho:** padronização de artefatos e workflows “as‑code” diminui em até 30% erros e refações  
-- **Maior transparência:** visibilidade em tempo real de backlog, sprints e status de tarefas para todos os stakeholders  
-- **Otimização do planejamento:** automação de tarefas repetitivas reduz em até 50% o tempo gasto na organização de sprints  
+## Benefits (Future)
+- **Faster deliveries:** shorter development cycles and releases, accelerating time-to-market  
+- **Rework reduction:** artifact and “as-code” workflow standardization cuts errors and rework by up to 30 %  
+- **Greater transparency:** real-time visibility of backlog, sprints, and task status for all stakeholders  
+- **Planning optimization:** automation of repetitive tasks reduces sprint-organization time by up to 50 %  
 
 
-## Produto
-- **Módulos de Gestão Ágil:** definição e gerenciamento de EPICs, histórias de usuário e tarefas via DSL  
-- **Backlog Integrado:** backlog de produto e sprint backlog priorizados e acessíveis a todos  
-- **Planejamento de Sprints:** timeboxes configuráveis com atribuição automática de responsáveis  
-- **Workflows e Templates Reutilizáveis:** modelos de EPICs, histórias e processos (revisão, deploy) parametrizáveis  
-- **Dashboards e Métricas:** burndown, velocity e indicadores de qualidade para acompanhamento contínuo  
+## Product
+- **Agile-Management Modules:** definition and management of EPICs, user stories, and tasks via DSL  
+- **Integrated Backlog:** product and sprint backlogs prioritized and accessible to everyone  
+- **Sprint Planning:** configurable time-boxes with automatic assignment of owners  
+- **Reusable Workflows & Templates:** parameterized templates for EPICs, stories, and processes (review, deploy)  
+- **Dashboards & Metrics:** burndown, velocity, and quality indicators for continuous monitoring  
 
 
-## Requisitos
-1. Cadastro de equipe com definição de papéis, habilidades e competências para alocação eficiente de recursos  
-2. Roadmap de releases versionado, vinculando EPICs e histórias de usuário às versões, com datas planejadas de início e fim  
-3. Workflows e templates reutilizáveis para processos comuns (revisão de código, aprovação de design, deploy), garantindo padronização e rapidez de setup  
-4. Dashboards e métricas (burn‑down, velocity e indicadores de qualidade) para acompanhamento em tempo real do progresso e performance  
-5. Histórico e rastreabilidade completa das definições (versionamento de artefatos de gestão) para auditorias e lições aprendidas  
-6. Controle de acesso e permissões baseado em função, assegurando visibilidade e segurança apropriadas para cada stakeholder  
-7. Integração com ferramentas de teste e CI/CD, permitindo controle de qualidade contínuo e validação automatizada antes de cada release  
+## Requirements
+1. Team registration with roles, skills, and competencies to allocate resources efficiently  
+2. Versioned release roadmap linking EPICs and user stories to versions, with planned start and end dates  
+3. Reusable workflows and templates for common processes (code review, design approval, deploy) ensuring standardization and rapid setup  
+4. Dashboards and metrics (burndown, velocity, quality indicators) for real-time tracking of progress and performance  
+5. Full history and traceability of all definitions (versioned management artifacts) for audits and lessons learned  
+6. Role-based access control, ensuring proper visibility and security for each stakeholder  
+7. Integration with testing and CI/CD tools, enabling continuous quality control and automated validation before each release  
 
 
-## Stakeholders Externos
-- Patrocinador Executivo (Sponsor)  
-- Gerente de Projeto  
+## External Stakeholders
+- Executive Sponsor  
+- Project Manager  
 - Product Owner  
 - Scrum Master  
-- Equipe de Desenvolvimento  
-- Equipe de QA / Testes  
-- Time de Operações / DevOps  
+- Development Team  
+- QA / Testing Team  
+- Operations / DevOps Team  
 - Designer / UX  
-- Usuários Finais / Clientes  
-- Equipe de Suporte Gamma (MADE)  
+- End Users / Customers  
+- Gamma Support Team (MADE)  
 
 
-## Premissas
-- **Equipe Capacitada:** membros com conhecimento em ágil (Scrum/Kanban) e sintaxe “as‑code” para adoção do DSL do MADE  
-- **Plataforma MADE Estável:** ferramenta disponível e performática para modelagem de EPICs, histórias, sprints e releases sem interrupções  
-- **Suporte e Treinamento:** time Gamma disponível para esclarecer dúvidas iniciais e fornecer treinamento  
+## Assumptions
+- **Skilled Team:** members knowledgeable in agile (Scrum/Kanban) and “as-code” syntax for adopting MADE’s DSL  
+- **Stable MADE Platform:** tool available and performant for modeling EPICs, stories, sprints, and releases without interruptions  
+- **Support & Training:** Gamma team available to answer initial questions and provide training  
 
 
-## Riscos
+## Risks
 
-| Risco                                              | Chance | Solução                                                |
-|----------------------------------------------------|:------:|--------------------------------------------------------|
-| Alunos desistirem da matéria                       |  7/10  | Estabelecer duplas para realizarem as atividades       |
-| Dificuldade de organização de horário entre membros|  8/10  | Organização de canais de comunicação eficientes        |
+| Risk                                                 | Chance | Mitigation                                        |
+|------------------------------------------------------|:------:|---------------------------------------------------|
+| Students drop the course                             |  7/10  | Assign pairs to carry out the activities          |
+| Scheduling conflicts among team members              |  8/10  | Organize efficient communication channels         |
 
-## Equipe
+
+## Team
 - Mafe Mattos  
 - Lucas Lopes  
 - Marlon Silva  
@@ -79,26 +79,26 @@
 - Jonathan Castro Silva  
 
 
-## Grupo de Entregas
-- **4 semanas:** Desenvolver Documento de Requisitos e Diagramas  
-- **2 semanas:** Aprender tecnologias envolvidas no projeto  
-- **3 semanas:** Desenvolver solução  
-- **2 semanas:** Testes e correções de bugs  
-- **3 semanas:** Fazer Deploy  
+## Delivery Group
+- **4 weeks:** Develop Requirements Document and Diagrams  
+- **2 weeks:** Learn project technologies  
+- **3 weeks:** Develop solution  
+- **2 weeks:** Testing and bug fixes  
+- **3 weeks:** Deployment  
 
 
-## Linha do Tempo
-1. **Semana 1–4:** Documento de Requisitos e Diagramas  
-2. **Semana 5–6:** Aprendizado de Tecnologias  
-3. **Semana 7–9:** Desenvolvimento da Solução  
-4. **Semana 10–11:** Testes e Correções de Bugs  
-5. **Semana 12–14:** Deploy  
+## Timeline
+1. **Weeks 1–4:** Requirements Document and Diagrams  
+2. **Weeks 5–6:** Technology Learning  
+3. **Weeks 7–9:** Solution Development  
+4. **Weeks 10–11:** Testing and Bug Fixes  
+5. **Weeks 12–14:** Deployment  
 
 
-## Restrições
-- Aprender TypeScript e Langium  
-- Tempo disponível  
+## Constraints
+- Learn TypeScript and Langium  
+- Available time  
 
 
-## Custos
-- **100 horas** de esforço estimado por integrante
+## Costs
+- **100 hours** of estimated effort per member
