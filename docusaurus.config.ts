@@ -41,7 +41,7 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           breadcrumbs: true,          
-          showLastUpdateTime: true, 
+          showLastUpdateTime: false, 
           includeCurrentVersion:true,   
           docsRootComponent: '@theme/DocsRoot',
           docVersionRootComponent: '@theme/DocVersionRoot',
