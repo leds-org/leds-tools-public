@@ -14,6 +14,7 @@ classDiagram
         +Process components*
         +Backlog components*
         +TimeBox components*
+        +Roadmap components*
     }
     
     class Project {
@@ -36,6 +37,10 @@ classDiagram
         <<import>>
     }
 
+    class Roadmap {
+        <<import>>
+    }
+
     class Helpers {
         <<import>>
     }
@@ -49,6 +54,7 @@ classDiagram
     Model --> Process
     Model --> Backlog
     Model --> TimeBox
+    Model --> Roadmap
     Model --> Helpers
     Model --> Terminals
 
@@ -63,6 +69,7 @@ The `Model` serves as the main entry point for the grammar. It consists of one m
 - **Process**: Represents processes within the project. Like teams, it is an optional component and is imported from the `processes` package.
 - **Backlog**: Refers to the backlog of tasks or issues in the project. It is also optional and is imported from the `backlog` package.
 - **TimeBox**: Represents time-based elements like sprints or deadlines. It is an optional component imported from the `timebox` package.
+- **Roadmap**: Represents strategic planning elements with milestones and releases. It is an optional component imported from the `roadmap` package.
 
 ###  Supporting Packages
 The model also relies on some supporting packages, including:
@@ -629,5 +636,91 @@ classDiagram
 
 ### TimeBoxTask
 - **Description**: The `TimeBoxTask` interface is implemented by `Epic`, `AtomicUserStory`, and `TaskBacklog`. This allows these classes to be treated uniformly when establishing dependencies, enabling flexible and dynamic relationships within the TimeBox Management system.
+
+## Roadmap
+
+This class diagram represents the structure of a Roadmap Management system, which includes `Roadmap`, `Milestone`, and `Release` components. This system allows for strategic planning with time-based goals and versioned releases.
+
+```mermaid
+classDiagram
+    class Roadmap {
+        +ID id
+        +STRING name
+        +STRING description
+    }
+
+    class Milestone {
+        +ID id
+        +STRING name
+        +STRING description
+        +DATE startDate
+        +DATE dueDate
+        +DATE completedDate
+        +STRING status
+    }
+
+    class Release {
+        +ID id
+        +STRING name
+        +STRING description
+        +STRING version
+        +DATE dueDate
+        +DATE releasedDate
+        +STRING status
+    }
+
+    class BacklogItem {
+        <<interface>>
+    }
+
+    %% Relationships
+    Roadmap "1" --> "*" Milestone : contains
+    Milestone "1" --> "*" Release : includes
+    Milestone "*" --> "*" Milestone : depends on
+    Release "*" --> "*" BacklogItem : includes items
+
+    %% Status values
+    note for Milestone "Status: PLANNED, IN_PROGRESS, COMPLETED, DELAYED"
+    note for Release "Status: PLANNED, IN_DEVELOPMENT, TESTING, RELEASED"
+```
+
+### Roadmap
+- **Description**: The `Roadmap` class represents the strategic planning view of a project, containing multiple milestones that define major goals and delivery points.
+- **Attributes**:
+  - `id`: A unique identifier for the roadmap.
+  - `name`: The name of the roadmap.
+  - `description`: A detailed description of the roadmap's purpose and scope.
+- **Relationships**:
+  - **Contains**: Holds multiple `Milestone` instances that represent major project goals.
+
+### Milestone
+- **Description**: A `Milestone` represents a significant point or goal in the project timeline, containing releases and having dependencies on other milestones.
+- **Attributes**:
+  - `id`: A unique identifier for the milestone.
+  - `name`: The name of the milestone.
+  - `description`: A detailed description of the milestone.
+  - `startDate`: The planned start date for the milestone (DATE format: YYYY-MM-DD).
+  - `dueDate`: The planned completion date for the milestone (DATE format: YYYY-MM-DD).
+  - `completedDate`: The actual completion date (optional, DATE format: YYYY-MM-DD).
+  - `status`: Current status of the milestone (`PLANNED`, `IN_PROGRESS`, `COMPLETED`, `DELAYED`).
+- **Relationships**:
+  - **Includes**: Contains multiple `Release` instances.
+  - **Depends On**: Can depend on other `Milestone` instances for completion.
+
+### Release
+- **Description**: A `Release` represents a versioned delivery of functionality within a milestone, containing specific backlog items.
+- **Attributes**:
+  - `id`: A unique identifier for the release.
+  - `name`: The name of the release.
+  - `description`: A detailed description of the release.
+  - `version`: The semantic version of the release (e.g., "1.0", "2.1.3").
+  - `dueDate`: The planned release date (DATE format: YYYY-MM-DD).
+  - `releasedDate`: The actual release date (optional, DATE format: YYYY-MM-DD).
+  - `status`: Current status of the release (`PLANNED`, `IN_DEVELOPMENT`, `TESTING`, `RELEASED`).
+- **Relationships**:
+  - **Includes Items**: References multiple `BacklogItem` instances (epics, stories, tasks) that are part of this release.
+
+### Date Format
+All date fields in the Roadmap system use ISO 8601 format (YYYY-MM-DD) for consistency and better integration with external tools and APIs.
 
 

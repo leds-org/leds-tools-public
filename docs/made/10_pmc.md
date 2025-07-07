@@ -101,4 +101,6 @@
 
 
 ## Costs
+
 - **100 hours** of estimated effort per member
+

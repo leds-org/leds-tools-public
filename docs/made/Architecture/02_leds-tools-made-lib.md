@@ -35,3 +35,20 @@ chart/              # SVG chart generators like CFD, throughput, dependencies
 example/            # Generated markdown reports and diagrams
 util/               # Common helpers (file paths, formatting)
 ```
+
+## Latest Enhancements
+
+**GitHub Integration:**
+- `GitHubMilestonePushService.ts`: Automatic milestone synchronization
+- Enhanced issue creation with proper date formatting
+- Support for project boards and team assignments
+
+**Date and Format Improvements:**
+- ISO 8601 date format support (YYYY-MM-DD)
+- Improved date parsing and validation
+- Better internationalization support
+
+**Updated Data Models:**
+- Enhanced `TimeBox` model with status tracking
+- Improved `Roadmap` and `Milestone` structures
+- Better dependency management between items
