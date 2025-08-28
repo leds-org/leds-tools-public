@@ -47,8 +47,6 @@ This action runs automatically on every commit. It analyzes code files changed i
 
 ### Workflow Breakdown
 
-### Workflow Breakdown
-
 The following steps describe the internal process behind CodeWise:
 
 1. **Git Commit Detection**  
