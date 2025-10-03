@@ -1,0 +1,8 @@
+{
+  "label": "Reportfy",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "description": "A bot that automatically generates GitHub repository reports and posts concise summaries to Discord"
+  }
+}

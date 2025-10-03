@@ -1,8 +1,8 @@
 {
-  "label": "Testing and Q&A Support",
-  "position": 4,
+  "label": "TestAI",
+  "position": 5,
   "link": {
     "type": "generated-index",
-    "description": "Tools and Practices to support Test and Quality Assurance"
+    "description": "Software that uses **language models (LLMs)** and artificial intelligence agents to efficiently generate automated test files"
   }
 }
